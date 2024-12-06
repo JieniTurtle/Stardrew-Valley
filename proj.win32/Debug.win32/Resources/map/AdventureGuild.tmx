@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="14" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <properties>
+  <property name="AmbientLight" value="95 95 95" />
+  <property name="DayTiles" value="Front 3 1 256 Front 3 2 288 Front 10 1 256 Front 10 2 288 Back 3 4 671 Back 3 5 703 Back 10 4 671 Back 10 5 703" />
+  <property name="Doors" value="1 9 1 120" />
+  <property name="Light" value="3 8 4 6 8 4 11 8 4 3 2 5 10 2 5 6 19 5 5 15 5 5 11 5 11 12 5" />
+  <property name="NightTiles" value="Front 3 1 1253 Front 3 2 1285 Front 10 1 1253 Front 10 2 1285 Back 3 4 574 Back 3 5 606 Back 10 4 574 Back 10 5 606 Back 10 6 638 Back 3 6 638" />
+  <property name="Warp" value="6 20 Mountain 76 9" />
+ </properties>
+ <tileset firstgid="1" name="cocos_fitted" tilewidth="16" tileheight="16" tilecount="3488" columns="40"><image source="new_image.png" width="256" height="1395.2" /></tileset><layer id="1" name="Back" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyNkk1OwzAQhSdVLKUkXkFTygXYF9KqIMLfki0/AgnKFbgA9CTQC3AEBBdgCxyhXIC/FW9kj+wkVtXFp2e/ceZlEs+I6BPMFtQkImpHRt9SonfwmBkNIbWP1PX5wvobvGZGQ0jtJ3V5ObyjqMlT4hBvNXN5ZYtoF0ytFppooI3Kmmt7YL3t8u6wn4AXq4eJ8W5jKJjEpsbeQeLyxthfW591bLnH+QcwjU2Nvf2kmbeo+nnbukqpjF62qt6OcnkErlQY/v6lt+fnJG+IXmvWq3NDTU/yRlj/Yva/eL727T+RvGWsn5eIesrksvr7c3Bh/Y52eRs63J/fY0tVtbB5PeX6rnA/kIOuquaLDmzeyOu3yf24Boae39VG+R1zb77Cfs9jcAJOwVkgT+6qzNfRzTnqymdCeXL/6/OI9nUzb15OSDnvH35jeco=
+  </data>
+ </layer>
+ <objectgroup id="2" name="Back" />
+</map>
