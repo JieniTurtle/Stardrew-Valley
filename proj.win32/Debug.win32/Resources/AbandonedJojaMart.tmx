@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="18" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="1">
+ <properties>
+  <property name="AmbientLight" value="110 110 60"/>
+  <property name="IgnoreLightingTiles" type="bool" value="true"/>
+  <property name="Warp" value="9 14 Town 96 51"/>
+ </properties>
+ <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16" tilecount="2176" columns="32">
+  <image source="townInterior" width="512" height="1088"/>
+ </tileset>
+ <tileset firstgid="2177" name="paths" tilewidth="16" tileheight="16" tilecount="64" columns="4">
+  <image source="paths" width="64" height="256"/>
+ </tileset>
+ <tileset firstgid="2241" name="untitled tile sheet" tilewidth="16" tileheight="16" tilecount="256" columns="16">
+  <image source="JojaRuins_TileSheet" width="256" height="256"/>
+ </tileset>
+ <layer id="1" name="Back" width="18" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7xcHAIMGJH5/hwI9PQ80QA2JxMrEk1B6QOWpArA7EGiRiTSCWQjPHHIgtSMSWBMw5y4Eb4zNHAod7YPqwmYHNHFg4I6uRxoNhanCFM0xemwCGqSMUzuc4iDOHUDgT6x5am0NIP73NsQNiKzSMzZxEIE6igntgeDCbAwAkH1Sl
+  </data>
+ </layer>
+ <objectgroup id="2" name="Back"/>
+ <layer id="3" name="Buildings" width="18" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyV0rdOxEAQgGGTveRYAhUNEkjEAokMJRlKMpRkKAk16KAHwQsAj0GqyDnnnHPmt87S7Vk6DCN98nhnbrS7PkWxRp9Qfg1HdUfrFtbHVEUZxwQmMaXa9/Tqv51mfUa1zZsln8M8FrCIJSxjBatYwzo2sIktbGNHte1pl3wP+zjAIY5wjBOc4gznuMAlrnCNG2mvt+R3uMcDHvGEZ7zgFW94xwc+8YVvbYZ0P07kznCBK9zgDg+oEPCEF7zhA1/4wV/Y7icAgQhCMELQ7+A79LAeijCEY9TQNyzVu03+A1HUo/UZg1Kv9q0HhK1uFun0ZGBEOpO8nxjE/mOOFr2GWUPCvv7XOXJY9LUCnoUmc7T7N/Zpe5HPlkYeaZAq7GvaeyWqhPXbGSOCtUxkIVuqJ+t5Cs8kYX3PQS7ykC/1JpAnogjFKDE5Wyn1MpSjQuqNI49HNWpQazKnjno9GtAo9TaRN6MFrWgzmdNOvQOd6NJ7fwC+IFx7
+  </data>
+ </layer>
+ <objectgroup id="4" name="Buildings"/>
+ <layer id="5" name="Front" width="18" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztz6cOAkEARdGx8xkUv3g8XdM1XbM0QwdJB0kHSYe/4yaMgQSCQZDsTY566glhZPRdFimEVb7fTWzmD/u/ZuOT/YUmnzftx7/L8qGCKmqowwEnXHDDAy98aKCJFtpKR+mihz4G8COAIEIII4IohhhhjIkyVWaYY4ElYogjgSRSSCODFdbYYKvslD0OOOKELHTkkEcBRZRwxgVX3JQ7hJUrBQ==
+  </data>
+ </layer>
+ <objectgroup id="6" name="Front"/>
+ <layer id="7" name="Paths" width="18" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA76OQYaBfQzg2DwW+jgHoAAMfBAbQ=
+  </data>
+ </layer>
+ <objectgroup id="8" name="Paths"/>
+</map>

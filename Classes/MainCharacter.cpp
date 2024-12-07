@@ -19,59 +19,109 @@ bool MainCharacter::init(const std::string& filename) {
 
     this->setScale(0.25);
 
- 
+    
+
     //添加键盘监听事件
     addKeyboardListener();
+    this->schedule(CC_SCHEDULE_SELECTOR(MainCharacter::update), 0.15f); //时刻刷新事件
+
     return true;
 }
 void MainCharacter::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    // 获取当前角色位置
-    Vec2 position =this->getPosition();
+    switch (keyCode) {
+        case EventKeyboard::KeyCode::KEY_W: // W
+            movementkeys[0] = true; // 向上移动
+            break;
+        case EventKeyboard::KeyCode::KEY_A: // A
+            movementkeys[1] = true; // 向左移动
+            break;
+        case EventKeyboard::KeyCode::KEY_S: // S
+            movementkeys[2] = true; // 向下移动
+            break;
+        case EventKeyboard::KeyCode::KEY_D: // D
+            movementkeys[3] = true; // 向右移动
+            break;
+        default:
+            break;
+    }
 
+}
+void MainCharacter::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
+    switch (keyCode) {
+        case EventKeyboard::KeyCode::KEY_W:
+            movementkeys[0] = false;
+            break;
+        case EventKeyboard::KeyCode::KEY_A:
+            movementkeys[1] = false;
+            break;
+        case EventKeyboard::KeyCode::KEY_S:
+            movementkeys[2] = false;
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            movementkeys[3] = false;
+            break;
+        default:
+            break;
+    }
+}
+void MainCharacter::addKeyboardListener() {
+    // 添加键盘事件监听
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(MainCharacter::onKeyPressed, this);
+    listener->onKeyReleased = CC_CALLBACK_2(MainCharacter::onKeyReleased, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+// 更新角色位置
+void MainCharacter::update(float delta) {
+    // 获取当前地图位置
+    Vec2 position = mainmap->getPosition();
+    int mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
+    int mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
+    int tileWidth = mainmap->getTileSize().width * 2; // 单个瓷砖的像素宽度
+    int tileHeight = mainmap->getTileSize().height * 2; // 单个瓷砖的像素高度
+    int mapwidth = mapWidth * tileWidth;
+    int mapheight = mapHeight * tileHeight;//地图长宽
     // 获取角色的尺寸
     Size characterSize = this->getContentSize();
     auto visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
     // 根据按下的键移动角色
-    switch (keyCode) {
-        case EventKeyboard::KeyCode::KEY_W: // 向上
-            position.y += 10; // 10 是移动距离
-            break;
-        case EventKeyboard::KeyCode::KEY_A: // 向左
-            position.x -= 10;
-            break;
-        case EventKeyboard::KeyCode::KEY_S: // 向下
-            position.y -= 10;
-            break;
-        case EventKeyboard::KeyCode::KEY_D: // 向右
-            position.x += 10;
-            break;
-        default:
-            return;
+      // 持续移动逻辑
+    if (movementkeys[0]) { // W
+        position.y -= 10; // 向上移动
+    }
+    if (movementkeys[1]) { // A
+        position.x += 10; // 向左移动
+    }
+    if (movementkeys[2]) { // S
+        position.y += 10; // 向下移动
+    }
+    if (movementkeys[3]) { // D
+        position.x -= 10; // 向右移动
     }
     //检查是否超出边界
-    if (position.x < characterSize.width / 2) {
-        position.x = characterSize.width / 2;
+    if (position.x > mapwidth / 2) {
+        position.x = mapwidth / 2;
     }
-    if (position.y < characterSize.height / 2) {
-        position.y = characterSize.height / 2;
+    if (position.y > mapheight / 2) {
+        position.y = mapheight / 2;
     }
-    if (position.x > visibleSize.width - characterSize.width / 2) {
-        position.x = visibleSize.width - characterSize.width / 2;
+    if (position.x < visibleSize.width - mapwidth / 2) {
+        position.x = visibleSize.width - mapwidth / 2;
     }
-    if (position.y > visibleSize.height - characterSize.height / 2) {
-        position.y = visibleSize.height - characterSize.height / 2;
+    if (position.y < visibleSize.height - mapheight / 2) {
+        position.y = visibleSize.height - mapheight / 2;
     }
 
     // 创建动画帧
     Vector<SpriteFrame*> animationFramesdown;//向下走动画
-    for (int i = 1; i <= 3; i++) { 
+    for (int i = 1; i <= 3; i++) {
         auto frame = SpriteFrame::create(StringUtils::format("characterdown%d.png", i).c_str(), Rect(0, 0, 100, 160));
         animationFramesdown.pushBack(frame);
     }
 
     Vector<SpriteFrame*> animationFramesright;//向右走动画
-    for (int i = 1; i <= 3; i++) { 
+    for (int i = 1; i <= 3; i++) {
         auto frame = SpriteFrame::create(StringUtils::format("characterright%d.png", i).c_str(), Rect(0, 0, 100, 160));
         animationFramesright.pushBack(frame);
     }
@@ -93,42 +143,38 @@ void MainCharacter::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
     walkAnimationleft = Animation::createWithSpriteFrames(animationFramesleft, 0.1f);
     walkAnimationup = Animation::createWithSpriteFrames(animationFramesup, 0.1f);
     auto walkAnimationnext = Animation::create();
-    std::string staticnext;//静止方向图片
+  
     // 播放走路动画
-    if (             keyCode == EventKeyboard::KeyCode::KEY_S 
-       ) {
+    if (movementkeys[2]
+        ) {
         walkAnimationnext = walkAnimationdown->clone();
         staticnext = "characterdown2.png";
     }
-    if (keyCode == EventKeyboard::KeyCode::KEY_D) {
-         walkAnimationnext = walkAnimationright->clone();
-         staticnext = "characterright2.png";
+    if (movementkeys[3]) {
+        walkAnimationnext = walkAnimationright->clone();
+        staticnext = "characterright2.png";
     }
-    if (keyCode == EventKeyboard::KeyCode::KEY_A) {
+    if (movementkeys[1]) {
         walkAnimationnext = walkAnimationleft->clone();
         staticnext = "characterleft2.png";
     }
-    if (keyCode == EventKeyboard::KeyCode::KEY_W) {
+    if (movementkeys[0]) {
         walkAnimationnext = walkAnimationup->clone();
         staticnext = "characterup2.png";
     }
+
     // 创建 Animate 动作
-    auto animateActionnext = Animate::create(walkAnimationnext);
-    this->runAction(RepeatForever::create(animateActionnext));
-    //角色移动，播放动画
-    this->runAction(Sequence::create(MoveTo::create(0.5, position), CallFunc::create([this, staticnext]() {
-
+    if (movementkeys[0] || movementkeys[1] || movementkeys[2] || movementkeys[3]) {
+        auto animateActionnext = Animate::create(walkAnimationnext);
+        this->runAction(RepeatForever::create(animateActionnext));
+        mainmap->runAction(MoveTo::create(0.3, position));
+    }
+    else {
         this->stopAllActions(); // 停止所有动作
-        
+
         this->setTexture(staticnext); // 切换为静态图像
+    }
 
-        }), nullptr));
 
 }
 
-void MainCharacter::addKeyboardListener() {
-    // 添加键盘事件监听
-    auto listener = EventListenerKeyboard::create();
-    listener->onKeyPressed = CC_CALLBACK_2(MainCharacter::onKeyPressed, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}

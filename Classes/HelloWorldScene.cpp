@@ -1,31 +1,7 @@
-/****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
 
- http://www.cocos2d-x.org
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include <ctime>
-#include <cmath>
 
 USING_NS_CC;
 
@@ -34,7 +10,7 @@ Scene* HelloWorld::createScene()
     return HelloWorld::create();
 }
 
-// Print useful error message instead of segfaulting when files are not there.
+
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
@@ -46,175 +22,66 @@ bool HelloWorld::init()
 {
     //////////////////////////////
     // 1. super init first
-    if (!Scene::init())
+    if ( !Scene::init() )
     {
         return false;
     }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();//这行代码获取当前游戏视图窗口的原点坐标
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
+    //开始按钮
+    auto startItem = MenuItemImage::create(
+                                           "startgamebutton.png",
+                                           "startgamebutton2.png",
+                                           CC_CALLBACK_1(HelloWorld::menuStart, this));
+    startItem->setScale(0.5);
+    float x = origin.x + visibleSize.width*0.4 - startItem->getContentSize().width/4;
+    float y = origin.y + visibleSize.height * 0.25+ startItem->getContentSize().height/4;
+    startItem->setPosition(Vec2(x,y));
+   
+    //退出按钮
     auto closeItem = MenuItemImage::create(
-        "CloseNormal.png",
-        "CloseSelected.png",
-        CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        "endbutton.png",
+        "endbutton2.png",
+        CC_CALLBACK_1(HelloWorld::menuClose, this));
+    closeItem->setScale(0.5);
+    float xx = origin.x + visibleSize.width * 0.7 - closeItem->getContentSize().width / 4;
+    float yy = origin.y + visibleSize.height * 0.25 + closeItem->getContentSize().height / 4;
+    closeItem->setPosition(Vec2(xx, yy));
 
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
-        float y = origin.y + closeItem->getContentSize().height / 2;
-        closeItem->setPosition(Vec2(x, y));
-    }
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(startItem, closeItem,NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
+    
 
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    Sprite* man = Sprite::create("characterdown1.png");
-    this->addChild(man, 2);
-    man->setScale(1);
-    man->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-
-    map_ = TMXTiledMap::create("map/Backwoods.tmx");
-    map_->setScale(4);
-    auto layer = map_->getLayer("Front");
-    this->addChild(map_, 1);
-    layer->setGlobalZOrder(6);
-
-    mapOffset_ = Vec2::ZERO;
-
-    //键盘事件监听器
-    auto keyListener = EventListenerKeyboard::create();
-    keyListener->onKeyPressed = CC_CALLBACK_2(HelloWorld::keyPressed, this);
-    keyListener->onKeyReleased = CC_CALLBACK_2(HelloWorld::keyReleased, this);
-
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
-
-
+    // 添加初始背景图
+    auto sprite = Sprite::create("StartBackground.jpg");
+    if (sprite == nullptr)
+    {
+        problemLoading("'StartBackground.jpg'");
+    }
+    else
+    {       
+        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+        sprite->setScale(3.2);       
+        this->addChild(sprite, 0);
+    }
     return true;
 }
 
-void HelloWorld::keyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+
+void HelloWorld::menuClose(Ref*obj)
 {
-    switch (keyCode)
-    {
-    case EventKeyboard::KeyCode::KEY_A:
-        _isMovingLeft = true;
-        break;
-    case EventKeyboard::KeyCode::KEY_D:
-        _isMovingRight = true;
-        break;
-    case EventKeyboard::KeyCode::KEY_W:
-        _isMovingUp = true;
-        break;
-    case EventKeyboard::KeyCode::KEY_S:
-        _isMovingDown = true;
-        break;
-    }
-    log("Key with keycode %d pressed", keyCode);
-    this->schedule(schedule_selector(HelloWorld::my_update), 0.01f);
-}
-
-void HelloWorld::my_update(float deltaTime)
-{
-    
-    Vec2 newPosition = map_->getPosition();
-    float v = 100;
-
-    if (_isMovingLeft)
-    {
-        if (_isMovingUp || _isMovingDown) {
-            newPosition.x += v * deltaTime / sqrt(2);
-        }
-        else {
-            newPosition.x += v * deltaTime;
-        }
-    }
-    if (_isMovingRight)
-    {
-        if (_isMovingUp || _isMovingDown) {
-            newPosition.x -= v * deltaTime / sqrt(2);
-        }
-        else {
-            newPosition.x -= v * deltaTime;
-        }
-    }
-    if (_isMovingUp)
-    {
-        if (_isMovingRight || _isMovingLeft) {
-            newPosition.y -= v * deltaTime / sqrt(2);
-        }
-        else {
-            newPosition.y -= v * deltaTime;
-        }
-    }
-    if (_isMovingDown)
-    {
-        if (_isMovingRight || _isMovingLeft) {
-            newPosition.y += v * deltaTime / sqrt(2);
-        }
-        else {
-            newPosition.y += v * deltaTime;
-        }
-    }
-
-    map_->setPosition(newPosition);
-    newPosition = map_->getPosition();
-    
-}
-
-void HelloWorld::keyReleased(EventKeyboard::KeyCode keyCode, Event* event)
-{
-     switch (keyCode)
-     {
-     case EventKeyboard::KeyCode::KEY_A:
-         _isMovingLeft = false;
-         break;
-     case EventKeyboard::KeyCode::KEY_D:
-         _isMovingRight = false;
-         break;
-     case EventKeyboard::KeyCode::KEY_W:
-         _isMovingUp = false;
-         break;
-     case EventKeyboard::KeyCode::KEY_S:
-         _isMovingDown = false;
-         break;
-     }
-    
-     log("Key with keycode %d pressed", keyCode);
-}
-
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    auto myScene = HelloWorld::createScene();
-    // Director::getInstance()->replaceScene(myScene);
-
+    //结束程序
     Director::getInstance()->end();
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+}
 
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
+void HelloWorld::menuStart(Ref* obj)
+{
+    //结束程序
+    auto scene = GameScene::createScene();
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(1, scene));
 
 }

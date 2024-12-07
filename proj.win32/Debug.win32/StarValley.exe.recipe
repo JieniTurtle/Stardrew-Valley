@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Star-Valley\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+      <FullPath>D:\cocos2dx\StarValley\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Star-Valley\proj.win32\Debug.win32\StarValley.exe</FullPath>
+      <FullPath>D:\cocos2dx\StarValley\proj.win32\Debug.win32\StarValley.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
