@@ -25,6 +25,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include <ctime>
+#include <cmath>
 
 USING_NS_CC;
 
@@ -87,15 +88,16 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-    Sprite* man = Sprite::create("HelloWorld.png");
-    this->addChild(man,2);
-    man->setScale(0.5);
+    Sprite* man = Sprite::create("characterdown1.png");
+    this->addChild(man, 2);
+    man->setScale(1);
     man->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 
     map_ = TMXTiledMap::create("map/Backwoods.tmx");
-    map_->setScale(3);
-    auto layer = map_->getLayer("Back");
-    this->addChild(map_);
+    map_->setScale(4);
+    auto layer = map_->getLayer("Front");
+    this->addChild(map_, 1);
+    layer->setGlobalZOrder(6);
 
     mapOffset_ = Vec2::ZERO;
 
@@ -114,16 +116,16 @@ void HelloWorld::keyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
     switch (keyCode)
     {
-    case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+    case EventKeyboard::KeyCode::KEY_A:
         _isMovingLeft = true;
         break;
-    case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+    case EventKeyboard::KeyCode::KEY_D:
         _isMovingRight = true;
         break;
-    case EventKeyboard::KeyCode::KEY_UP_ARROW:
+    case EventKeyboard::KeyCode::KEY_W:
         _isMovingUp = true;
         break;
-    case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+    case EventKeyboard::KeyCode::KEY_S:
         _isMovingDown = true;
         break;
     }
@@ -139,19 +141,39 @@ void HelloWorld::my_update(float deltaTime)
 
     if (_isMovingLeft)
     {
-        newPosition.x += v * deltaTime;
+        if (_isMovingUp || _isMovingDown) {
+            newPosition.x += v * deltaTime / sqrt(2);
+        }
+        else {
+            newPosition.x += v * deltaTime;
+        }
     }
     if (_isMovingRight)
     {
-        newPosition.x -= v * deltaTime;
+        if (_isMovingUp || _isMovingDown) {
+            newPosition.x -= v * deltaTime / sqrt(2);
+        }
+        else {
+            newPosition.x -= v * deltaTime;
+        }
     }
     if (_isMovingUp)
     {
-        newPosition.y -= v * deltaTime;
+        if (_isMovingRight || _isMovingLeft) {
+            newPosition.y -= v * deltaTime / sqrt(2);
+        }
+        else {
+            newPosition.y -= v * deltaTime;
+        }
     }
     if (_isMovingDown)
     {
-        newPosition.y += v * deltaTime;
+        if (_isMovingRight || _isMovingLeft) {
+            newPosition.y += v * deltaTime / sqrt(2);
+        }
+        else {
+            newPosition.y += v * deltaTime;
+        }
     }
 
     map_->setPosition(newPosition);
@@ -162,22 +184,22 @@ void HelloWorld::my_update(float deltaTime)
 void HelloWorld::keyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
      switch (keyCode)
-    {
-    case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        _isMovingLeft = false;
-        break;
-    case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        _isMovingRight = false;
-        break;
-    case EventKeyboard::KeyCode::KEY_UP_ARROW:
-        _isMovingUp = false;
-        break;
-    case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-        _isMovingDown = false;
-        break;
-    }
+     {
+     case EventKeyboard::KeyCode::KEY_A:
+         _isMovingLeft = false;
+         break;
+     case EventKeyboard::KeyCode::KEY_D:
+         _isMovingRight = false;
+         break;
+     case EventKeyboard::KeyCode::KEY_W:
+         _isMovingUp = false;
+         break;
+     case EventKeyboard::KeyCode::KEY_S:
+         _isMovingDown = false;
+         break;
+     }
     
-    log("Key with keycode %d pressed", keyCode);
+     log("Key with keycode %d pressed", keyCode);
 }
 
 
