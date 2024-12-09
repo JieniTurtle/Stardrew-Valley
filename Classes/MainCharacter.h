@@ -3,29 +3,20 @@
 #define __MAINCHARACTER_H__
 
 #include "cocos2d.h"
-#include "Tools.h"
+
 USING_NS_CC;
 
 class MainCharacter : public Sprite {
 public:
-    static MainCharacter* create(const std::string& filename); // ÖØÔØ´´½¨·½·¨
-    void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);//wasdËÄ¸ö¼üÒÆ¶¯ÊÂ¼ş
-    void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);//wasdËÄ¸ö¼üÒÆ¶¯ÊÂ¼ş
-    void addKeyboardListener();//Ìí¼Ó¼üÅÌ¼àÌıÊÂ¼ş
-    void update(float delta);
-    //´«ÈëµØÍ¼Ö¸Õë
-    void setMap(TMXTiledMap* map) {
-        mainmap = map;
-    }
-
-    std::string staticnext="characterdown2.png";//¾²Ö¹·½ÏòÍ¼Æ¬
+    static MainCharacter* create(const std::string& filename); // é‡è½½åˆ›å»ºæ–¹æ³•
+    void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);//wasdå››ä¸ªé”®ç§»åŠ¨äº‹ä»¶
+    void addKeyboardListener();//æ·»åŠ é”®ç›˜ç›‘å¬äº‹ä»¶
     virtual bool init(const std::string& filename);
-    int movementkeys[4];//´¢´æwasdËÄ¸ö¼üÎª
-    Animation* walkAnimationdown; // ×ßÂ·¶¯»­
+ 
+    Animation* walkAnimationdown; // èµ°è·¯åŠ¨ç”»
     Animation* walkAnimationup;
     Animation* walkAnimationleft;
     Animation* walkAnimationright;
-    TMXTiledMap* mainmap;//µØÍ¼Ö¸Õë
 };
 
 #endif 
