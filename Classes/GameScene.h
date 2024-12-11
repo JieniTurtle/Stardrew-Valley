@@ -4,13 +4,16 @@
 #include "cocos2d.h"
 #include"MainCharacter.h"
 #include "ui/CocosGUI.h"
+#include "Seeds.h"
+#include "Gloves.h"
+#include "Wheat.h"
 USING_NS_CC;
 class GameScene : public cocos2d::Scene
 {
 public:
     static Scene* createScene();
     virtual bool init();
-
+    void CheckboxOnlyone();//只能选择一个复选框
   
     MainCharacter* character;//主角
     int mapWidth;   // 横向瓷砖数量
@@ -19,6 +22,11 @@ public:
     int tileHeight;  // 单个瓷砖的像素高度
     CREATE_FUNC(GameScene);
 
+    Tools* tools ;//传入工具   
+    Seeds* seeds;//传入种子   
+    Wheat* wheat ;//传入小麦   
+    Gloves* gloves ;//传入手套
+    ;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -67,6 +67,8 @@ bool HelloWorld::init()
         sprite->setScale(3.2);       
         this->addChild(sprite, 0);
     }
+ 
+   
     return true;
 }
 
