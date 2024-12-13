@@ -9,7 +9,6 @@
 #include "Gloves.h"
 #include "Wheat.h"
 #include "NPC.h"
-#include "Dialog.h"
 USING_NS_CC;
 
 enum Mouse {
@@ -41,22 +40,19 @@ public:
     NPC* NPC_Jodi;
     NPC* NPC_Harvey;
 
-    Dialog* Dialog_Willy;
-    Dialog* Dialog_Gus;
-    Dialog* Dialog_Jodi;
-    Dialog* Dialog_Harvey;
-
     NPC* initNPC(std::string NPC_Name, std::vector<Vec2>& NPC_Path, TMXTiledMap* NPC_Map);
 
     void addMouseListener();
     void Mouseupdate(float delta);
     void onMouseDown(cocos2d::Event* event);
-
+    void MouseClickNPC(NPC* npc);
     Tools* tools ;//传入工具   
     Seeds* seeds;//传入种子   
     Wheat* wheat ;//传入小麦   
     Gloves* gloves ;//传入手套
     std::string scene_name_;
+
+    int clickNPCButtons();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

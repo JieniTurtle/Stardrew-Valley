@@ -38,6 +38,9 @@ bool NPC::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    //创建对话
+    Dialog_NPC = Dialog::create(NPCname);
+
     //创建纹理
     Texture2D* Move = Director::getInstance()->getTextureCache()->addImage("NPC/" + NPCname + "/texture.png");
 
@@ -84,6 +87,7 @@ bool NPC::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
+    //静止动画
     Vector<SpriteFrame*>NPCstatic;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(0, 0, NPCsize_x, NPCsize_y));
@@ -200,62 +204,33 @@ void NPC::startMovement()
 }
 
 //判断鼠标是否点击在NPC上
-bool NPC::JudgeClickNPC(Vec2 NPCp, Vec2 clickp)
+bool NPC::JudgeClickNPC(Vec2 clickPos,int mapscale)
 {
-    if (NPCp.x - NPCsize_x / 2 <= clickp.x) {
-        if (NPCp.x + NPCsize_x / 2 >= clickp.x) {
-            if (NPCp.y - NPCsize_y / 2 <= clickp.y) {
-                if (NPCp.y + NPCsize_y / 2 >= clickp.y) {
+    //获取地图坐标信息
+    float TileNum_Width = NPCmap->getMapSize().width;  // 横向瓷砖数量
+    float TileNum_Height = NPCmap->getMapSize().height; // 纵向瓷砖数量
+    float TileWidth = NPCmap->getTileSize().width * 1; // 单个瓷砖的像素宽度
+    float TileHeight = NPCmap->getTileSize().height * 1; // 单个瓷砖的像素高度
+    float mapwidth = TileNum_Width * TileWidth;//获取地图宽度
+    float mapheight = TileNum_Height * TileHeight;//获取地图高度
+    //获取地图位置
+    auto MAPposition = NPCmap->getPosition() / mapscale;
+
+    //将鼠标位置转化为以地图左下角为原点
+    clickPos.x = clickPos.x - MAPposition.x + mapwidth / 2;
+    clickPos.y = clickPos.y - MAPposition.y + mapheight / 2;
+
+    //获取NPC位置
+    Vec2 NPCPosition = this->getPosition();
+
+    if (NPCPosition.x - NPCsize_x / 2 <= clickPos.x) {
+        if (NPCPosition.x + NPCsize_x / 2 >= clickPos.x) {
+            if (NPCPosition.y - NPCsize_y / 2 <= clickPos.y) {
+                if (NPCPosition.y + NPCsize_y / 2 >= clickPos.y) {
                     return true;
                 }
             }
         }
-    }
-    return false;
-}
-
-//处理鼠标事件
-bool NPC::onMouseDown(cocos2d::Event* event,int mapscale)
-{
-    //未被选中时
-    if (ifSelected == false) {
-        //地图放缩尺寸
-        //获取地图坐标信息
-        float TileNum_Width = NPCmap->getMapSize().width;  // 横向瓷砖数量
-        float TileNum_Height = NPCmap->getMapSize().height; // 纵向瓷砖数量
-        float TileWidth = NPCmap->getTileSize().width * 1; // 单个瓷砖的像素宽度
-        float TileHeight = NPCmap->getTileSize().height * 1; // 单个瓷砖的像素高度
-        float mapwidth = TileNum_Width * TileWidth;//获取地图宽度
-        float mapheight = TileNum_Height * TileHeight;//获取地图高度
-        //获取地图位置
-        auto MAPposition = NPCmap->getPosition() / mapscale;
-
-        //获取当前游戏视图窗口的尺寸
-        auto visibleSize = Director::getInstance()->getVisibleSize();
-
-        //获取鼠标点击的位置（初始原点为左上角）
-        EventMouse* e = static_cast<EventMouse*>(event);
-        Vec2 clickPos = e->getLocation() / mapscale;
-        //将鼠标点击的位置转化为以屏幕左下角为原点
-        clickPos.y = visibleSize.height / mapscale - clickPos.y;
-        //将鼠标位置转化为以地图左下角为原点
-        clickPos.x = clickPos.x - MAPposition.x + mapwidth / 2;
-        clickPos.y = clickPos.y - MAPposition.y + mapheight / 2;
-        //获取NPC位置
-        Vec2 NPCPosition = this->getPosition();
-
-        // 检查点击是否在NPC范围内
-        if (JudgeClickNPC(NPCPosition, clickPos)) {
-            ifSelected = true;
-            stopMovement();
-            return true;
-        }
-    }
-    //被选中时
-    else {
-        ifSelected = false;
-        startMovement();
-        return true;
     }
     return false;
 }

@@ -83,7 +83,7 @@ bool GameScene::init()
         return false;
     }
     this->addChild(map, 0);
-    map->setScale(2);//地图扩大两倍
+    map->setScale(mapscale);//地图扩大两倍
     set_physical_map(map);
 
     map->getLayer("Back")->setLocalZOrder(-3);
@@ -135,19 +135,6 @@ bool GameScene::init()
         test->getPhysicsBody()->setVelocity(test->getPhysicsBody()->getVelocity() * 0.9);
         }, "update_key");
 
-    tools = Tools::create(map);//传入工具
-    this->addChild(tools, 1);
-
-    seeds = Seeds::create(map);//传入种子
-    this->addChild(seeds, 1);
-
-    wheat = Wheat::create(map);//传入小麦
-    this->addChild(wheat, 1);
-    gloves = Gloves::create(map,(wheat->wheatnum));//传入手套
-    this->addChild(gloves, 1);
-
-    
-
     MouseStatus = notTaken;//设置鼠标状态
 
     //地图为城镇，创建NPC
@@ -155,34 +142,39 @@ bool GameScene::init()
         //创建NPC Willy 及对话 在地图左下方
         std::vector<Vec2> path_Willy = { Vec2(700, 500), Vec2(1000, 500), Vec2(1000, 700), Vec2(700, 700) };
         NPC_Willy = initNPC("Willy", path_Willy, map);
-        Dialog_Willy = Dialog::create(NPC_Willy->NPCname);
+        NPC_Willy->retain();
 
         //创建NPC Gus 及对话 在地图左上方
         std::vector<Vec2> path_Gus = { Vec2(700, 700),Vec2(700, 500), Vec2(1000, 500), Vec2(1000, 700) };
         NPC_Gus = initNPC("Gus", path_Gus, map);
-        Dialog_Gus = Dialog::create(NPC_Gus->NPCname);
+        NPC_Gus->retain();
 
         //创建NPC Jodi 及对话 在地图右上方
         std::vector<Vec2> path_Jodi = { Vec2(1000, 700), Vec2(700, 700),Vec2(700, 500) ,Vec2(1000, 500) };
         NPC_Jodi = initNPC("Jodi", path_Jodi, map);
-        Dialog_Jodi = Dialog::create(NPC_Jodi->NPCname);
+        NPC_Jodi->retain();
 
         //创建NPC Harvey 及对话 在地图右下方
         std::vector<Vec2> path_Harvey = { Vec2(1000, 500), Vec2(1000, 700), Vec2(700, 700),Vec2(700, 500) };
         NPC_Harvey = initNPC("Harvey", path_Harvey, map);
-        Dialog_Harvey = Dialog::create(NPC_Harvey->NPCname);
-
-        Dialog_Willy->retain();
-        Dialog_Gus->retain();
-        Dialog_Jodi->retain();
-        Dialog_Harvey->retain();
+        NPC_Harvey->retain();
 
         //添加鼠标监听事件
         addMouseListener();
-        this->schedule(CC_SCHEDULE_SELECTOR(GameScene::Mouseupdate), 0.1f); // 更新间隔为0.1秒
+        //this->schedule(CC_SCHEDULE_SELECTOR(GameScene::Mouseupdate), 0.1f); // 更新间隔为0.1秒
     }
     //地图为农场，创建newnew
     else {
+        tools = Tools::create(map);//传入工具
+        this->addChild(tools, 1);
+        gloves = Gloves::create(map, (wheat->wheatnum));//传入手套
+        this->addChild(gloves, 1);
+
+        seeds = Seeds::create(map);//传入种子
+        this->addChild(seeds, 1);
+        wheat = Wheat::create(map);//传入小麦
+        this->addChild(wheat, 1);
+
         auto cow = Cow::create("cow");
         cow->setMaincharacter(character);
         cow->setMap(map);
@@ -321,43 +313,74 @@ void GameScene::onMouseDown(cocos2d::Event* event)
 
     if (MouseStatus == notTaken) {//鼠标未被占据
         //处理点击到 NPC 的事件
-        if (NPC_Willy->onMouseDown(event, mapscale)) { addChild(Dialog_Willy); }
-        if (NPC_Gus->onMouseDown(event, mapscale)) { addChild(Dialog_Gus); }
-        if (NPC_Jodi->onMouseDown(event, mapscale)) { addChild(Dialog_Jodi); }
-        if (NPC_Harvey->onMouseDown(event, mapscale)) { addChild(Dialog_Harvey); }
-        if (NPC_Willy->ifSelected || NPC_Gus->ifSelected || NPC_Jodi->ifSelected || NPC_Harvey->ifSelected) {
+        if (NPC_Willy->JudgeClickNPC(clickPos, mapscale)) {
+            MouseClickNPC(NPC_Willy);
+            MouseStatus = TakenByNPC;
+            return;
+        }
+        if (NPC_Gus->JudgeClickNPC(clickPos, mapscale)) {
+            MouseClickNPC(NPC_Gus);
+            MouseStatus = TakenByNPC;
+            return;
+        }
+        if (NPC_Jodi->JudgeClickNPC(clickPos, mapscale)) {
+            MouseClickNPC(NPC_Jodi);
+            MouseStatus = TakenByNPC;
+            return;
+        }
+        if (NPC_Harvey->JudgeClickNPC(clickPos, mapscale)) {
+            MouseClickNPC(NPC_Harvey);
             MouseStatus = TakenByNPC;
             return;
         }
     }
     else if (MouseStatus == TakenByNPC) {//鼠标被NPC占据
+        /*int c = clickNPCButtons();
+        if (c == 1) {
+        }
+        else if (c == 2) {
+
+        }*/
         if (NPC_Willy->ifSelected) {
-            if (Dialog_Willy->JudgeClickButton(clickPos, mapscale)) {
-                Dialog_Willy->removeFromParent();
-                NPC_Willy->onMouseDown(event, mapscale);
+            if (NPC_Willy->Dialog_NPC->clickEndButton == true) {
                 MouseStatus = notTaken;
+                NPC_Willy->startMovement();
+                NPC_Willy->Dialog_NPC->clickEndButton = false;
             }
         }
         if (NPC_Gus->ifSelected) {
-            if (Dialog_Gus->JudgeClickButton(clickPos, mapscale)) {
-                Dialog_Gus->removeFromParent();
-                NPC_Gus->onMouseDown(event, mapscale);
+            if (NPC_Gus->Dialog_NPC->clickEndButton == true) {
                 MouseStatus = notTaken;
+                NPC_Gus->startMovement();
+                NPC_Gus->Dialog_NPC->clickEndButton = false;
             }
         }
         if (NPC_Jodi->ifSelected) {
-            if (Dialog_Jodi->JudgeClickButton(clickPos, mapscale)) {
-                Dialog_Jodi->removeFromParent();
-                NPC_Jodi->onMouseDown(event, mapscale);
+            if (NPC_Jodi->Dialog_NPC->clickEndButton == true) {
                 MouseStatus = notTaken;
+                NPC_Jodi->startMovement();
+                NPC_Jodi->Dialog_NPC->clickEndButton = false;
             }
         }
         if (NPC_Harvey->ifSelected) {
-            if (Dialog_Harvey->JudgeClickButton(clickPos, mapscale)) {
-                Dialog_Harvey->removeFromParent();
-                NPC_Harvey->onMouseDown(event, mapscale);
+            if (NPC_Harvey->Dialog_NPC->clickEndButton == true) {
                 MouseStatus = notTaken;
+                NPC_Harvey->startMovement();
+                NPC_Harvey->Dialog_NPC->clickEndButton = false;
             }
         }
     }
+}
+
+void GameScene::MouseClickNPC(NPC* npc)
+{
+    npc->stopMovement();
+    npc->ifSelected = true;
+    enum TaskStatus npcTS = npc->NPCtask.GetTaskStatus();
+    this->addChild(npc->Dialog_NPC);
+}
+
+int GameScene::clickNPCButtons()
+{
+    return 0;
 }

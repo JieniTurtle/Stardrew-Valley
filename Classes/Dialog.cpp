@@ -1,6 +1,6 @@
 #include "Dialog.h"
 
-Dialog* Dialog::create(const std::string& Username)
+Dialog* Dialog::create(std::string& Username)
 {
     Dialog* dialog = new Dialog();
     if (dialog) {
@@ -20,29 +20,44 @@ bool Dialog::init() {
     auto visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     // 创建一个黑色的半透明背景，只占据屏幕的下半部分
-    Dialog_Layer = LayerColor::create(Color4B(0, 0, 0, 180), visibleSize.width, visibleSize.height / 3);
-    Dialog_Layer->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    Dialog_Layer->setPosition(Vec2(0, 0));  // 背景放在屏幕的下半部分
-    this->addChild(Dialog_Layer);
+    BackLayer = LayerColor::create(Color4B(0, 0, 0, 180), visibleSize.width, visibleSize.height / 3);
+    BackLayer->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    BackLayer->setPosition(Vec2(0, 0));  // 背景放在屏幕的下半部分
+    this->addChild(BackLayer);
 
-    // 创建消息标签
-    Dialog_Label = Label::createWithSystemFont("HW", "arial", 24);
-    Dialog_Label->setString(GetDialogContent("NPC/" + User + "/DialogContent.txt"));
-    Dialog_Label->setDimensions(visibleSize.width * 0.8, 0);
-    Dialog_Label->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-    Dialog_Label->setPosition(visibleSize.width * 0.1, visibleSize.height / 4);
-    //设置文本水平方向在左边，垂直方向在右边显示
-    Dialog_Label->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);
-    this->addChild(Dialog_Label);
+    //录入对话文本
+    contentIndex = 0;
+    contentstore.push_back(GetDialogContent("NPC/" + User + "/DialogContent_Normal.txt"));
+    contentstore.push_back(GetDialogContent("NPC/" + User + "/DialogContent_TaskGiving.txt"));
+    contentstore.push_back(GetDialogContent("NPC/" + User + "/DialogContent_TaskInProgress.txt"));
+    contentstore.push_back(GetDialogContent("NPC/" + User + "/DialogContent_TaskCompleted.txt"));
+
+    //创建继续按钮
+    button_continue = MenuItemImage::create(
+        "NPC/" + User + "/DialogContinue1.png", "NPC/" + User + "/DialogContinue2.png", CC_CALLBACK_1(Dialog::onContinueButtonClick, this));
+    button_continue->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+    button_continue->setPosition(visibleSize.width / 8, visibleSize.height / 8);
+    this->addChild(button_continue);
 
     //创建退出按钮
-    Dialog_CloseBotton = MenuItemImage::create(
-        "NPC/" + User + "/DialogStart.png", "NPC/" + User + "/DialogEnd.png", CC_CALLBACK_1(Dialog::onExitButtonClick, this));
-    Dialog_CloseBotton->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    Dialog_CloseBotton->setPosition(Dialog_CloseBotton->getPosition().x + visibleSize.width / 2, Dialog_CloseBotton->getPosition().y - visibleSize.height / 2);
-    Dialog_Menu = Menu::create(Dialog_CloseBotton, NULL);
-    this->addChild(Dialog_Menu);
+    button_close = MenuItemImage::create(
+        "NPC/" + User + "/DialogEnd1.png", "NPC/" + User + "/DialogEnd2.png", CC_CALLBACK_1(Dialog::onEndButtonClick, this));
+    button_close->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+    button_close->setPosition(visibleSize.width * 7 / 8, visibleSize.height / 8);
+    this->addChild(button_close);
+    clickEndButton = false;
 
+    // 创建消息标签
+    content = Label::createWithSystemFont("HW", "arial", 24);
+    content->setString(contentstore[contentIndex]);
+    content->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
+    content->setPosition(visibleSize.width / 2, visibleSize.height / 4);
+    //设置文本水平方向在左边，垂直方向在上边显示
+    content->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);
+    content->setDimensions(visibleSize.width * 0.8, 0);
+    this->addChild(content);
+
+    this->retain();
     return true;
 }
 
@@ -54,24 +69,39 @@ std::string Dialog::GetDialogContent(std::string path)
     return buffer.str();    // 返回文件内容
 }
 
-bool Dialog::JudgeClickButton(Vec2 clickp,int mapscale)
+//点击结束按钮
+void Dialog::onEndButtonClick(Ref* obj)
 {
-    Vec2 ButtonSize = Dialog_CloseBotton->getContentSize();
-    auto visibleSize = Director::getInstance()->getVisibleSize() / mapscale;
-
-    if (clickp.x >= visibleSize.width - ButtonSize.x) {
-        if (clickp.x <= visibleSize.width) {
-            if (clickp.y >= 0) {
-                if (clickp.y < ButtonSize.y) {
-                    return true;
-                }
-            }
-        }
+    clickEndButton = true;
+    if (contentIndex == 0) {
+        this->removeFromParent();
     }
-    return false;
+    else if (contentIndex == 1) {
+        contentIndex = 2;
+        content->setString(contentstore[contentIndex]);
+        this->addChild(button_continue);
+        this->removeFromParent();
+    }
+    else if (contentIndex == 2) {
+        this->removeFromParent();
+    }
+    else if (contentIndex == 3) {
+        this->removeFromParent();
+    }
 }
 
-void Dialog::onExitButtonClick(Ref* obj)
+//点击继续按钮
+void Dialog::onContinueButtonClick(Ref* obj)
 {
-    this->removeFromParent();
+    if (contentIndex == 0) {
+        contentIndex = 1;
+        content->setString(contentstore[contentIndex]);
+        this->removeChild(button_continue);
+    }
+    else if (contentIndex == 2) {
+        contentIndex = 3;
+        content->setString(contentstore[contentIndex]);
+        this->removeChild(button_continue);
+        this->removeFromParent();
+    }
 }

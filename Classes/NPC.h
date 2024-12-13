@@ -1,12 +1,22 @@
 #ifndef __NPC_SCENE_H__
 #define __NPC_SCENE_H__
 #include "cocos2d.h"
+#include "Dialog.h"
+#include "Task.h"
 
 USING_NS_CC;
 
 class NPC : public cocos2d::Sprite
 {
 public:
+    //析构
+    ~NPC() {
+        moveup->release();
+        moveleft->release();
+        moveright->release();
+        movedown->release();
+        movestatic->release();
+    }
     //NPC名称
     std::string NPCname;
 
@@ -34,6 +44,12 @@ public:
     //标记NPC是否被选中
     bool ifSelected;
 
+    //NPC任务
+    Task NPCtask;
+
+    //NPC对话
+    Dialog* Dialog_NPC;
+
     //路径相关
     int currentPathIndex;//路径索引
     float speed;//速度
@@ -46,7 +62,7 @@ public:
     static NPC* create(const std::string& filename);
 
     //初始化
-    virtual bool init();
+    bool init();
 
     //NPC移动的更新
     void updatemove(float dt);
@@ -63,10 +79,7 @@ public:
     // 恢复NPC的动画和移动
     void startMovement();
 
-    //处理鼠标事件
-    bool NPC::onMouseDown(cocos2d::Event* event,int mapscale);
-
     //判断鼠标位置是否在NPC上
-    bool JudgeClickNPC(Vec2 NPCp, Vec2 clickp);
+    bool JudgeClickNPC(Vec2 clickPos, int mapscale);
 };
 #endif // __NPC_SCENE_H__;
