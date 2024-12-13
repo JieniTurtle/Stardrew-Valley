@@ -16,16 +16,27 @@ public:
     //传入地图指针
     void setMap(TMXTiledMap* map) {
         mainmap = map;
+        animate_sprite = Sprite::create();
+        mainmap->addChild(animate_sprite, 1);
+        animate_sprite->setPosition(this->getPosition());
     }
 
-    std::string staticnext="characterdown2.png";//静止方向图片
+    int frame_count = 0;    // move when
+    std::string staticnext = "characterdown2.png";//静止方向图片
     virtual bool init(const std::string& filename);
-    int movementkeys[4];//储存wasd四个键为
+    int movementkeys[6];//储存wasd四个键为
     Animation* walkAnimationdown; // 走路动画
     Animation* walkAnimationup;
     Animation* walkAnimationleft;
     Animation* walkAnimationright;
     TMXTiledMap* mainmap;//地图指针
+
+    int dir = 2;
+    Sprite* animate_sprite;
+    SpriteFrame* walking_animation[4][4];
+
+    void set_map_position_by_character();
+    bool on_contact_begin(PhysicsContact& contact);
 };
 
 #endif 

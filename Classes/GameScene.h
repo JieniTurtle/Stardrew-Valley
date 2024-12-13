@@ -11,8 +11,9 @@ USING_NS_CC;
 class GameScene : public cocos2d::Scene
 {
 public:
-    static Scene* createScene();
-    virtual bool init();
+    static Scene* createScene(std::string s);
+    static GameScene* create(std::string s);
+    bool init();
     void CheckboxOnlyone();//只能选择一个复选框
   
     MainCharacter* character;//主角
@@ -20,13 +21,12 @@ public:
     int mapHeight; // 纵向瓷砖数量
     int tileWidth;  // 单个瓷砖的像素宽度
     int tileHeight;  // 单个瓷砖的像素高度
-    CREATE_FUNC(GameScene);
 
     Tools* tools ;//传入工具   
     Seeds* seeds;//传入种子   
     Wheat* wheat ;//传入小麦   
     Gloves* gloves ;//传入手套
-    ;
+    std::string scene_name_;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

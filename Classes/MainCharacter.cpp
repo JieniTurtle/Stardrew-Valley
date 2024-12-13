@@ -1,180 +1,245 @@
-
-#include "MainCharacter.h"
+ï»¿#include "MainCharacter.h"
+#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "SimpleAudioEngine.h"
-MainCharacter* MainCharacter::create(const std::string& filename) {
 
+#define LEFT 1
+#define UP 0
+#define RIGHT 3
+#define DOWN 2
+#define UP_DOWN_CONFLICT 4
+#define LEFT_RIGHT_CONFLICT 5
+
+#define CHARACTER 1
+
+MainCharacter* MainCharacter::create(const std::string& filename) {
     MainCharacter* ret = new MainCharacter();
     if (ret && ret->init(filename)) {
-        ret->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+        ret->autorelease();
         return ret;
     }
-    CC_SAFE_DELETE(ret); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(ret);
     return nullptr;
 }
 
 bool MainCharacter::init(const std::string& filename) {
-    if (!Sprite::initWithFile(filename)) { // Ê¹ÓÃ´«ÈëµÄÎÄ¼þÃû³õÊ¼»¯¾«Áé
+    if (!Sprite::initWithFile(filename)) {
         return false;
     }
 
-    this->setScale(0.25);
-
+    this->setVisible(false);
     
+    // add physical property
+    auto physics_body = PhysicsBody::createCircle(4, PhysicsMaterial(0.00001f, 0.0f, 0.01f));
+    physics_body->setRotationEnable(false);
+    physics_body->setVelocityLimit(200);
+    physics_body->setContactTestBitmask(0xFFFFFFFF);
+    physics_body->setPositionOffset(Vec2(0, -16));
+    this->addComponent(physics_body);
+    this->setTag(CHARACTER);
 
-    //Ìí¼Ó¼üÅÌ¼àÌýÊÂ¼þ
+    //add contact event listener
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(MainCharacter::on_contact_begin, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+
     addKeyboardListener();
-    this->schedule(CC_SCHEDULE_SELECTOR(MainCharacter::update), 0.15f); //Ê±¿ÌË¢ÐÂÊÂ¼þ
+    this->schedule(CC_SCHEDULE_SELECTOR(MainCharacter::update), 1.0 / 60); // 60 fps
 
     return true;
 }
+
 void MainCharacter::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
     switch (keyCode) {
         case EventKeyboard::KeyCode::KEY_W: // W
-            movementkeys[0] = true; // ÏòÉÏÒÆ¶¯
+            if (!movementkeys[DOWN])
+                movementkeys[UP] = true;
+            else
+                movementkeys[UP_DOWN_CONFLICT] = true;
             break;
         case EventKeyboard::KeyCode::KEY_A: // A
-            movementkeys[1] = true; // Ïò×óÒÆ¶¯
+            if (!movementkeys[RIGHT])
+                movementkeys[LEFT] = true; 
+            else
+                movementkeys[LEFT_RIGHT_CONFLICT] = true;
             break;
         case EventKeyboard::KeyCode::KEY_S: // S
-            movementkeys[2] = true; // ÏòÏÂÒÆ¶¯
+            if (!movementkeys[UP])
+                movementkeys[DOWN] = true; 
+            else
+                movementkeys[UP_DOWN_CONFLICT] = true;
             break;
         case EventKeyboard::KeyCode::KEY_D: // D
-            movementkeys[3] = true; // ÏòÓÒÒÆ¶¯
+            if (!movementkeys[LEFT])
+                movementkeys[RIGHT] = true;
+            else
+                movementkeys[LEFT_RIGHT_CONFLICT] = true;
             break;
         default:
             break;
     }
-
 }
+
 void MainCharacter::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) {
     switch (keyCode) {
         case EventKeyboard::KeyCode::KEY_W:
-            movementkeys[0] = false;
+            movementkeys[UP] = false;
+            if (movementkeys[UP_DOWN_CONFLICT]) {
+                movementkeys[UP_DOWN_CONFLICT] = false;
+                movementkeys[DOWN] = true;
+            }
             break;
         case EventKeyboard::KeyCode::KEY_A:
-            movementkeys[1] = false;
+            movementkeys[LEFT] = false;
+            if (movementkeys[LEFT_RIGHT_CONFLICT]) {
+                movementkeys[LEFT_RIGHT_CONFLICT] = false;
+                movementkeys[RIGHT] = true;
+            }
             break;
         case EventKeyboard::KeyCode::KEY_S:
-            movementkeys[2] = false;
+            movementkeys[DOWN] = false;
+            if (movementkeys[UP_DOWN_CONFLICT]) {
+                movementkeys[UP_DOWN_CONFLICT] = false;
+                movementkeys[UP] = true;
+            }
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            movementkeys[3] = false;
+            movementkeys[RIGHT] = false;
+            if (movementkeys[LEFT_RIGHT_CONFLICT]) {
+                movementkeys[LEFT_RIGHT_CONFLICT] = false;
+                movementkeys[LEFT] = true;
+            }
             break;
         default:
             break;
     }
 }
+
 void MainCharacter::addKeyboardListener() {
-    // Ìí¼Ó¼üÅÌÊÂ¼þ¼àÌý
     auto listener = EventListenerKeyboard::create();
     listener->onKeyPressed = CC_CALLBACK_2(MainCharacter::onKeyPressed, this);
     listener->onKeyReleased = CC_CALLBACK_2(MainCharacter::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
-// ¸üÐÂ½ÇÉ«Î»ÖÃ
+
 void MainCharacter::update(float delta) {
-    // »ñÈ¡µ±Ç°µØÍ¼Î»ÖÃ
     Vec2 position = mainmap->getPosition();
-    int mapWidth = mainmap->getMapSize().width;  // ºáÏò´É×©ÊýÁ¿
-    int mapHeight = mainmap->getMapSize().height; // ×ÝÏò´É×©ÊýÁ¿
-    int tileWidth = mainmap->getTileSize().width * 2; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight = mainmap->getTileSize().height * 2; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
+    int mapWidth = mainmap->getMapSize().width;  
+    int mapHeight = mainmap->getMapSize().height; 
+    int tileWidth = mainmap->getTileSize().width * 2; 
+    int tileHeight = mainmap->getTileSize().height * 2; 
     int mapwidth = mapWidth * tileWidth;
-    int mapheight = mapHeight * tileHeight;//µØÍ¼³¤¿í
-    // »ñÈ¡½ÇÉ«µÄ³ß´ç
+    int mapheight = mapHeight * tileHeight;
+
     Size characterSize = this->getContentSize();
-    auto visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    // ¸ù¾Ý°´ÏÂµÄ¼üÒÆ¶¯½ÇÉ«
-      // ³ÖÐøÒÆ¶¯Âß¼­
-    if (movementkeys[0]) { // W
-        position.y -= 10; // ÏòÉÏÒÆ¶¯
-    }
-    if (movementkeys[1]) { // A
-        position.x += 10; // Ïò×óÒÆ¶¯
-    }
-    if (movementkeys[2]) { // S
-        position.y += 10; // ÏòÏÂÒÆ¶¯
-    }
-    if (movementkeys[3]) { // D
-        position.x -= 10; // ÏòÓÒÒÆ¶¯
-    }
-    //¼ì²éÊÇ·ñ³¬³ö±ß½ç
-    if (position.x > mapwidth / 2) {
-        position.x = mapwidth / 2;
-    }
-    if (position.y > mapheight / 2) {
-        position.y = mapheight / 2;
-    }
-    if (position.x < visibleSize.width - mapwidth / 2) {
-        position.x = visibleSize.width - mapwidth / 2;
-    }
-    if (position.y < visibleSize.height - mapheight / 2) {
-        position.y = visibleSize.height - mapheight / 2;
-    }
+    auto visibleSize = Director::getInstance()->getVisibleSize();
 
-    // ´´½¨¶¯»­Ö¡
-    Vector<SpriteFrame*> animationFramesdown;//ÏòÏÂ×ß¶¯»­
-    for (int i = 1; i <= 3; i++) {
-        auto frame = SpriteFrame::create(StringUtils::format("characterdown%d.png", i).c_str(), Rect(0, 0, 100, 160));
-        animationFramesdown.pushBack(frame);
-    }
+    double v = 200;
 
-    Vector<SpriteFrame*> animationFramesright;//ÏòÓÒ×ß¶¯»­
-    for (int i = 1; i <= 3; i++) {
-        auto frame = SpriteFrame::create(StringUtils::format("characterright%d.png", i).c_str(), Rect(0, 0, 100, 160));
-        animationFramesright.pushBack(frame);
+    this->getPhysicsBody()->applyForce(Vec2(v * (movementkeys[RIGHT] - movementkeys[LEFT]),
+                                                     v * (movementkeys[UP] - movementkeys[DOWN])));
+    if (!movementkeys[UP] && !movementkeys[DOWN] && !movementkeys[LEFT] && !movementkeys[RIGHT]) {
+        this->getPhysicsBody()->setVelocity(Vec2(0, 0));
     }
-
-    Vector<SpriteFrame*> animationFramesleft;//Ïò×ó×ß¶¯»­
-    for (int i = 1; i <= 3; i++) {
-        auto frame = SpriteFrame::create(StringUtils::format("characterleft%d.png", i).c_str(), Rect(0, 0, 100, 160));
-        animationFramesleft.pushBack(frame);
+    set_map_position_by_character();
+    log("v_x = %f, v_y = %f", this->getPhysicsBody()->getVelocity().x, this->getPhysicsBody()->getVelocity().y);
+    
+    frame_count = (1 + frame_count) % 24;
+    int step = frame_count / 6;
+    
+    int temp_dir = 4;
+    if (movementkeys[UP] == 1) {
+        temp_dir = UP;
     }
-
-    Vector<SpriteFrame*> animationFramesup;//ÏòÉÏ×ß¶¯»­
-    for (int i = 1; i <= 3; i++) {
-        auto frame = SpriteFrame::create(StringUtils::format("characterup%d.png", i).c_str(), Rect(0, 0, 100, 160));
-        animationFramesup.pushBack(frame);
+    else if (movementkeys[DOWN] == 1) {
+        temp_dir = DOWN;
     }
-    // ´´½¨¶¯»­
-    walkAnimationdown = Animation::createWithSpriteFrames(animationFramesdown, 0.1f);
-    walkAnimationright = Animation::createWithSpriteFrames(animationFramesright, 0.1f);
-    walkAnimationleft = Animation::createWithSpriteFrames(animationFramesleft, 0.1f);
-    walkAnimationup = Animation::createWithSpriteFrames(animationFramesup, 0.1f);
-    auto walkAnimationnext = Animation::create();
-  
-    // ²¥·Å×ßÂ·¶¯»­
-    if (movementkeys[2]
-        ) {
-        walkAnimationnext = walkAnimationdown->clone();
-        staticnext = "characterdown2.png";
+    else if (movementkeys[LEFT] == 1) {
+        temp_dir = LEFT;
     }
-    if (movementkeys[3]) {
-        walkAnimationnext = walkAnimationright->clone();
-        staticnext = "characterright2.png";
+    else if (movementkeys[RIGHT] == 1) {
+        temp_dir = RIGHT;
     }
-    if (movementkeys[1]) {
-        walkAnimationnext = walkAnimationleft->clone();
-        staticnext = "characterleft2.png";
+    // animation
+    for (int direction = 0; direction < 4; direction++) {
+        for (int step = 0; step < 4; step++) {
+            auto frame = SpriteFrame::create("MainCharacter/Emily.png", Rect(16 * step, 32 * ((temp_dir + 2) % 4), 16, 32));
+            walking_animation[direction][step] = frame;
+        }
     }
-    if (movementkeys[0]) {
-        walkAnimationnext = walkAnimationup->clone();
-        staticnext = "characterup2.png";
-    }
-
-    // ´´½¨ Animate ¶¯×÷
-    if (movementkeys[0] || movementkeys[1] || movementkeys[2] || movementkeys[3]) {
-        auto animateActionnext = Animate::create(walkAnimationnext);
-        this->runAction(RepeatForever::create(animateActionnext));
-        mainmap->runAction(MoveTo::create(0.3, position));
-    }
+    if (temp_dir != 4) {
+        dir = ((temp_dir + 2) % 4);
+        animate_sprite->setSpriteFrame(walking_animation[dir][step]);
+    } 
     else {
-        this->stopAllActions(); // Í£Ö¹ËùÓÐ¶¯×÷
-
-        this->setTexture(staticnext); // ÇÐ»»Îª¾²Ì¬Í¼Ïñ
+        animate_sprite->setSpriteFrame(walking_animation[dir][0]);
     }
 
-
+    animate_sprite->setPosition(this->getPosition());
 }
 
+/****************************************************************************************************
+                            Followed by Wang's code about map collision
+**********************************************************************************************************/
+
+void MainCharacter::set_map_position_by_character()
+{
+    int mapWidth = mainmap->getMapSize().width;
+    int mapHeight = mainmap->getMapSize().height;
+    int tileWidth = mainmap->getTileSize().width;
+    int tileHeight = mainmap->getTileSize().height;
+    int mapwidth = mapWidth * tileWidth;
+    int mapheight = mapHeight * tileHeight;
+
+    Size characterSize = this->getContentSize();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    float scale = 2.0f;
+    // x axis
+    log("%f", this->getPositionX());
+    if ((this->getPositionX() * scale) > visibleSize.width / 2 && (this->getPositionX() * scale) < mapwidth * scale - visibleSize.width / 2) {
+        mainmap->setPositionX((-this->getPositionX() + mapwidth / 2) * 2 + visibleSize.width / 2);
+        log("%f", (-this->getPositionX() + mapwidth / 2) * 2 + visibleSize.width / 2);
+    }
+    else if ((this->getPositionX() * scale) < visibleSize.width / 2) {
+        mainmap->setPositionX(mapwidth);
+    }
+    else {
+        mainmap->setPositionX(-mapwidth + visibleSize.width);
+    }
+
+    // y axis
+    log("%f", this->getPositionY());
+    if ((this->getPositionY() * scale) > visibleSize.height / 2 && (this->getPositionY() * scale) < mapheight * scale - visibleSize.height / 2) {
+        mainmap->setPositionY((-this->getPositionY() + mapheight / 2) * 2 + visibleSize.height / 2);
+        log("%f", (-this->getPositionY() + mapheight / 2) * 2 + visibleSize.height / 2);
+    }
+    else if ((this->getPositionY() * scale) < visibleSize.height / 2) {
+        mainmap->setPositionY(mapheight);
+    }
+    else {
+        mainmap->setPositionY(-mapheight + visibleSize.height);
+    }
+}
+
+
+bool MainCharacter::on_contact_begin(PhysicsContact& contact)
+{
+    const int EDGE = 114;
+    auto nodeA = contact.getShapeA()->getBody()->getNode();
+    auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+    if (nodeA && nodeB) {
+        if (nodeA->getTag() == EDGE || nodeB->getTag() == EDGE) {
+            GameScene* next_scene;
+            if (dynamic_cast<GameScene*>(this->getScene())->scene_name_ == "newnewFarm")
+                next_scene = GameScene::create("Town");
+            else
+                next_scene = GameScene::create("newnewFarm");
+            Director::getInstance()->replaceScene(next_scene);
+        }
+    }
+
+    return true;
+}
