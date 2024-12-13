@@ -1,4 +1,5 @@
 #include "animals.h"
+#include"MainCharacter.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -99,6 +100,60 @@ Cow* Cow::create(const std::string& filename)
     return nullptr;
 }
 
+void Cow::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    {
+        cow_feed_label->setVisible(true); // 显示文字
+
+        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
+    }
+}
+
+// 添加键盘事件监听
+void Cow::addKeyboardListener() {
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(Cow::onKeyPressed, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+//标签隐藏
+void Cow::hideLabel(float dt)
+{
+    cow_feed_label->setVisible(false); // 隐藏文字
+}
+
+void Cow::isMainCharNear(float delta)
+{
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+
+    // 获取地图大小
+    Vec2 mapPosition = mainmap->getPosition();
+    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
+    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
+    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
+    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
+    double maplength = mapWidth * tileWidth;
+    double mapwidth = mapHeight * tileHeight;
+
+    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
+    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2) / 1.3F;
+
+    float distance = sprite1Position.distance(sprite2Position);
+    
+    // 如果距离小于某个值，设置标志位
+    if (distance < 50)
+    {
+        isNearSprite = true;
+    }
+    else
+    {
+        isNearSprite = false;
+    }
+}
+
 //初始化
 bool Cow::init()
 {
@@ -151,6 +206,16 @@ bool Cow::init()
     Animation* ddown = Animation::createWithSpriteFrames(Animaldown, 0.3f);
     movedown = Animate::create(ddown);
     movedown->setTag(4);
+    
+
+    // 创建文字标签
+    cow_feed_label = cocos2d::Label::createWithSystemFont("The cow has been fed.Obtain Milk x1", "Arial", 25);
+    cow_feed_label->setVisible(false); // 初始时隐藏
+    this->addChild(cow_feed_label);
+    cow_feed_label->setPosition(cocos2d::Vec2(40, 120));
+
+    Cow::addKeyboardListener();
+    this->schedule(CC_SCHEDULE_SELECTOR(Cow::isMainCharNear), 0.1f);
 
     return true;
 }
@@ -185,6 +250,30 @@ Sheep* Sheep::create(const std::string& filename)
     }
     CC_SAFE_DELETE(sheep); // 如果创建失败，安全删除
     return nullptr;
+}
+
+void Sheep::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    {
+        sheep_feed_label->setVisible(true); // 显示文字
+
+        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
+    }
+}
+
+// 添加键盘事件监听
+void Sheep::addKeyboardListener() {
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(Sheep::onKeyPressed, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+//标签隐藏
+void Sheep::hideLabel(float dt)
+{
+    sheep_feed_label->setVisible(false); // 隐藏文字
 }
 
 //初始化
@@ -240,7 +329,46 @@ bool Sheep::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
+    // 创建文字标签
+    sheep_feed_label = cocos2d::Label::createWithSystemFont("The sheep has been fed.Obtain Wool x1", "Arial", 10);
+    sheep_feed_label->setVisible(false); // 初始时隐藏
+    this->addChild(sheep_feed_label);
+    sheep_feed_label->setPosition(cocos2d::Vec2(20, 40));
+
+    Sheep::addKeyboardListener();
+    this->schedule(CC_SCHEDULE_SELECTOR(Sheep::isMainCharNear), 0.1f);
+
     return true;
+}
+
+void Sheep::isMainCharNear(float delta)
+{
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+
+    // 获取地图大小
+    Vec2 mapPosition = mainmap->getPosition();
+    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
+    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
+    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
+    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
+    double maplength = mapWidth * tileWidth;
+    double mapwidth = mapHeight * tileHeight;
+
+    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
+    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2);
+
+    float distance = sprite1Position.distance(sprite2Position);
+
+    // 如果距离小于某个值，设置标志位
+    if (distance < 50)
+    {
+        isNearSprite = true;
+    }
+    else
+    {
+        isNearSprite = false;
+    }
 }
 
 void Sheep::move(Sheep* sheep, TMXTiledMap* map) {
@@ -273,6 +401,30 @@ Chicken* Chicken::create(const std::string& filename)
     }
     CC_SAFE_DELETE(chicken); // 如果创建失败，安全删除
     return nullptr;
+}
+
+void Chicken::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    {
+        chicken_feed_label->setVisible(true); // 显示文字
+
+        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
+    }
+}
+
+// 添加键盘事件监听
+void Chicken::addKeyboardListener() {
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(Chicken::onKeyPressed, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+//标签隐藏
+void Chicken::hideLabel(float dt)
+{
+    chicken_feed_label->setVisible(false); // 隐藏文字
 }
 
 //初始化
@@ -328,7 +480,49 @@ bool Chicken::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
+    // 创建文字标签
+    chicken_feed_label = cocos2d::Label::createWithSystemFont("The chicken has been fed.Obtain Egg x1", "Arial", 10);
+    chicken_feed_label->setVisible(false); // 初始时隐藏
+    this->addChild(chicken_feed_label);
+    chicken_feed_label->setPosition(cocos2d::Vec2(20, 40));
+
+    Chicken::addKeyboardListener();
+    this->schedule(CC_SCHEDULE_SELECTOR(Chicken::isMainCharNear), 0.1f);
+
     return true;
+}
+
+void Chicken::isMainCharNear(float delta)
+{
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+
+    // 获取地图大小
+    Vec2 mapPosition = mainmap->getPosition();
+    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
+    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
+    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
+    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
+    double maplength = mapWidth * tileWidth;
+    double mapwidth = mapHeight * tileHeight;
+
+    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
+    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2)*3.5F;
+
+    float distance = sprite1Position.distance(sprite2Position);
+
+    log("distance: %f", distance);
+    log("sprite1Position: %f", sprite1Position.y);
+    log("sprite2Position: %f", sprite2Position.y);
+    // 如果距离小于某个值，设置标志位
+    if (distance < 100)
+    {
+        isNearSprite = true;
+    }
+    else
+    {
+        isNearSprite = false;
+    }
 }
 
 void Chicken::move(Chicken* chicken, TMXTiledMap* map) {

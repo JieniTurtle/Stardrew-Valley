@@ -1,6 +1,7 @@
 #ifndef __ANIMALS_H__
 #define __ANIMALS_H__
 
+#include"MainCharacter.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
@@ -48,8 +49,40 @@ public:
 	static int Animalorder_right;
 	static int Animalorder_down;
 
+	//主角
+	MainCharacter* mainChar;
+	//地图指针
+	TMXTiledMap* mainmap;
+
+	//cow已被喂养的反馈弹窗
+	cocos2d::Label* cow_feed_label;
+
+	//检测主角与动物的位置关系
+	void isMainCharNear(float delta);
+
+	//是否在附近
+	bool isNearSprite = false;
+
+	//添加键盘监听事件
+	void addKeyboardListener();
+
+	//当按键按下时产生的事件
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	
+	//标签隐藏
+	void hideLabel(float dt);
+
 	//初始化
 	bool init();
+
+	//设置主角
+	void setMaincharacter(MainCharacter* mainCharacter) {
+		mainChar = mainCharacter;
+	}
+	//传入地图指针
+	void setMap(TMXTiledMap* map) {
+		mainmap = map;
+	}
 //播放动画
 	static void move(Cow* cow, TMXTiledMap* map);
 };
@@ -69,8 +102,41 @@ public:
 	static int Animalorder_right;
 	static int Animalorder_down;
 
+	//主角
+	MainCharacter* mainChar;
+	//地图指针
+	TMXTiledMap* mainmap;
+
+	//cow已被喂养的反馈弹窗
+	cocos2d::Label* sheep_feed_label;
+
+	//检测主角与动物的位置关系
+	void isMainCharNear(float delta);
+
+	//是否在附近
+	bool isNearSprite = false;
+
+	//添加键盘监听事件
+	void addKeyboardListener();
+
+	//当按键按下时产生的事件
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+
+	//标签隐藏
+	void hideLabel(float dt);
+
 	//初始化
 	bool init();
+
+	//设置主角
+	void setMaincharacter(MainCharacter* mainCharacter) {
+		mainChar = mainCharacter;
+	}
+	//传入地图指针
+	void setMap(TMXTiledMap* map) {
+		mainmap = map;
+	}
+
 	//播放动画
 	static void move(Sheep* sheep, TMXTiledMap* map);
 };
@@ -89,6 +155,38 @@ public:
 	static int Animalorder_left;
 	static int Animalorder_right;
 	static int Animalorder_down;
+
+	//主角
+	MainCharacter* mainChar;
+	//地图指针
+	TMXTiledMap* mainmap;
+
+	//cow已被喂养的反馈弹窗
+	cocos2d::Label* chicken_feed_label;
+
+	//检测主角与动物的位置关系
+	void isMainCharNear(float delta);
+
+	//是否在附近
+	bool isNearSprite = false;
+
+	//添加键盘监听事件
+	void addKeyboardListener();
+
+	//当按键按下时产生的事件
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+
+	//标签隐藏
+	void hideLabel(float dt);
+
+	//设置主角
+	void setMaincharacter(MainCharacter* mainCharacter) {
+		mainChar = mainCharacter;
+	}
+	//传入地图指针
+	void setMap(TMXTiledMap* map) {
+		mainmap = map;
+	}
 
 	//初始化
 	bool init();
