@@ -129,18 +129,6 @@ void Cow::isMainCharNear(float delta)
     Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
-    // 获取地图大小
-    Vec2 mapPosition = mainmap->getPosition();
-    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
-    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
-    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
-    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
-    double maplength = mapWidth * tileWidth;
-    double mapwidth = mapHeight * tileHeight;
-
-    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
-    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2) / 1.3F;
-
     float distance = sprite1Position.distance(sprite2Position);
     
     // 如果距离小于某个值，设置标志位
@@ -346,18 +334,6 @@ void Sheep::isMainCharNear(float delta)
     Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
-    // 获取地图大小
-    Vec2 mapPosition = mainmap->getPosition();
-    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
-    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
-    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
-    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
-    double maplength = mapWidth * tileWidth;
-    double mapwidth = mapHeight * tileHeight;
-
-    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
-    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2);
-
     float distance = sprite1Position.distance(sprite2Position);
 
     // 如果距离小于某个值，设置标志位
@@ -496,18 +472,6 @@ void Chicken::isMainCharNear(float delta)
 {
     Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
-
-    // 获取地图大小
-    Vec2 mapPosition = mainmap->getPosition();
-    double mapWidth = mainmap->getMapSize().width;  // 横向瓷砖数量
-    double mapHeight = mainmap->getMapSize().height; // 纵向瓷砖数量
-    double tileWidth = mainmap->getTileSize().width; // 单个瓷砖的像素宽度
-    double tileHeight = mainmap->getTileSize().height; // 单个瓷砖的像素高度
-    double maplength = mapWidth * tileWidth;
-    double mapwidth = mapHeight * tileHeight;
-
-    sprite1Position.x = (sprite1Position.x - mapPosition.x + maplength / 2) / 1.3F;
-    sprite1Position.y = (sprite1Position.y - mapPosition.y + mapwidth / 2)*3.5F;
 
     float distance = sprite1Position.distance(sprite2Position);
 
