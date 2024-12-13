@@ -1,5 +1,5 @@
 
-
+#include "animals.h"
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
 
@@ -82,6 +82,22 @@ bool GameScene::init()
 
 
     CheckboxOnlyone();
+    
+        auto cow = Cow::create("cow");
+    cow->setMaincharacter(character);
+    cow->setMap(map);
+    Cow::move(cow, map);
+
+    auto sheep = Sheep::create("sheep");
+    sheep->setMaincharacter(character);
+    sheep->setMap(map);
+    Sheep::move(sheep, map);
+
+    auto chicken = Chicken::create("chicken");
+    chicken->setMaincharacter(character);
+    chicken->setMap(map);
+    Chicken::move(chicken, map);
+    
     return true;
    
 }
