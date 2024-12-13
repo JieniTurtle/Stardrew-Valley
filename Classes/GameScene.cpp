@@ -4,6 +4,8 @@
 
 USING_NS_CC;
 
+int GameScene::mapscale = 2;
+
 Scene* GameScene::createScene(std::string s)
 {
     return GameScene::create(s);
@@ -144,23 +146,61 @@ bool GameScene::init()
     gloves = Gloves::create(map,(wheat->wheatnum));//传入手套
     this->addChild(gloves, 1);
 
-    auto cow = Cow::create("cow");
-    cow->setMaincharacter(character);
-    cow->setMap(map);
-    Cow::move(cow, map);
+    
+
+    MouseStatus = notTaken;//设置鼠标状态
+
+    //地图为城镇，创建NPC
+    if (scene_name_ == "Town") {
+        //创建NPC Willy 及对话 在地图左下方
+        std::vector<Vec2> path_Willy = { Vec2(700, 500), Vec2(1000, 500), Vec2(1000, 700), Vec2(700, 700) };
+        NPC_Willy = initNPC("Willy", path_Willy, map);
+        Dialog_Willy = Dialog::create(NPC_Willy->NPCname);
+
+        //创建NPC Gus 及对话 在地图左上方
+        std::vector<Vec2> path_Gus = { Vec2(700, 700),Vec2(700, 500), Vec2(1000, 500), Vec2(1000, 700) };
+        NPC_Gus = initNPC("Gus", path_Gus, map);
+        Dialog_Gus = Dialog::create(NPC_Gus->NPCname);
+
+        //创建NPC Jodi 及对话 在地图右上方
+        std::vector<Vec2> path_Jodi = { Vec2(1000, 700), Vec2(700, 700),Vec2(700, 500) ,Vec2(1000, 500) };
+        NPC_Jodi = initNPC("Jodi", path_Jodi, map);
+        Dialog_Jodi = Dialog::create(NPC_Jodi->NPCname);
+
+        //创建NPC Harvey 及对话 在地图右下方
+        std::vector<Vec2> path_Harvey = { Vec2(1000, 500), Vec2(1000, 700), Vec2(700, 700),Vec2(700, 500) };
+        NPC_Harvey = initNPC("Harvey", path_Harvey, map);
+        Dialog_Harvey = Dialog::create(NPC_Harvey->NPCname);
+
+        Dialog_Willy->retain();
+        Dialog_Gus->retain();
+        Dialog_Jodi->retain();
+        Dialog_Harvey->retain();
+
+        //添加鼠标监听事件
+        addMouseListener();
+        this->schedule(CC_SCHEDULE_SELECTOR(GameScene::Mouseupdate), 0.1f); // 更新间隔为0.1秒
+    }
+    //地图为农场，创建newnew
+    else {
+        auto cow = Cow::create("cow");
+        cow->setMaincharacter(character);
+        cow->setMap(map);
+        Cow::move(cow, map);
 
 
-    auto sheep = Sheep::create("sheep");
-    sheep->setMaincharacter(character);
-    sheep->setMap(map);
-    Sheep::move(sheep, map);
+        auto sheep = Sheep::create("sheep");
+        sheep->setMaincharacter(character);
+        sheep->setMap(map);
+        Sheep::move(sheep, map);
 
-    auto chicken = Chicken::create("chicken");
-    chicken->setMaincharacter(character);
-    chicken->setMap(map);
-    Chicken::move(chicken, map);
+        auto chicken = Chicken::create("chicken");
+        chicken->setMaincharacter(character);
+        chicken->setMap(map);
+        Chicken::move(chicken, map);
 
-    CheckboxOnlyone();
+        CheckboxOnlyone();
+    }
     return true;
 }
 
@@ -246,4 +286,78 @@ void GameScene::CheckboxOnlyone() {
   
 }
 
+NPC* GameScene::initNPC(std::string NPC_Name, std::vector<Vec2>& NPC_Path, TMXTiledMap* NPC_Map)
+{
+    NPC* npc = NPC::create(NPC_Name);
+    if (npc == nullptr) { return NULL; }
+    npc->setPath(NPC_Path);
+    NPC_Map->addChild(npc);
+    npc->setMap(NPC_Map);
+    npc->startMovement();
+    return npc;
+}
 
+void GameScene::addMouseListener()
+{
+    auto MouseListener = EventListenerMouse::create();
+    MouseListener->onMouseDown = CC_CALLBACK_1(GameScene::onMouseDown, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(MouseListener, this);
+}
+
+void GameScene::Mouseupdate(float delta)
+{
+
+}
+
+void GameScene::onMouseDown(cocos2d::Event* event)
+{
+    //获取可视范围
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    //获取鼠标点击的位置（初始原点为左上角）
+    EventMouse* e = static_cast<EventMouse*>(event);
+    Vec2 clickPos = e->getLocation() / mapscale;
+    //将鼠标点击的位置转化为以屏幕左下角为原点
+    clickPos.y = visibleSize.height / mapscale - clickPos.y;
+
+    if (MouseStatus == notTaken) {//鼠标未被占据
+        //处理点击到 NPC 的事件
+        if (NPC_Willy->onMouseDown(event, mapscale)) { addChild(Dialog_Willy); }
+        if (NPC_Gus->onMouseDown(event, mapscale)) { addChild(Dialog_Gus); }
+        if (NPC_Jodi->onMouseDown(event, mapscale)) { addChild(Dialog_Jodi); }
+        if (NPC_Harvey->onMouseDown(event, mapscale)) { addChild(Dialog_Harvey); }
+        if (NPC_Willy->ifSelected || NPC_Gus->ifSelected || NPC_Jodi->ifSelected || NPC_Harvey->ifSelected) {
+            MouseStatus = TakenByNPC;
+            return;
+        }
+    }
+    else if (MouseStatus == TakenByNPC) {//鼠标被NPC占据
+        if (NPC_Willy->ifSelected) {
+            if (Dialog_Willy->JudgeClickButton(clickPos, mapscale)) {
+                Dialog_Willy->removeFromParent();
+                NPC_Willy->onMouseDown(event, mapscale);
+                MouseStatus = notTaken;
+            }
+        }
+        if (NPC_Gus->ifSelected) {
+            if (Dialog_Gus->JudgeClickButton(clickPos, mapscale)) {
+                Dialog_Gus->removeFromParent();
+                NPC_Gus->onMouseDown(event, mapscale);
+                MouseStatus = notTaken;
+            }
+        }
+        if (NPC_Jodi->ifSelected) {
+            if (Dialog_Jodi->JudgeClickButton(clickPos, mapscale)) {
+                Dialog_Jodi->removeFromParent();
+                NPC_Jodi->onMouseDown(event, mapscale);
+                MouseStatus = notTaken;
+            }
+        }
+        if (NPC_Harvey->ifSelected) {
+            if (Dialog_Harvey->JudgeClickButton(clickPos, mapscale)) {
+                Dialog_Harvey->removeFromParent();
+                NPC_Harvey->onMouseDown(event, mapscale);
+                MouseStatus = notTaken;
+            }
+        }
+    }
+}
