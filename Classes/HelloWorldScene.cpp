@@ -83,7 +83,7 @@ void HelloWorld::menuClose(Ref*obj)
 void HelloWorld::menuStart(Ref* obj)
 {
     //½áÊø³ÌÐò
-    auto scene = GameScene::createScene();
+    auto scene = GameScene::createScene("newnewFarm");
     Director::getInstance()->replaceScene(TransitionCrossFade::create(1, scene));
 
 }
