@@ -17,11 +17,11 @@ public:
     void setMap(TMXTiledMap* map) {
         mainmap = map;
         animate_sprite = Sprite::create();
-        mainmap->addChild(animate_sprite, 1);
-        animate_sprite->setPosition(this->getPosition());
+        this->addChild(animate_sprite);
+        animate_sprite->setPosition(Vec2::ZERO);
     }
 
-    int frame_count = 0;    // move when
+    int frame_count = 2;    // move when
     std::string staticnext = "characterdown2.png";//静止方向图片
     virtual bool init(const std::string& filename);
     int movementkeys[6];//储存wasd四个键为

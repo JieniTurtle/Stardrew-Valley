@@ -4,6 +4,8 @@
 
 USING_NS_CC;
 
+#define PHYSICS 999
+
 // Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
 {
@@ -17,6 +19,13 @@ void Animal::setPath(const std::vector<Vec2>& newPath)
     Animalpath = newPath;
     currentPathIndex = 0;  // 重置路径索引
     setPosition(Animalpath[currentPathIndex]);  // 设置 Animal 的起始位置
+
+    auto physics_body = PhysicsBody::createCircle(12, PhysicsMaterial(0.00001f, 0.0f, 0.1f));
+    // this->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
+    physics_body->setRotationEnable(false);
+    physics_body->setVelocityLimit(50.0f);
+    this->addComponent(physics_body);
+    this->setVisible(false);
 }
 
 void Animal::updatemove(float dt)
@@ -32,13 +41,13 @@ void Animal::updatemove(float dt)
     float distance = direction.length();
 
     // 如果到达目标，切换到下一个路径点
-    if (distance < 1.0f) {
+    if (distance < 10.0f) {
         currentPathIndex = (currentPathIndex + 1) % Animalpath.size();  // 循环路径
     }
 
     // 移动 Animal
     Vec2 moveDirection = direction.getNormalized();
-    setPosition(currentPosition + moveDirection * speed * dt);
+    getPhysicsBody()->applyForce(0.1f * moveDirection * speed);
 
     // 根据方向播放动画
     if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // 水平移动
@@ -57,24 +66,25 @@ void Animal::updatemove(float dt)
             playAnimation("down");
         }
     }
+
+    animate_sprite->setPosition(getPosition());
 }
 
 void Animal::playAnimation(const std::string& direction)
 {
-    //!getActionByTag(1)
+    //!getActionByTag(1) 
     // 如果当前动画与目标方向相同，直接返回
     if (direction == "up" && 1) {
-
-        runAction(RepeatForever::create(moveup));
+        animate_sprite->runAction(RepeatForever::create(moveup));
     }
     else if (direction == "down" && 1) {
-        runAction(RepeatForever::create(movedown));
+        animate_sprite->runAction(RepeatForever::create(movedown));
     }
     else if (direction == "left" && 1) {
-        runAction(RepeatForever::create(moveleft));
+        animate_sprite->runAction(RepeatForever::create(moveleft));
     }
     else if (direction == "right" && 1) {
-        runAction(RepeatForever::create(moveright));
+        animate_sprite->runAction(RepeatForever::create(moveright));
     }
 }
 
@@ -86,11 +96,16 @@ int Cow::Animalorder_left = 3;
 int Cow::Animalorder_right = 1;
 int Cow::Animalorder_down = 0;
 
-Cow* Cow::create(const std::string& filename)
+Cow* Cow::create(const std::string& filename, TMXTiledMap* map)
 {
     Cow* cow = new Cow();
     if (cow) {
         cow->animalName = filename;
+        
+        cow->animate_sprite = Sprite::create("HelloWorld.png");
+        cow->animate_sprite->setScale(0.5);
+        map->addChild(cow->animate_sprite, 10);
+
         if (cow->init()) {
             cow->autorelease(); // 自动释放内存
             return cow;
@@ -126,18 +141,16 @@ void Cow::hideLabel(float dt)
 
 void Cow::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);
     
     // 如果距离小于某个值，设置标志位
-    if (distance < 50)
-    {
+    if (distance < 50) {
         isNearSprite = true;
     }
-    else
-    {
+    else {
         isNearSprite = false;
     }
 }
@@ -194,7 +207,6 @@ bool Cow::init()
     Animation* ddown = Animation::createWithSpriteFrames(Animaldown, 0.3f);
     movedown = Animate::create(ddown);
     movedown->setTag(4);
-    
 
     // 创建文字标签
     cow_feed_label = cocos2d::Label::createWithSystemFont("The cow has been fed.Obtain Milk x1", "Arial", 25);
@@ -210,12 +222,12 @@ bool Cow::init()
 
 void Cow::move(Cow* cow, TMXTiledMap* map) {
     map->addChild(cow);
-    cow->setScale(0.5f);
+    cow->setScale(2.0f);
     cow->setPosition(Vec2(950, 765 ));
     Sequence* move_cow = Sequence::create(cow->moveup, cow->moveright, cow->moveleft, cow->movedown, NULL);
-    cow->runAction(RepeatForever::create(move_cow));
     std::vector<Vec2> path_cow = { Vec2(950, 765), Vec2(950, 720), Vec2(1070, 720),Vec2(1070, 765) };
     cow->setPath(path_cow);
+    cow->animate_sprite->runAction(RepeatForever::create(move_cow));
 }
 
 int Sheep::Animalsize_x = 32;
@@ -331,7 +343,7 @@ bool Sheep::init()
 
 void Sheep::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);
@@ -470,7 +482,7 @@ bool Chicken::init()
 
 void Chicken::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);

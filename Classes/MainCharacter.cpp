@@ -10,6 +10,8 @@
 #define UP_DOWN_CONFLICT 4
 #define LEFT_RIGHT_CONFLICT 5
 
+#define V_LIMIT 100
+
 #define CHARACTER 1
 
 MainCharacter* MainCharacter::create(const std::string& filename) {
@@ -26,13 +28,11 @@ bool MainCharacter::init(const std::string& filename) {
     if (!Sprite::initWithFile(filename)) {
         return false;
     }
-
-    this->setVisible(false);
     
     // add physical property
-    auto physics_body = PhysicsBody::createCircle(4, PhysicsMaterial(0.00001f, 0.0f, 0.01f));
+    auto physics_body = PhysicsBody::createCircle(8, PhysicsMaterial(0.00001f, 0.0f, 0.01f));
     physics_body->setRotationEnable(false);
-    physics_body->setVelocityLimit(200);
+    physics_body->setVelocityLimit(V_LIMIT);
     physics_body->setContactTestBitmask(0xFFFFFFFF);
     physics_body->setPositionOffset(Vec2(0, -16));
     this->addComponent(physics_body);
@@ -124,59 +124,43 @@ void MainCharacter::addKeyboardListener() {
 }
 
 void MainCharacter::update(float delta) {
-    Vec2 position = mainmap->getPosition();
-    int mapWidth = mainmap->getMapSize().width;  
-    int mapHeight = mainmap->getMapSize().height; 
-    int tileWidth = mainmap->getTileSize().width * 2; 
-    int tileHeight = mainmap->getTileSize().height * 2; 
-    int mapwidth = mapWidth * tileWidth;
-    int mapheight = mapHeight * tileHeight;
-
-    Size characterSize = this->getContentSize();
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-
-    double v = 200;
+    double v = 600;
 
     this->getPhysicsBody()->applyForce(Vec2(v * (movementkeys[RIGHT] - movementkeys[LEFT]),
                                                      v * (movementkeys[UP] - movementkeys[DOWN])));
     if (!movementkeys[UP] && !movementkeys[DOWN] && !movementkeys[LEFT] && !movementkeys[RIGHT]) {
         this->getPhysicsBody()->setVelocity(Vec2(0, 0));
     }
+    //log("UP=%d, DOWN=%d, LEFT=%d, RIGHT=%d, dir=%d", movementkeys[UP], movementkeys[DOWN], movementkeys[LEFT], movementkeys[RIGHT], dir);
     set_map_position_by_character();
-    log("v_x = %f, v_y = %f", this->getPhysicsBody()->getVelocity().x, this->getPhysicsBody()->getVelocity().y);
+
+    int frame_per_second = 3;  // change 3 animate every second
+
+    frame_count = (1 + frame_count) % (4 * (60 / frame_per_second));
+    int step_count = frame_count / (60 / frame_per_second);
     
-    frame_count = (1 + frame_count) % 24;
-    int step = frame_count / 6;
-    
-    int temp_dir = 4;
-    if (movementkeys[UP] == 1) {
-        temp_dir = UP;
-    }
-    else if (movementkeys[DOWN] == 1) {
-        temp_dir = DOWN;
-    }
-    else if (movementkeys[LEFT] == 1) {
-        temp_dir = LEFT;
-    }
-    else if (movementkeys[RIGHT] == 1) {
-        temp_dir = RIGHT;
-    }
-    // animation
-    for (int direction = 0; direction < 4; direction++) {
-        for (int step = 0; step < 4; step++) {
-            auto frame = SpriteFrame::create("MainCharacter/Emily.png", Rect(16 * step, 32 * ((temp_dir + 2) % 4), 16, 32));
-            walking_animation[direction][step] = frame;
+    if (frame_count % (60 / frame_per_second) == 0) {
+        int temp_dir = 4;
+        if (movementkeys[UP] == 1) {
+            temp_dir = UP;
+        }
+        else if (movementkeys[DOWN] == 1) {
+            temp_dir = DOWN;
+        }
+        else if (movementkeys[LEFT] == 1) {
+            temp_dir = LEFT;
+        }
+        else if (movementkeys[RIGHT] == 1) {
+            temp_dir = RIGHT;
+        }
+        if (temp_dir != 4) {
+            dir = ((temp_dir + 2) % 4);
+            animate_sprite->setSpriteFrame(SpriteFrame::create("MainCharacter/Emily.png", Rect(16 * step_count, 32 * dir, 16, 32)));
+        }
+        else {
+            animate_sprite->setSpriteFrame(SpriteFrame::create("MainCharacter/Emily.png", Rect(0, 32 * dir, 16, 32)));
         }
     }
-    if (temp_dir != 4) {
-        dir = ((temp_dir + 2) % 4);
-        animate_sprite->setSpriteFrame(walking_animation[dir][step]);
-    } 
-    else {
-        animate_sprite->setSpriteFrame(walking_animation[dir][0]);
-    }
-
-    animate_sprite->setPosition(this->getPosition());
 }
 
 /****************************************************************************************************
@@ -197,47 +181,109 @@ void MainCharacter::set_map_position_by_character()
 
     float scale = 2.0f;
     // x axis
-    log("%f", this->getPositionX());
-    if ((this->getPositionX() * scale) > visibleSize.width / 2 && (this->getPositionX() * scale) < mapwidth * scale - visibleSize.width / 2) {
-        mainmap->setPositionX((-this->getPositionX() + mapwidth / 2) * 2 + visibleSize.width / 2);
-        log("%f", (-this->getPositionX() + mapwidth / 2) * 2 + visibleSize.width / 2);
-    }
-    else if ((this->getPositionX() * scale) < visibleSize.width / 2) {
-        mainmap->setPositionX(mapwidth);
+    if (mainmap->getMapSize().width * mainmap->getTileSize().width * scale < visibleSize.width) {
+        mainmap->setPositionX(visibleSize.width / 2);
     }
     else {
-        mainmap->setPositionX(-mapwidth + visibleSize.width);
+        if ((this->getPositionX() * scale) > visibleSize.width / 2 && (this->getPositionX() * scale) < mapwidth * scale - visibleSize.width / 2) {
+            mainmap->setPositionX((-this->getPositionX() + mapwidth / 2) * 2 + visibleSize.width / 2);
+        }
+        else if ((this->getPositionX() * scale) < visibleSize.width / 2) {
+            mainmap->setPositionX(mapwidth);
+        }
+        else {
+            mainmap->setPositionX(-mapwidth + visibleSize.width);
+        }
     }
-
     // y axis
-    log("%f", this->getPositionY());
-    if ((this->getPositionY() * scale) > visibleSize.height / 2 && (this->getPositionY() * scale) < mapheight * scale - visibleSize.height / 2) {
-        mainmap->setPositionY((-this->getPositionY() + mapheight / 2) * 2 + visibleSize.height / 2);
-        log("%f", (-this->getPositionY() + mapheight / 2) * 2 + visibleSize.height / 2);
-    }
-    else if ((this->getPositionY() * scale) < visibleSize.height / 2) {
-        mainmap->setPositionY(mapheight);
+    if (mainmap->getMapSize().height * mainmap->getTileSize().height * scale < visibleSize.height) {
+        mainmap->setPositionY(visibleSize.height / 2);
     }
     else {
-        mainmap->setPositionY(-mapheight + visibleSize.height);
+        if ((this->getPositionY() * scale) > visibleSize.height / 2 && (this->getPositionY() * scale) < mapheight * scale - visibleSize.height / 2) {
+            mainmap->setPositionY((-this->getPositionY() + mapheight / 2) * 2 + visibleSize.height / 2);
+        }
+        else if ((this->getPositionY() * scale) < visibleSize.height / 2) {
+            mainmap->setPositionY(mapheight);
+        }
+        else {
+            mainmap->setPositionY(-mapheight + visibleSize.height);
+        }
     }
 }
 
 
 bool MainCharacter::on_contact_begin(PhysicsContact& contact)
 {
-    const int EDGE = 114;
+    const int EDGE = 114, MINE = 999;
     auto nodeA = contact.getShapeA()->getBody()->getNode();
     auto nodeB = contact.getShapeB()->getBody()->getNode();
 
     if (nodeA && nodeB) {
         if (nodeA->getTag() == EDGE || nodeB->getTag() == EDGE) {
-            GameScene* next_scene;
-            if (dynamic_cast<GameScene*>(this->getScene())->scene_name_ == "newnewFarm")
-                next_scene = GameScene::create("Town");
+            // get direction
+            int direction;
+            if (this->getPosition().x <= 16)
+                direction = LEFT;
+            else if (this->getPosition().x >= mainmap->getMapSize().width * mainmap->getTileSize().width - 16)
+                direction = RIGHT;
+            else if (this->getPosition().y >= mainmap->getMapSize().height * mainmap->getTileSize().height - 16)
+                direction = UP;
+            else if (this->getPosition().y <= 20)
+                direction = DOWN;
             else
-                next_scene = GameScene::create("newnewFarm");
+                direction = -1;
+
+            int next_direction = (direction + 2) % 4;    // one side in, another side out
+
+            GameScene* next_scene;
+            std::string this_scene_name = dynamic_cast<GameScene*>(this->getScene())->scene_name_, next_scene_name;
+            if (this_scene_name == "newnewFarm")
+                if (direction == RIGHT)
+                    next_scene_name = "Town";
+                else
+                    throw "How about we explore the area ahead of us later ? ";
+            else if (this_scene_name == "Town")
+                if (direction == RIGHT)
+                    next_scene_name = "Mine";
+                else if (direction == UP)
+                    next_scene_name = "Mountain";
+                else if (direction == LEFT)
+                    next_scene_name = "newnewFarm";
+                else
+                    throw "How about we explore the area ahead of us later ? ";
+            else if (this_scene_name == "Mine")
+                if (direction == LEFT)
+                    next_scene_name = "Town";
+                else
+                    throw "How about we explore the area ahead of us later ? ";
+            else if (this_scene_name == "Mountain")
+                if (direction == DOWN)
+                    next_scene_name = "Town";
+                else if (direction == LEFT)
+                    next_scene_name = "Woods";
+                else
+                    throw "How about we explore the area ahead of us later ? ";
+            else if (this_scene_name == "Woods")
+                if (direction == RIGHT)
+                    next_scene_name = "Mountain";
+                else
+                    throw "How about we explore the area ahead of us later ? ";
+                
+
+
+            next_scene = GameScene::create(next_scene_name, next_direction);
             Director::getInstance()->replaceScene(next_scene);
+        }
+        if (nodeA->getTag() == MINE || nodeB->getTag() == MINE) {
+            if (dynamic_cast<GameScene*>(this->getScene())->scene_name_ == "Town") {
+                auto next_scene = GameScene::create("Mine", LEFT);
+                Director::getInstance()->replaceScene(next_scene);
+            }
+            else {
+                auto next_scene = GameScene::create("Town", RIGHT);
+                Director::getInstance()->replaceScene(next_scene);
+            }
         }
     }
 

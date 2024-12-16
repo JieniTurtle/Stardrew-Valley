@@ -83,7 +83,7 @@ void HelloWorld::menuClose(Ref*obj)
 void HelloWorld::menuStart(Ref* obj)
 {
     //½áÊø³ÌÐò
-    auto scene = GameScene::createScene("newnewFarm");
+    auto scene = GameScene::createScene("newnewFarm", -1);  // -1 represent place main character in the middle of the map
     Director::getInstance()->replaceScene(TransitionCrossFade::create(1, scene));
 
 }

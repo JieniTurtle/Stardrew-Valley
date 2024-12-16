@@ -2,12 +2,14 @@
 #define __NPC_SCENE_H__
 #include "cocos2d.h"
 #include "Dialog.h"
-#include "Task.h"
+//#include "Task.h"
 
 USING_NS_CC;
 
 class NPC : public cocos2d::Sprite
 {
+private:
+    Sprite* animate_sprite;
 public:
     //析构
     ~NPC() {
@@ -45,7 +47,7 @@ public:
     bool ifSelected;
 
     //NPC任务
-    Task NPCtask;
+    //Task NPCtask;
 
     //NPC对话
     Dialog* Dialog_NPC;

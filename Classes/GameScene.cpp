@@ -1,22 +1,31 @@
 #include "animals.h"
 #include "GameScene.h"
 #include "SimpleAudioEngine.h"
+#include "Task.h"
 
 USING_NS_CC;
 
+#define MIDDLE -1
+#define LEFT 1
+#define UP 0
+#define RIGHT 3
+#define DOWN 2
+
+TaskManager* task_manager = new TaskManager;
+
 int GameScene::mapscale = 2;
 
-Scene* GameScene::createScene(std::string s)
+Scene* GameScene::createScene(std::string s, int direction)
 {
-    return GameScene::create(s);
+    return GameScene::create(s, direction);
 }
 
-GameScene* GameScene::create(std::string s)
+GameScene* GameScene::create(std::string s, int direction)
 {
     GameScene* scene = new GameScene;
     if (scene) {
         scene->scene_name_ = s;
-        if (scene->init()) {
+        if (scene->init(direction)) {
             return scene;
         }
     }
@@ -24,7 +33,7 @@ GameScene* GameScene::create(std::string s)
 }
 
 
-void set_physical_map(TMXTiledMap* map) {
+void GameScene::set_physical_map(TMXTiledMap* map) {
     auto layer = map->getLayer("Buildings");
     const int tile_width = 16, tile_height = 16;
     const int scale = 2;
@@ -42,6 +51,16 @@ void set_physical_map(TMXTiledMap* map) {
                 physics_body->setDynamic(false);
                 auto tile = layer->getTileAt(Vec2(x, y));
                 tile->addComponent(physics_body);
+
+                // for going to the mine
+                if (layer->getTileGIDAt(Vec2(x, y)) == 959 && scene_name_ == "Town") {
+                    physics_body->setContactTestBitmask(0xFFFFFFFF);
+                    tile->setTag(999);
+                }
+                if (layer->getTileGIDAt(Vec2(x, y)) == 289 && scene_name_ == "Mine") {
+                    physics_body->setContactTestBitmask(0xFFFFFFFF);
+                    tile->setTag(999);
+                }
             }
         }
     }
@@ -54,7 +73,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool GameScene::init()
+bool GameScene::init(int direction)
 {
     //////////////////////////////
     // 1. super init first
@@ -85,10 +104,28 @@ bool GameScene::init()
     this->addChild(map, 0);
     map->setScale(mapscale);//地图扩大两倍
     set_physical_map(map);
-
     map->getLayer("Back")->setLocalZOrder(-3);
     map->getLayer("Buildings")->setLocalZOrder(-2);
 
+    auto task_layer = TaskLayer::create(task_manager);
+    this->addChild(task_layer);
+    // test
+    Task* task1 = new Task;
+    task1->name = "test1";
+    task1->content = "For test.";
+    task_manager->add_task(task1);
+    Task* task2 = new Task;
+    task2->name = "test2";
+    task2->content = "For test.";
+    task_manager->add_task(task2);
+    Task* task3 = new Task;
+    task3->name = "test3";
+    task3->content = "For test.";
+    task_manager->add_task(task3);
+    Task* task4 = new Task;
+    task4->name = "test4";
+    task4->content = "For test.";
+    task_manager->add_task(task4);
 
     // 获取地图的大小
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -113,14 +150,49 @@ bool GameScene::init()
     map->addComponent(edge);
 
     //创建主角
-    character = MainCharacter::create("HelloWorld.png");    // this HelloWorld.png is set invisible, don't care
-    character->setScale(2); // 0.5
+    character = MainCharacter::create("MainCharacter/transparent.png");    // this HelloWorld.png is set invisible, don't care
     character->setMap(map);//传入地图
-    map->addChild(character, 20);
-    character->setPosition(mapWidth / 2 * tileWidth, mapHeight / 2 * tileWidth); // 初始位置
+    map->addChild(character, 1);
+    int x = 0, y = 0;
+    switch (direction)
+    {
+    case MIDDLE:   // the first time you enter this game
+        x = mapWidth / 2, y = mapHeight / 2;
+        break;
+    case LEFT:
+        x = 1;
+        if (scene_name_ == "Town")
+            y = 56;
+        else if (scene_name_ == "Mine")
+            x = 14, y = 9;
+        else if (scene_name_ == "Mountain")
+            y = 27;
+        break;
+    case RIGHT:
+        x = map->getMapSize().width - 1;
+        if (scene_name_ == "newnewFarm")
+            y = 48;
+        else if (scene_name_ == "Town")
+            x = 107, y = 33;
+        else if (scene_name_ == "Woods")
+            y = 15;
+        break;
+    case UP:
+        y = map->getMapSize().height - 1;
+        if (scene_name_ == "Town")
+            x = 81;
+        break;
+    case DOWN:
+        y = 2;
+        if (scene_name_ == "Mountain")
+            x = 15;
+        break;
+    default:
+        break;
+    }
+    character->setPosition(x * tileWidth, y * tileWidth); // 初始位置
 
-
-    // please copy this to your aninals sprite
+    /*/ please copy this to your aninals sprite
     auto test = Sprite::create("HelloWorld.png");
     // add physical property
     auto physics_body = PhysicsBody::createCircle(test->getContentSize().width / 2, PhysicsMaterial(0.00001f, 0.0f, 0.1f));
@@ -133,7 +205,7 @@ bool GameScene::init()
     test->setPosition(mapWidth / 2 * tileWidth, mapHeight / 2 * tileWidth + 100);
     test->schedule([test](float dt) {
         test->getPhysicsBody()->setVelocity(test->getPhysicsBody()->getVelocity() * 0.9);
-        }, "update_key");
+        }, "update_key");*/
 
     MouseStatus = notTaken;//设置鼠标状态
 
@@ -175,21 +247,9 @@ bool GameScene::init()
         wheat = Wheat::create(map);//传入小麦
         this->addChild(wheat, 1);
 
-        auto cow = Cow::create("cow");
+        auto cow = Cow::create("cow", map);
         cow->setMaincharacter(character);
-        cow->setMap(map);
         Cow::move(cow, map);
-
-
-        auto sheep = Sheep::create("sheep");
-        sheep->setMaincharacter(character);
-        sheep->setMap(map);
-        Sheep::move(sheep, map);
-
-        auto chicken = Chicken::create("chicken");
-        chicken->setMaincharacter(character);
-        chicken->setMap(map);
-        Chicken::move(chicken, map);
 
         CheckboxOnlyone();
     }
@@ -376,7 +436,7 @@ void GameScene::MouseClickNPC(NPC* npc)
 {
     npc->stopMovement();
     npc->ifSelected = true;
-    enum TaskStatus npcTS = npc->NPCtask.GetTaskStatus();
+    //enum TaskStatus npcTS = npc->NPCtask.GetTaskStatus();
     this->addChild(npc->Dialog_NPC);
 }
 

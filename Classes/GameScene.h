@@ -24,11 +24,13 @@ public:
     //地图比例
     static int mapscale;
 
-    static Scene* createScene(std::string s);
-    static GameScene* create(std::string s);
-    bool init();
+    static Scene* createScene(std::string s, int direction);
+    static GameScene* create(std::string s, int direction);
+    bool init(int direction);
     void CheckboxOnlyone();//只能选择一个复选框
-  
+
+    void set_physical_map(TMXTiledMap* map);
+
     MainCharacter* character;//主角
     int mapWidth;   // 横向瓷砖数量
     int mapHeight; // 纵向瓷砖数量
@@ -46,10 +48,10 @@ public:
     void Mouseupdate(float delta);
     void onMouseDown(cocos2d::Event* event);
     void MouseClickNPC(NPC* npc);
-    Tools* tools ;//传入工具   
+    Tools* tools;//传入工具   
     Seeds* seeds;//传入种子   
-    Wheat* wheat ;//传入小麦   
-    Gloves* gloves ;//传入手套
+    Wheat* wheat;//传入小麦   
+    Gloves* gloves;//传入手套
     std::string scene_name_;
 
     int clickNPCButtons();

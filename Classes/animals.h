@@ -7,6 +7,7 @@ USING_NS_CC;
 
 class Animal : public Sprite {
 public:
+	Sprite* animate_sprite;
 	//Animal动画 动画路径示例：Animal/filename/moveup1.png
 	Animate* moveup;
 	Animate* moveleft;
@@ -15,6 +16,11 @@ public:
 
 	//标记Animal是否被选中
 	bool ifSelected;
+
+	//地图指针
+	TMXTiledMap* mainmap;
+	//传入地图指针
+	
 
 	//路径相关
 	std::vector<Vec2> Animalpath;//路径参数
@@ -37,7 +43,7 @@ public:
 class Cow : public Animal {
 public:
 	//Animal静止图片路径为 Animal/filename/static.png
-	static Cow* create(const std::string& filename);
+	static Cow* create(const std::string& filename, TMXTiledMap* map);
 
 	//Animal精灵大小
 	static int Animalsize_x ;
@@ -51,8 +57,6 @@ public:
 
 	//主角
 	MainCharacter* mainChar;
-	//地图指针
-	TMXTiledMap* mainmap;
 
 	//cow已被喂养的反馈弹窗
 	cocos2d::Label* cow_feed_label;
@@ -78,10 +82,6 @@ public:
 	//设置主角
 	void setMaincharacter(MainCharacter* mainCharacter) {
 		mainChar = mainCharacter;
-	}
-	//传入地图指针
-	void setMap(TMXTiledMap* map) {
-		mainmap = map;
 	}
 //播放动画
 	static void move(Cow* cow, TMXTiledMap* map);

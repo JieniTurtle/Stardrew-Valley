@@ -34,7 +34,19 @@ NPC* NPC::create(const std::string& filename)
 //初始化
 bool NPC::init()
 {
-    if (!Sprite::initWithFile("NPC/" + NPCname + "/static.png")) { return false; }
+    if (!(Sprite::initWithFile("MainCharacter/transparent.png"))) { return false; }
+
+    // physical body
+    auto physics_body = PhysicsBody::createCircle(8, PhysicsMaterial(0.00001f, 0.0f, 0.01f));
+    physics_body->setRotationEnable(false);
+    //physics_body->setContactTestBitmask(0xFFFFFFFF);
+    physics_body->setPositionOffset(Vec2(0, -16));
+    this->addComponent(physics_body);
+
+    // animated sprite
+    this->animate_sprite = Sprite::create("NPC/" + NPCname + "/static.png");
+    animate_sprite->setPosition(Vec2::ZERO);
+    this->addChild(animate_sprite);
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -132,7 +144,7 @@ void NPC::updatemove(float dt)
 
     //进行移动
     Vec2 moveDirection = direction.getNormalized();
-    setPosition(currentPosition + moveDirection * speed * dt);
+    this->getPhysicsBody()->setVelocity(moveDirection * speed);
     //播放动画
     if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // 水平移动
         if (moveDirection.x > 0) {
@@ -162,28 +174,27 @@ void NPC::updatestatic(float dt)
 void NPC::playAnimation(const std::string& direction)
 {
     if (direction == "up") {
-
-        runAction(RepeatForever::create(moveup));
+        animate_sprite->runAction(RepeatForever::create(moveup));
     }
     else if (direction == "down") {
-        runAction(RepeatForever::create(movedown));
+        animate_sprite->runAction(RepeatForever::create(movedown));
     }
     else if (direction == "left") {
-        runAction(RepeatForever::create(moveleft));
+        animate_sprite->runAction(RepeatForever::create(moveleft));
     }
     else if (direction == "right") {
-        runAction(RepeatForever::create(moveright));
+        animate_sprite->runAction(RepeatForever::create(moveright));
     }
     else if (direction == "static") {
-        runAction(RepeatForever::create(movestatic));
+        animate_sprite->runAction(RepeatForever::create(movestatic));
     }
 }
 
 // 停止NPC的动画和移动
 void NPC::stopMovement()
 {
-    stopAllActions();
-    runAction(RepeatForever::create(movestatic));
+    animate_sprite->stopAllActions();
+    animate_sprite->runAction(RepeatForever::create(movestatic));
     // 停止 NPC 的路径更新
     unschedule("npc_notselected_key");
 
@@ -195,7 +206,7 @@ void NPC::startMovement()
 {
     stopAllActions();
     //Sequence* move_NPC = Sequence::create(moveup, moveright, moveleft, movedown, NULL);
-    runAction(RepeatForever::create(movestatic));
+    animate_sprite->runAction(RepeatForever::create(movestatic));
 
     unschedule("npc_isselected_key");
 
@@ -204,7 +215,7 @@ void NPC::startMovement()
 }
 
 //判断鼠标是否点击在NPC上
-bool NPC::JudgeClickNPC(Vec2 clickPos,int mapscale)
+bool NPC::JudgeClickNPC(Vec2 clickPos, int mapscale)
 {
     //获取地图坐标信息
     float TileNum_Width = NPCmap->getMapSize().width;  // 横向瓷砖数量
