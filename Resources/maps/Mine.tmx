@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="77" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="6">
+ <properties>
+  <property name="AmbientLight" value="80 80 40"/>
+  <property name="ViewportFollowPlayer" type="bool" value="true"/>
+  <property name="Warp" value="18 14 Mountain 54 5 67 18 Mountain 103 17"/>
+ </properties>
+ <tileset firstgid="1" name="cocos_fitted" tilewidth="16" tileheight="16" tilecount="360" columns="40">
+  <image source="Mine.png" width="640" height="144"/>
+ </tileset>
+ <layer id="1" name="Back" width="77" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVttxgzAQPLWQ5Mv4K48fx1XgVGBSgZNq7bgBTAU4aSD5iW7QDaeLJJD8YMiwMzsIIaPVanUYYMKECWPHzjBTafwviFkbPf/R7WfVcKn5pe8Xqu2T/IY4z3aRvDZc6/MhYz6R3gradgl2/8G0F5E54374MjukZ7d6/nvVXB9UWMNcP6+hGfMBtu6atffw19OZ6pcZ6RXPtMxt1qG3D1LqCWncaD4FNGD/XNk+8IxxYr/0dBZZ+8grzDS+Kzd8gbYOcO9SvQrVEp93fF3oGa3Nte/oWSn6D2B75ctNqN65uDSZXhmv8Pqm+erxLhY0RynWILW6ajGNW2veqGa8y+eM1bGV0dznjEmPY5kbbehXYbg2GnhNiMWWzSHPBPKo+QlthlyeIR+VXd9km+7vNN/Z7yrH3JWj3Rc8w1gzCnYlUtYoI7HgnpE+zLDcY5dnUmcXcb/JL1eGaP7a0dcX8p2FIGrIzRppTCy2QiOdNWrvzZhzeOZjqJbFrkuebVzLBuzM8b07JWdcN98D/r1P/T8e0pXiS9dcnNwjqjO8DqSAn00637gfvE5Tzi6BS3t2rvyG5sIs09mn2kK+jgFDeIZnEf06Nb9D4Zqehb5jE7pRDS1ghMiHFjBC9PXsF4LFPdk=
+  </data>
+ </layer>
+ <objectgroup id="2" name="Back"/>
+ <layer id="3" name="Buildings" width="77" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztl7tPVEEUxucmUGtFaaS0UPafEP0HAFsLlYLGGJBCCyGAz81GguIDCBCfoPIIb8VNfHVgorayidgaG3u/yd6TOzmZnTtz7q6QuF/yy92Z3Tkz57tnTrJKhWkQDIGb4Ba4Dm54jOcC99nP4jm6chsAd8Bd8BCMgfvgPBs/AH2g3xgXa3L6vRHPsej47Qh4DKbALHgBroBJY/wczIDbYNgYfxacjWr6OGiNOQHGwYQgni2+S3nQBQpsnufoyu0RWAYr4DV4A9bBPBtvWMYl70wSr6im20B7TAd4CV6p7N7RPuZdo88n4/iXwGW2judYcuyxBD6CT4LzXVOVex2fJ6+ops+AC+AsOAcWwFuVeCfplWafobum+8s78B6cCoivc7O9P/0+rgrORrqnkvvPex/vD9qrJyqp6W7QE3MRbIFtsKnK3hUF59F9Zjreh+6a7i9fwFfQGRBf50b+mu9fv49RwdlIz1Ry/3nv4/2BvKKazkVKtUTlOMfw/I7njkq8k/RK3WcW433Mu/YD7ILegPg6N6p9s2b1HXkqOBtpTVXudXw+7f7nYv/Iu5LgPD59xje+zo38NWtWv49Vwdn+hX4L1nyocnzy13z/kr7/i43zMfyz7fsgReFLvlnm+HmzxCc1YG2zcH2e4ZrXzyMB+xwUnOlnhfnTVYqv1ZTB66NRmZAaCvntYcHZ/tQ4Psn0Le0epd1DH/nW2gFBTo0Ba/j/gFDZ7hblRrVku3sS+dT2oQy9wldZPXPtL/XGJZdvUr+0CsrPi1r4RaqFX2ZsG1mV5puvr/+TCsruS6X5uhKZ/tT98leBPetKV0h9/QXubuI0
+  </data>
+ </layer>
+ <objectgroup id="4" name="Buildings">
+  <object id="1" name="TileData" x="272" y="48" width="16" height="16">
+   <properties>
+    <property name="Action" value="MineElevator"/>
+   </properties>
+  </object>
+  <object id="2" name="TileData" x="368" y="144" width="16" height="16">
+   <properties>
+    <property name="Action" value="Mine"/>
+   </properties>
+  </object>
+  <object id="3" name="TileData" x="1072" y="144" width="16" height="16">
+   <properties>
+    <property name="Action" value="Mine 77377"/>
+   </properties>
+  </object>
+  <object id="4" name="TileData" x="176" y="160" width="16" height="16">
+   <properties>
+    <property name="Action" value="MinecartTransport Default Mines"/>
+   </properties>
+  </object>
+  <object id="5" name="TileData" x="192" y="160" width="16" height="16">
+   <properties>
+    <property name="Action" value="MinecartTransport Default Mines"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="5" name="Front" width="77" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzlWDtOAzEQnS2gDKIhoQiUkIKLQAjQAoLU4VtQ8d0G0UXbcASOwBE4AkfgBtAzI3uUkWM7O/uJFvGkp93En9hv3ow3OwaAsYJlUHb8PPBoryPkmdM2stdnz7g69OJ5NX3rjiHrkoHRKhNMkdvIHZhoxXhVrLcs8s6j7adZG2uU2ust8s65HyIPkUd2DGuX2c9vM9ZSh2ZlvHMTmFeDFMz+dxVjWDfCe2ANdWjWFJBeL57vffFg7IPxXx/5EenXJL3Wk2rmodwkf/nyK4YhGL2OkV/VLOVPYIDcQ16DP79iOAejF2EF47daUQybjhPkKZh6FssvH+6RD2DOV8q73pw028Df2Uym733tdYHPRq1mF2DqIOUnaZbXa9/I5YJ7auG4tcT8Vkfct+3njtNeh/f5+YH2/hnocxD4nnKTPEb5yTXe57WW2NNiiT10rR6a/xt1eZ99pq3jlJt9e89rlDFvi7jLdqnbrDyS7VtKvTTe14DPAPLZj3JsCsZjnJuafbST6dzivXUD7VqPabxGubCUU1t5BizkjEnXzs/+lLlZhr0CfgrBjVGsJrREPDS4RF5BvpjQnlKY1H93jUVZxE8hxLwdqx0a0PPZE+SLCXmMzw5+PqtCsyIMoer5fCDPsNdi9YX0or7ue6GmaFV2PRoMwJwF5DU3TzkX5XNJ5oxvmmbzAJ8FUjtZX1gv33vH/wzyjjxH5ftG+S7S9dh/Rqagi19JHvwu
+  </data>
+ </layer>
+ <objectgroup id="6" name="Front"/>
+ <layer id="7" name="Paths" width="77" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt10kOwCAMQ1G23P/CvUBFScLgyv8tEQhiwoLWcEMPjqvJnjOybmbuX/Kqcqkzq5rPqXzf9nG6269anbKIyObWJ9be5P4esN+on6K9ptiblTMp1gNgPd66J+4d0MD/F8oenQkA/Q==
+  </data>
+ </layer>
+ <objectgroup id="8" name="Paths"/>
+</map>
