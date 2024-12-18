@@ -1,0 +1,6 @@
+D:\cocos2dx\StarValley\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\new3\Stardrew-Valley\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\new4\proj.win32\Debug.win32\StarValley.exe
+D:\cocos2dx\3\New\new4\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\New5\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\New6\Stardrew-Valley\proj.win32\Debug.win32\StarValley.exe
