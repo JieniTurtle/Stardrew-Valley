@@ -6,6 +6,7 @@ extern TaskManager* task_manager;
 extern int bridge_repaired;
 extern int seed_number;
 extern int chest_opened[2];
+extern int is_playing_gobang;
 extern int mineral_number;
 extern int stone_number;
 extern int seeds_number;

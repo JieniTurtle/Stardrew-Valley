@@ -1,4 +1,5 @@
 #include "MiniGame.h"
+#include "global.h"
 
 int myFlag = 2;
 int enemyFlag = 1;
@@ -91,6 +92,7 @@ bool GobangScene::init()
 void GobangScene::close(Ref* obj)
 {
     Director::getInstance()->popScene();
+    is_playing_gobang = 0;
 }
 
 

@@ -4,6 +4,7 @@ TaskManager* task_manager = new TaskManager;
 
 int bridge_repaired = 0;
 int chest_opened[2] = { 0, 0 };
+int is_playing_gobang = 0;
 
 int date = 0;
 int hour = 9;

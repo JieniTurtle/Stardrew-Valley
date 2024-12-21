@@ -35,3 +35,11 @@ public:
 	static Chest* create(TMXTiledMap* map, int ID);
 	bool init() override;
 };
+
+class GobangBoard : public Interaction {
+private:
+	void on_mouse_down(Event* event) override;
+public:
+	static GobangBoard* create(TMXTiledMap* map);
+	bool init() override;
+};

@@ -5,6 +5,7 @@
 #include "global.h"
 #include "explore.h"
 #include "Date.h"
+#include "MiniGame.h"
 
 USING_NS_CC;
 
@@ -93,7 +94,7 @@ bool GameScene::init(int direction)
     this->getPhysicsWorld()->setGravity(Vec2(0, 0));
     this->getPhysicsWorld()->setUpdateRate(1);
     // 启用调试绘制
-    this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 添加初始背景图
     TMXTiledMap* map;
@@ -228,6 +229,11 @@ bool GameScene::init(int direction)
         break;
     }
     character->setPosition(x * tileWidth, y * tileWidth); // 初始位置
+
+    if (scene_name_ == "Town") {
+        auto gobang_board = GobangBoard::create(map);
+        map->addChild(gobang_board, 5);
+    }
 
     // bridge
     if (scene_name_ == "Mountain" && !bridge_repaired) {
@@ -722,7 +728,7 @@ void GameScene::showmoneynum() {
     std::string moneyString = "Money: " + std::to_string(money);
     auto label = Label::createWithTTF(moneyString, "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 8 / 10, visibleSize.height * 9 / 10)); // 设置标签显示的位置
-    label->setColor(Color3B::BLACK);
+    label->setColor(Color3B(0,0,0));
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签

@@ -1,5 +1,5 @@
 #include "explore.h"
-
+#include "MiniGame.h"
 Interaction* Interaction::create(TMXTiledMap* map)
 {
     Interaction* interaction = new Interaction;
@@ -139,5 +139,39 @@ void Chest::on_mouse_down(Event* event)
         this->runAction(animate);
         mineral_number++;
 
+    }
+}
+GobangBoard* GobangBoard::create(TMXTiledMap* map)
+{
+    GobangBoard* gobang_board = new GobangBoard;
+    if (gobang_board) {
+        gobang_board->map_ = map;
+        gobang_board->done_flag_ = 0; // always can click
+        if (gobang_board->init()) {
+            gobang_board->autorelease(); // 自动释放内存
+            return gobang_board;
+        }
+    }
+    CC_SAFE_DELETE(gobang_board); // 如果创建失败，安全删除
+    return nullptr;
+}
+
+bool GobangBoard::init()
+{
+    name_ = "Gobang_board";
+    position_ = Vec2(120, 888);
+    Interaction::init();
+    return true;
+}
+
+void GobangBoard::on_mouse_down(Event* event)
+{
+    EventMouse* e = static_cast<EventMouse*>(event);
+    Vec2 click_position = e->getLocation();
+    auto distance = transfer_vision_to_map(click_position).distance(this->getPosition());
+    if (distance < this->getContentSize().width && !is_playing_gobang) {
+        auto gobang_scene = GobangScene::create();
+        Director::getInstance()->pushScene(gobang_scene);
+        is_playing_gobang = 1;
     }
 }
