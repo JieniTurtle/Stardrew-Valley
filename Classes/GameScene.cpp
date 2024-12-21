@@ -93,7 +93,7 @@ bool GameScene::init(int direction)
     this->getPhysicsWorld()->setGravity(Vec2(0, 0));
     this->getPhysicsWorld()->setUpdateRate(1);
     // 启用调试绘制
-    this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 添加初始背景图
     TMXTiledMap* map;
