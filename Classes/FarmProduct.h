@@ -2,7 +2,7 @@
 #define __FARMPRODUCT_H__
 
 #include "cocos2d.h"
-
+#include "global.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 #define ScaleFactor 2  //扩大因子，地图乘2
@@ -20,10 +20,7 @@ public:
     ui::CheckBox* eggcheckbox;//鸡蛋复选框
     ui::CheckBox* woolcheckbox;//羊毛复选框
     ui::CheckBox* fishcheckbox;//yu复选框
-    int milknum;//牛奶数量
-    int eggnum;//鸡蛋数量
-    int woolnum;//羊毛数量
-    int fishnum;//yu数量
+
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度
     int mapwidth;//地图宽度

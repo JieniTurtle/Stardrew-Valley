@@ -3,7 +3,7 @@
 #include "SimpleAudioEngine.h"
 
 bool Mineral::init(TMXTiledMap* map) {
-    stonenum = 0;
+   
 
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
@@ -48,13 +48,13 @@ Mineral* Mineral::create(TMXTiledMap* map) {
 
 void Mineral::showstonenum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(stonenum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(stone_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9.7 / 10, visibleSize.height * 3.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(stonenum));
+        label->setString(std::to_string(stone_number));
         }, "update_label_key");
 }
 

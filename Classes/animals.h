@@ -7,7 +7,6 @@ USING_NS_CC;
 
 class Animal : public Sprite {
 public:
-	Sprite* animate_sprite;
 	//Animal动画 动画路径示例：Animal/filename/moveup1.png
 	Animate* moveup;
 	Animate* moveleft;
@@ -16,11 +15,6 @@ public:
 
 	//标记Animal是否被选中
 	bool ifSelected;
-
-	//地图指针
-	TMXTiledMap* mainmap;
-	//传入地图指针
-	
 
 	//路径相关
 	std::vector<Vec2> Animalpath;//路径参数
@@ -43,11 +37,11 @@ public:
 class Cow : public Animal {
 public:
 	//Animal静止图片路径为 Animal/filename/static.png
-	static Cow* create(const std::string& filename, TMXTiledMap* map);
+	static Cow* create(const std::string& filename);
 
 	//Animal精灵大小
-	static int Animalsize_x ;
-	static int Animalsize_y ;
+	static int Animalsize_x;
+	static int Animalsize_y;
 
 	//Animal纹理的动画顺序
 	static int Animalorder_up;
@@ -55,14 +49,28 @@ public:
 	static int Animalorder_right;
 	static int Animalorder_down;
 
+	//幸福度
+	double happiness = 0;
+
 	//主角
 	MainCharacter* mainChar;
+	//地图指针
+	TMXTiledMap* mainmap;
 
 	//cow已被喂养的反馈弹窗
 	cocos2d::Label* cow_feed_label;
 
+	//cow已被抚摸的反馈弹窗
+	cocos2d::Label* cow_touch_label;
+
 	//检测主角与动物的位置关系
 	void isMainCharNear(float delta);
+
+	//检测是否被抚摸
+	void isMainCharTouch(float delta);
+
+	//随时间幸福会降低
+	void decreaseHappiness(float delta);
 
 	//是否在附近
 	bool isNearSprite = false;
@@ -72,7 +80,7 @@ public:
 
 	//当按键按下时产生的事件
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
-	
+
 	//标签隐藏
 	void hideLabel(float dt);
 
@@ -82,6 +90,10 @@ public:
 	//设置主角
 	void setMaincharacter(MainCharacter* mainCharacter) {
 		mainChar = mainCharacter;
+	}
+	//传入地图指针
+	void setMap(TMXTiledMap* map) {
+		mainmap = map;
 	}
 	//播放动画
 	static void move(Cow* cow, TMXTiledMap* map);
@@ -102,6 +114,9 @@ public:
 	static int Animalorder_right;
 	static int Animalorder_down;
 
+	//幸福度
+	double happiness = 0;
+
 	//主角
 	MainCharacter* mainChar;
 	//地图指针
@@ -110,8 +125,17 @@ public:
 	//cow已被喂养的反馈弹窗
 	cocos2d::Label* sheep_feed_label;
 
+	//cow已被抚摸的反馈弹窗
+	cocos2d::Label* sheep_touch_label;
+
 	//检测主角与动物的位置关系
 	void isMainCharNear(float delta);
+
+	//检测是否被抚摸
+	void isMainCharTouch(float delta);
+
+	//随时间幸福会降低
+	void decreaseHappiness(float delta);
 
 	//是否在附近
 	bool isNearSprite = false;
@@ -156,6 +180,9 @@ public:
 	static int Animalorder_right;
 	static int Animalorder_down;
 
+	//幸福度
+	double happiness = 0;
+
 	//主角
 	MainCharacter* mainChar;
 	//地图指针
@@ -163,9 +190,17 @@ public:
 
 	//cow已被喂养的反馈弹窗
 	cocos2d::Label* chicken_feed_label;
+	//cow已被喂养的反馈弹窗
+	cocos2d::Label* chicken_touch_label;
 
 	//检测主角与动物的位置关系
 	void isMainCharNear(float delta);
+
+	//检测是否被抚摸
+	void isMainCharTouch(float delta);
+
+	//随时间幸福会降低
+	void decreaseHappiness(float delta);
 
 	//是否在附近
 	bool isNearSprite = false;

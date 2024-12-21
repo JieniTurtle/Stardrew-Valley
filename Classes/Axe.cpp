@@ -2,7 +2,7 @@
 
 #include "SimpleAudioEngine.h"
 
-bool Axe::init(TMXTiledMap* map, int& woodnum) {
+bool Axe::init(TMXTiledMap* map) {
     isaxe = 0;
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
@@ -14,7 +14,7 @@ bool Axe::init(TMXTiledMap* map, int& woodnum) {
     mapwidth = mapHeight * tileHeight;
     setaxecheckbox();//设置锄头复选框
 
-    axeListenerMouse(map,woodnum);
+    axeListenerMouse(map);
     return true;
 }
 
@@ -28,10 +28,10 @@ void  Axe::setaxecheckbox() {
 
 }
 
-Axe* Axe::create(TMXTiledMap* map, int& woodnum) {
+Axe* Axe::create(TMXTiledMap* map) {
 
     Axe* ret = new Axe();
-    if (ret && ret->init(map,woodnum)) {
+    if (ret && ret->init(map)) {
         ret->autorelease(); // 自动释放内存
         return ret;
     }
@@ -39,11 +39,11 @@ Axe* Axe::create(TMXTiledMap* map, int& woodnum) {
     return nullptr;
 }
 
-void Axe::axeListenerMouse(TMXTiledMap* map, int& woodnum) {
+void Axe::axeListenerMouse(TMXTiledMap* map) {
     // 创建鼠标事件监听器
     auto mouseListener = EventListenerMouse::create();
 
-    mouseListener->onMouseDown = [=,&woodnum](Event* event) {
+    mouseListener->onMouseDown = [=](Event* event) {
         EventMouse* mouseEvent = static_cast<EventMouse*>(event);
         Vec2 mapPosition = map->getPosition();
         if (isaxe == 1) {
@@ -66,12 +66,14 @@ void Axe::axeListenerMouse(TMXTiledMap* map, int& woodnum) {
 
                 // 检查图层是否有效
                 if (treeLayer) {
+                    
                     int tileGID = treeLayer->getTileGIDAt(Vec2(tileX, tileY));//点击处是否有树
                     if (tileGID != 0) {
                         map->removeChild(treeLayer, true);//移除该图层，表示砍掉了
-                        woodnum += OneTreeForWood;
+                        wood_number += OneTreeForWood;
+                        experience += WoodExp;
                     }
-                    
+                  
                 }
 
             }

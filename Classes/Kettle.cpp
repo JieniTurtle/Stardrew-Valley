@@ -1,7 +1,7 @@
 #include "Kettle.h"
 
 #include "SimpleAudioEngine.h"
-
+int MatureTime=8; //成熟时间只浇水
 bool Kettle::init(TMXTiledMap* map) {
     iskettle = 0;
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
@@ -69,6 +69,14 @@ void Kettle::kettleListenerMouse(TMXTiledMap* map) {
                     auto callback = [this, tileX, tileY, tileLayer]() {
                         tileLayer->setTileGID(MaturePlantID, Vec2(tileX, tileY)); // 替换成成熟状态的图块
                         };
+                    if (weather == 2) {
+                        MatureTime = 4;
+                    }
+                    else if (weather == 1) {
+                        MatureTime = 10;
+                    }
+                    else
+                        MatureTime = 8;
                     Action* rebackaction = Sequence::create(DelayTime::create(MatureTime), CallFunc::create(callback), nullptr);
                     this->runAction(rebackaction);
                     // 调度器延迟执行，n秒长成熟

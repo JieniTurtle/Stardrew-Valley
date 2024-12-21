@@ -7,7 +7,6 @@ Dialog* Dialog::create(std::string& Username)
         dialog->User = Username;
         if (dialog && dialog->init()) {
             dialog->autorelease();
-
             return dialog;
         }
     }
@@ -34,19 +33,27 @@ bool Dialog::init() {
     contentstore.push_back(GetDialogContent("NPC/" + User + "/DialogContent_TaskCompleted.txt"));
 
     //创建继续按钮
-    button_continue = MenuItemImage::create(
-        "NPC/" + User + "/DialogContinue1.png", "NPC/" + User + "/DialogContinue2.png", CC_CALLBACK_1(Dialog::onContinueButtonClick, this));
+    button_continue = ui::Button::create("NPC/" + User + "/DialogContinue1.png", "NPC/" + User + "/DialogContinue2.png");
     button_continue->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-    button_continue->setPosition(visibleSize.width / 8, visibleSize.height / 8);
+    button_continue->setPosition(visibleSize / 8);
+    button_continue->addClickEventListener(CC_CALLBACK_1(Dialog::onContinueButtonClick, this));
     this->addChild(button_continue);
+    button_continue->setTitleText("continue");  // 设置按钮上显示的文本
+    button_continue->setTitleFontSize(24);      // 设置字体大小
+    button_continue->setTitleColor(Color3B::WHITE);  // 设置字体颜色
 
     //创建退出按钮
-    button_close = MenuItemImage::create(
-        "NPC/" + User + "/DialogEnd1.png", "NPC/" + User + "/DialogEnd2.png", CC_CALLBACK_1(Dialog::onEndButtonClick, this));
+    button_close = ui::Button::create("NPC/" + User + "/DialogEnd1.png", "NPC/" + User + "/DialogEnd2.png");
     button_close->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    button_close->setPosition(visibleSize.width * 7 / 8, visibleSize.height / 8);
+    Vec2 button_close_position;
+    button_close_position.x = visibleSize.width * 7 / 8;
+    button_close_position.y = visibleSize.height / 8;
+    button_close->setPosition(button_close_position);
+    button_close->addClickEventListener(CC_CALLBACK_1(Dialog::onEndButtonClick, this));
     this->addChild(button_close);
-    clickEndButton = false;
+    button_close->setTitleText("end");  // 设置按钮上显示的文本
+    button_close->setTitleFontSize(24);      // 设置字体大小
+    button_close->setTitleColor(Color3B::WHITE);  // 设置字体颜色
 
     // 创建消息标签
     content = Label::createWithSystemFont("HW", "arial", 24);
@@ -58,6 +65,8 @@ bool Dialog::init() {
     content->setDimensions(visibleSize.width * 0.8, 0);
     this->addChild(content);
 
+    ChangeToClose = 0;
+    TaskStatus = 0;
     this->retain();
     return true;
 }
@@ -73,7 +82,8 @@ std::string Dialog::GetDialogContent(std::string path)
 //点击结束按钮
 void Dialog::onEndButtonClick(Ref* obj)
 {
-    clickEndButton = true;
+    button_close->retain();
+    ChangeToClose = 1;
     if (contentIndex == 0) {
         this->removeFromParent();
     }
@@ -94,13 +104,17 @@ void Dialog::onEndButtonClick(Ref* obj)
 //点击继续按钮
 void Dialog::onContinueButtonClick(Ref* obj)
 {
+    button_continue->retain();
     if (contentIndex == 0) {
         contentIndex = 1;
+        TaskStatus = 1;
         content->setString(contentstore[contentIndex]);
         this->removeChild(button_continue);
     }
     else if (contentIndex == 2) {
+        ChangeToClose = 2;
         contentIndex = 3;
+        TaskStatus = 2;
         content->setString(contentstore[contentIndex]);
         this->removeChild(button_continue);
         this->removeFromParent();

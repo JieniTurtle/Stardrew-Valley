@@ -10,13 +10,13 @@ USING_NS_CC;
 #define RawPlantID 5529//发芽图块id没浇水
 #define MaturePlantID 5548//成熟图块id
 #define MatureTime 2.0f //成熟时间
-#define NoWaterDieTime 10.0f //没有浇水最长生存时间
+extern int NoWaterDieTime; //没有浇水最长生存时间
 #define AbleHoeID 809  //可耕做的图块id
 // 种子类
 class Seeds : public cocos2d::Scene {
 public:
     bool isseeds;//是否拿种子
-    int& seedsnum = seed_number;//种子数量
+
     ui::CheckBox* seedscheckbox;//种子复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

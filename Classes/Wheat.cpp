@@ -3,7 +3,7 @@
 
 bool Wheat::init(TMXTiledMap* map) {
     iswheat = 0;
-    wheatnum = 2;
+ 
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -99,12 +99,12 @@ Wheat* Wheat::create(TMXTiledMap* map) {
 
 void Wheat::showwheatnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(wheatnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(wheat_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height*6.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(wheatnum));
+        label->setString(std::to_string(wheat_number));
         }, "update_label_key");
 }

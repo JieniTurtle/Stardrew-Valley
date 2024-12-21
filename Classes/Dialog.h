@@ -1,13 +1,13 @@
-#ifndef __DIALOG_H__
+ #ifndef __DIALOG_H__
 #define __DIALOG_H__
 
 #include "cocos2d.h"
 #include <fstream>
-//#include "ui/CocosGUI.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
-class Dialog : public Layer
+class Dialog : public Scene
 {
 public:
     //析构
@@ -19,15 +19,15 @@ public:
     }
 
     //标记是否点击了退出按钮
-    bool clickEndButton;
+    int ChangeToClose;
+    int TaskStatus;
     std::string User;//对话人名称
 
     LayerColor* BackLayer;//对话透明层
     Label* content;//对话文字
-    MenuItemImage* button_continue;//继续对话按钮
-    MenuItemImage* button_close;//退出对话按钮
+    ui::Button* button_continue;//继续对话按钮
+    ui::Button* button_close;//退出对话按钮
 
-    Menu* Button;
     int contentIndex;
     std::vector<std::string> contentstore;//存储对话内容
 

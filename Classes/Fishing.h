@@ -1,6 +1,6 @@
 #ifndef __FISHING_H__
 #define __FISHING_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include"Maincharacter.h"
@@ -26,14 +26,14 @@ public:
     int scheduleCounter;
    
     //
-    virtual bool init(TMXTiledMap* map, MainCharacter* maincharacter,int& fishnum);
+    virtual bool init(TMXTiledMap* map, MainCharacter* maincharacter);
     void setfishingcheckbox();//设置fishing复选框
-    void ifgainfish(int& fishnum);
-    static Fishing* create(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum);
-    void fishingListenerMouse(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum);//fishing监听函数
-    void fishingprocess(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum);//执行钓鱼状态的动作
+    void ifgainfish();
+    static Fishing* create(TMXTiledMap* map, MainCharacter* maincharacter);
+    void fishingListenerMouse(TMXTiledMap* map, MainCharacter* maincharacter);//fishing监听函数
+    void fishingprocess(TMXTiledMap* map, MainCharacter* maincharacter);//执行钓鱼状态的动作
     void myUpdateFunction(std::string updateKey);
-    void myUpdateFunction3(int& fishnum, std::string updateKey3);
+    void myUpdateFunction3( std::string updateKey3);
     void myUpdateFunction2(TMXTiledMap* map, MainCharacter* maincharacter, std::string updateKey);
 };
 

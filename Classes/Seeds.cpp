@@ -1,6 +1,6 @@
 #include "Seeds.h"
 #include "SimpleAudioEngine.h"
-
+int NoWaterDieTime=10; //没有浇水最长生存时间
 bool Seeds::init(TMXTiledMap* map) {
     isseeds = 0;
     scheduleCounter = 0;
@@ -76,15 +76,19 @@ void Seeds::seedsListenerMouse(TMXTiledMap* map) {
             //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
             if (tileLayer) {
 
-                if ((tileGID == HoeOverID)&&seedsnum>0 ){//已经耕田的瓦片id，判断是否可种植
+                if ((tileGID == HoeOverID)&&seeds_number>0 ){//已经耕田的瓦片id，判断是否可种植
              
                     tileLayer->setTileGID(RawPlantID, Vec2(tileX, tileY));//替换成种植后的图块，初始状态
-                    seedsnum--;//种植成功，种子数量减少
+                    seeds_number--;//种植成功，种子数量减少
                     // 使用调度器在n秒后更改瓦片ID
                     auto callback = [this, tileX, tileY,tileLayer]() {
                         tileLayer->setTileGID(AbleHoeID, Vec2(tileX, tileY)); // 默认没浇水，替换成可耕地的图块
                         };
-
+                    if (weather == 1) {
+                        NoWaterDieTime = 5;
+                    }
+                    else
+                        NoWaterDieTime = 10;
                     // 调度器延迟执行，n秒后没交水复原
                     Action* rebackaction = Sequence::create(DelayTime::create(NoWaterDieTime), CallFunc::create(callback), nullptr);
                     this->runAction(rebackaction);
@@ -108,13 +112,13 @@ void Seeds::seedsListenerMouse(TMXTiledMap* map) {
 
 void Seeds::showseedsnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(seedsnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(seeds_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height*7.5 / 10)); // 设置标签显示的位置
     this->addChild(label,1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this,label](float dt) {
-        label->setString(std::to_string(seedsnum));
+        label->setString(std::to_string(seeds_number));
         }, "update_label_key");
 }
 //检测是否取消土地复原操作，浇过水后取消该动作

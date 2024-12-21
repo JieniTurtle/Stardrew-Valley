@@ -1,7 +1,7 @@
 
 #ifndef __CARROT_H__
 #define __CARROT_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -10,7 +10,7 @@ USING_NS_CC;
 class Carrot : public cocos2d::Scene {
 public:
     bool iscarrot;//是否拿小麦
-    int carrotnum;//小麦数量
+ 
     ui::CheckBox* carrotcheckbox;//种子复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

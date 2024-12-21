@@ -1,34 +1,31 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\10068\\Desktop\\New6\\Stardrew-Valley\\proj.win32\\",
+  "WorkspaceRootPath": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\proj.win32\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\GameScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\New6\\Stardrew-Valley\\proj.win32\\global.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\GameScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\MainCharacter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\Dialog.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\ingredients.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\proj.win32\\global.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|solutionrelative:global.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\global.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\animals.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\10068\\Desktop\\New5\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StarValley.vcxproj|C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\global.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,121 +35,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "explore.h",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\explore.h",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.h",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\explore.h",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAqwBEAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-17T14:23:57.672Z",
-              "IsPinned": true
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Mineral.cpp",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\Mineral.cpp",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.cpp",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\Mineral.cpp",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAD4AAABDAAAA",
+              "DocumentIndex": 2,
+              "Title": "MainCharacter.cpp",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\MainCharacter.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\MainCharacter.cpp",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\MainCharacter.cpp",
+              "RelativeToolTip": "..\\Classes\\MainCharacter.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-18T10:11:26.075Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Mineral.h",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\Mineral.h",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\Mineral.h",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\Mineral.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABIAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-18T10:02:37.789Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "explore.cpp",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\explore.cpp",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\explore.cpp",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\explore.cpp",
-              "ViewState": "AQIAAIMAAAAAAAAAAAAUwIsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-17T14:23:49.751Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "global.cpp",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New6\\Stardrew-Valley\\proj.win32\\global.cpp",
-              "RelativeDocumentMoniker": "global.cpp",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New6\\Stardrew-Valley\\proj.win32\\global.cpp",
-              "RelativeToolTip": "global.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-18T07:34:04.209Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "global.h",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\global.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\global.h",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\global.h",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\global.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-17T12:25:42.927Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "animals.h",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\animals.h",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\animals.h",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\animals.h",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\animals.h",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFUAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-18T02:41:08.734Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameScene.cpp",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\GameScene.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\GameScene.cpp",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\GameScene.cpp",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\GameScene.cpp",
-              "ViewState": "AQIAAIwAAAAAAAAAAAAkwG8AAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-18T02:38:11.805Z",
+              "WhenOpened": "2024-12-21T12:59:45.702Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HelloWorldScene.cpp",
-              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\New5\\Classes\\HelloWorldScene.cpp",
-              "RelativeDocumentMoniker": "..\\..\\..\\New5\\Classes\\HelloWorldScene.cpp",
-              "ToolTip": "C:\\Users\\10068\\Desktop\\New5\\Classes\\HelloWorldScene.cpp",
-              "RelativeToolTip": "..\\..\\..\\New5\\Classes\\HelloWorldScene.cpp",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAkwFQAAAAxAAAA",
+              "DocumentIndex": 3,
+              "Title": "Dialog.h",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\Dialog.h",
+              "RelativeDocumentMoniker": "..\\Classes\\Dialog.h",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\Dialog.h",
+              "RelativeToolTip": "..\\Classes\\Dialog.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-21T12:48:56.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NPC.h",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.h",
+              "RelativeDocumentMoniker": "..\\Classes\\NPC.h",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.h",
+              "RelativeToolTip": "..\\Classes\\NPC.h",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAAsAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-21T12:25:35.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ingredients.cpp",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\ingredients.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\ingredients.cpp",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\ingredients.cpp",
+              "RelativeToolTip": "..\\Classes\\ingredients.cpp",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-17T15:56:41.184Z"
+              "WhenOpened": "2024-12-21T12:22:16.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NPC.cpp",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\NPC.cpp",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\NPC.cpp",
+              "RelativeToolTip": "..\\Classes\\NPC.cpp",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAAANEAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-21T12:09:32.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameScene.cpp",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\GameScene.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\GameScene.cpp",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\GameScene.cpp",
+              "RelativeToolTip": "..\\Classes\\GameScene.cpp",
+              "ViewState": "AQIAAPoAAAAAAAAAAAA2wAoBAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-21T12:06:44.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "global.h",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\global.h",
+              "RelativeDocumentMoniker": "..\\Classes\\global.h",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\Classes\\global.h",
+              "RelativeToolTip": "..\\Classes\\global.h",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAywAwAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-21T11:54:18.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "global.cpp",
+              "DocumentMoniker": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\proj.win32\\global.cpp",
+              "RelativeDocumentMoniker": "global.cpp",
+              "ToolTip": "C:\\Users\\10068\\Desktop\\recent study\\sophomore first\\Programming Paradigms\\StardrewValley\\New7\\proj.win32\\global.cpp",
+              "RelativeToolTip": "global.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAoAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-21T11:54:12.092Z",
+              "EditorCaption": ""
             }
           ]
         }

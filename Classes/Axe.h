@@ -6,12 +6,14 @@
 #include "Gloves.h"
 #include "Wheat.h"
 #include "ui/CocosGUI.h"
+#include "global.h"
 USING_NS_CC;
 #define ScaleFactor 2  //扩大因子，地图乘2
 #define HoeOverID 1753  //耕作后的图块id
 #define AbleHoeID 809  //可耕做的图块id
 #define numberOfTree 3  //树图层的数量
 #define OneTreeForWood 5  //一棵树等于几个木头
+#define WoodExp 20
 // 工具类
 class Axe : public cocos2d::Layer {
 public:
@@ -25,11 +27,11 @@ public:
     int mapHeight; // 纵向瓷砖数量
     int tileWidth; // 单个瓷砖的像素宽度
     int tileHeight; // 单个瓷砖的像素高度
-    virtual bool init(TMXTiledMap* map, int& woodnum);
+    virtual bool init(TMXTiledMap* map);
     void setaxecheckbox();//设置锄头复选框
 
-    static Axe* create(TMXTiledMap* map, int& woodnum);
-    void axeListenerMouse(TMXTiledMap* map, int& woodnum);//锄地监听函数
+    static Axe* create(TMXTiledMap* map);
+    void axeListenerMouse(TMXTiledMap* map);//锄地监听函数
 
 };
 

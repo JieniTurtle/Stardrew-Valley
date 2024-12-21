@@ -1,7 +1,7 @@
 #include "Fishing.h"
 #include "SimpleAudioEngine.h"
 
-bool Fishing::init(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum) {
+bool Fishing::init(TMXTiledMap* map, MainCharacter* maincharacter) {
     isfishing = 0;
   
     fishingcondition = 0;
@@ -27,7 +27,7 @@ bool Fishing::init(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum)
     mapwidth = mapHeight * tileHeight;
     setfishingcheckbox();//设置复选框
 
-    fishingListenerMouse(map, maincharacter,fishnum);
+    fishingListenerMouse(map, maincharacter);
     return true;
 }
 
@@ -55,7 +55,7 @@ void  Fishing::setfishingcheckbox() {
 
 }
 //钓鱼过程
-void  Fishing::fishingprocess(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum) {
+void  Fishing::fishingprocess(TMXTiledMap* map, MainCharacter* maincharacter) {
     isfishingnow->setVisible(true);
     isfishingnowtext->setVisible(true);
    
@@ -69,14 +69,14 @@ void  Fishing::fishingprocess(TMXTiledMap* map, MainCharacter* maincharacter, in
         myUpdateFunction2(map,maincharacter, updateKey2); // 调用更新函数
         }, 0.02f, updateKey2);
     std::string updateKey3 = "update3_function_key_" + std::to_string(scheduleCounter++);
-    this->schedule([=,&fishnum](float dt) {
-        myUpdateFunction3(fishnum, updateKey3); // 调用更新函数
+    this->schedule([=](float dt) {
+        myUpdateFunction3( updateKey3); // 调用更新函数
         }, 0.02f, updateKey3);
 }
-Fishing* Fishing::create(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum) {
+Fishing* Fishing::create(TMXTiledMap* map, MainCharacter* maincharacter) {
 
     Fishing* ret = new Fishing();
-    if (ret && ret->init(map, maincharacter, fishnum)) {
+    if (ret && ret->init(map, maincharacter)) {
         ret->autorelease(); // 自动释放内存
         return ret;
     }
@@ -84,11 +84,11 @@ Fishing* Fishing::create(TMXTiledMap* map, MainCharacter* maincharacter, int& fi
     return nullptr;
 }
 //是否获得鱼
-void Fishing::ifgainfish(int& fishnum) {
+void Fishing::ifgainfish() {
     
     int random_number = std::rand() % (5000 + 1); // 生成 0 到 max_value 之间的随机数
     if (random_number == 5) {
-        fishnum++;
+        fish_number++;
         //生成提示标签
         auto label = Label::createWithSystemFont("You gain a fish!", "Arial", 35);
         label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 3));
@@ -102,11 +102,11 @@ void Fishing::ifgainfish(int& fishnum) {
         this->runAction(rebackaction);
     }
 }
-void Fishing::fishingListenerMouse(TMXTiledMap* map, MainCharacter* maincharacter, int& fishnum) {
+void Fishing::fishingListenerMouse(TMXTiledMap* map, MainCharacter* maincharacter) {
     // 创建鼠标事件监听器
     auto mouseListener = EventListenerMouse::create();
 
-    mouseListener->onMouseDown = [=, & fishnum](Event* event) {
+    mouseListener->onMouseDown = [=](Event* event) {
         EventMouse* mouseEvent = static_cast<EventMouse*>(event);
         Vec2 mapPosition = map->getPosition();
         if (isfishing == 1) {
@@ -127,7 +127,7 @@ void Fishing::fishingListenerMouse(TMXTiledMap* map, MainCharacter* maincharacte
                 if (tileGID == AbleFishing) {//判断是否可diaoyu
                     fishingcondition = 1;
                     
-                    fishingprocess(map, maincharacter,  fishnum);
+                    fishingprocess(map, maincharacter);
                     //钓鱼操作
                 }
 
@@ -161,10 +161,10 @@ void Fishing::myUpdateFunction(std::string updateKey) {
     
 }
 //是否调用ifgainfish函数
-void Fishing::myUpdateFunction3(int& fishnum, std::string updateKey3) {
+void Fishing::myUpdateFunction3(std::string updateKey3) {
     if (fishingcondition == 1) {
        
-            ifgainfish( fishnum); // 调用函数
+            ifgainfish(); // 调用函数
 
         
     }

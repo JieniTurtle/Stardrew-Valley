@@ -5,10 +5,7 @@
 #include "SimpleAudioEngine.h"
 
 bool FarmProduct::init(TMXTiledMap* map) {
-    eggnum = 0;
-    milknum = 0;
-    woolnum = 0;
-    fishnum = 0;
+
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -62,48 +59,48 @@ FarmProduct* FarmProduct::create(TMXTiledMap* map) {
 
 void FarmProduct::showmilknum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(milknum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(milk_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 3.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(milknum));
+        label->setString(std::to_string(milk_number));
         }, "update_label_key");
 }
 
 void FarmProduct::showeggnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(eggnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(egg_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 1.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(eggnum));
+        label->setString(std::to_string(egg_number));
         }, "update_label_key1");
 }
 
 void FarmProduct::showwoolnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(woolnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(wool_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 2.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(woolnum));
+        label->setString(std::to_string(wool_number));
         }, "update_label_key2");
 }
 
 void FarmProduct::showfishnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(fishnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(fish_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 0.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(fishnum));
+        label->setString(std::to_string(fish_number));
         }, "update_label_key3");
 }

@@ -4,8 +4,6 @@
 
 USING_NS_CC;
 
-#define PHYSICS 999
-
 // Print useful error message instead of segfaulting when files are not there.
 static void problemLoading(const char* filename)
 {
@@ -19,12 +17,6 @@ void Animal::setPath(const std::vector<Vec2>& newPath)
     Animalpath = newPath;
     currentPathIndex = 0;  // 重置路径索引
     setPosition(Animalpath[currentPathIndex]);  // 设置 Animal 的起始位置
-
-    auto physics_body = PhysicsBody::createCircle(12, PhysicsMaterial(0.00001f, 0.0f, 0.1f));
-    // this->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
-    physics_body->setRotationEnable(false);
-    physics_body->setVelocityLimit(50.0f);
-    this->addComponent(physics_body);
 }
 
 void Animal::updatemove(float dt)
@@ -40,13 +32,13 @@ void Animal::updatemove(float dt)
     float distance = direction.length();
 
     // 如果到达目标，切换到下一个路径点
-    if (distance < 10.0f) {
+    if (distance < 1.0f) {
         currentPathIndex = (currentPathIndex + 1) % Animalpath.size();  // 循环路径
     }
 
     // 移动 Animal
     Vec2 moveDirection = direction.getNormalized();
-    getPhysicsBody()->applyForce(0.1f * moveDirection * speed);
+    setPosition(currentPosition + moveDirection * speed * dt);
 
     // 根据方向播放动画
     if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // 水平移动
@@ -65,25 +57,24 @@ void Animal::updatemove(float dt)
             playAnimation("down");
         }
     }
-
-    animate_sprite->setPosition(getPosition());
 }
 
 void Animal::playAnimation(const std::string& direction)
 {
-    //!getActionByTag(1) 
+    //!getActionByTag(1)
     // 如果当前动画与目标方向相同，直接返回
     if (direction == "up" && 1) {
-        animate_sprite->runAction(RepeatForever::create(moveup));
+
+        runAction(RepeatForever::create(moveup));
     }
     else if (direction == "down" && 1) {
-        animate_sprite->runAction(RepeatForever::create(movedown));
+        runAction(RepeatForever::create(movedown));
     }
     else if (direction == "left" && 1) {
-        animate_sprite->runAction(RepeatForever::create(moveleft));
+        runAction(RepeatForever::create(moveleft));
     }
     else if (direction == "right" && 1) {
-        animate_sprite->runAction(RepeatForever::create(moveright));
+        runAction(RepeatForever::create(moveright));
     }
 }
 
@@ -95,16 +86,11 @@ int Cow::Animalorder_left = 3;
 int Cow::Animalorder_right = 1;
 int Cow::Animalorder_down = 0;
 
-Cow* Cow::create(const std::string& filename, TMXTiledMap* map)
+Cow* Cow::create(const std::string& filename)
 {
     Cow* cow = new Cow();
     if (cow) {
         cow->animalName = filename;
-        
-        cow->animate_sprite = Sprite::create("HelloWorld.png");
-        cow->animate_sprite->setScale(0.5);
-        map->addChild(cow->animate_sprite, 10);
-
         if (cow->init()) {
             cow->autorelease(); // 自动释放内存
             return cow;
@@ -116,10 +102,29 @@ Cow* Cow::create(const std::string& filename, TMXTiledMap* map)
 
 void Cow::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
+        if (weather == 1) {
+            happiness = happiness / 2; // 减半快乐值
+        }
+        else if (weather == 2) {
+            happiness = happiness / 2; // 减半快乐值
+        }
         cow_feed_label->setVisible(true); // 显示文字
-
+        if (happiness <= 50&&happiness>=0)
+            milk_number++;
+        else if(happiness >= 50&&happiness<=90)
+            milk_number+=2;
+        else
+            milk_number+=4;
+            wheat_number--;
+        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
+    }
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
+    {
+        cow_touch_label->setVisible(true); // 显示文字
+        happiness += 10; // 加快乐值
         // 启动定时器，3秒后隐藏文字
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
@@ -136,20 +141,23 @@ void Cow::addKeyboardListener() {
 void Cow::hideLabel(float dt)
 {
     cow_feed_label->setVisible(false); // 隐藏文字
+    cow_touch_label->setVisible(false); // 隐藏文字
 }
 
 void Cow::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);
-    
+
     // 如果距离小于某个值，设置标志位
-    if (distance < 100) {
+    if (distance < 50)
+    {
         isNearSprite = true;
     }
-    else {
+    else
+    {
         isNearSprite = false;
     }
 }
@@ -207,26 +215,38 @@ bool Cow::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
+
     // 创建文字标签
-    cow_feed_label = cocos2d::Label::createWithSystemFont("The cow has been fed.Obtain Milk x1", "Arial", 12);
+    cow_feed_label = cocos2d::Label::createWithSystemFont("The cow has been fed.Obtain Milk x1", "Arial", 25);
     cow_feed_label->setVisible(false); // 初始时隐藏
-    this->addChild(cow_feed_label, 114514);
-    cow_feed_label->setPosition(cocos2d::Vec2(0, 30));
+    this->addChild(cow_feed_label);
+    cow_feed_label->setPosition(cocos2d::Vec2(40, 120));
+
+    cow_touch_label = cocos2d::Label::createWithSystemFont("The cow has been touched.Happiess+10", "Arial", 25);
+    cow_touch_label->setVisible(false); // 初始时隐藏
+    this->addChild(cow_touch_label);
+    cow_touch_label->setPosition(cocos2d::Vec2(40, 120));
 
     Cow::addKeyboardListener();
     this->schedule(CC_SCHEDULE_SELECTOR(Cow::isMainCharNear), 0.1f);
+    this->schedule(CC_SCHEDULE_SELECTOR(Cow::decreaseHappiness), 20.0f);
 
     return true;
 }
 
 void Cow::move(Cow* cow, TMXTiledMap* map) {
     map->addChild(cow);
-    cow->setScale(2.0f);
-    cow->setPosition(Vec2(950, 765 ));
+    cow->setScale(0.5f);
+    cow->setPosition(Vec2(950, 765));
     Sequence* move_cow = Sequence::create(cow->moveup, cow->moveright, cow->moveleft, cow->movedown, NULL);
+    cow->runAction(RepeatForever::create(move_cow));
     std::vector<Vec2> path_cow = { Vec2(950, 765), Vec2(950, 720), Vec2(1070, 720),Vec2(1070, 765) };
     cow->setPath(path_cow);
-    cow->animate_sprite->runAction(RepeatForever::create(move_cow));
+}
+
+void Cow::decreaseHappiness(float delta) {
+    if (happiness > 5)
+        happiness -= 5;
 }
 
 int Sheep::Animalsize_x = 32;
@@ -253,10 +273,22 @@ Sheep* Sheep::create(const std::string& filename)
 
 void Sheep::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
         sheep_feed_label->setVisible(true); // 显示文字
-
+        if (happiness <= 50 && happiness >= 0)
+            wool_number++;
+        else if (happiness >= 50 && happiness <= 90)
+            wool_number += 2;
+        else
+            wool_number += 4;
+        wheat_number--;        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Sheep::hideLabel), 3.0f);
+    }
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
+    {
+        sheep_touch_label->setVisible(true); // 显示文字
+        happiness += 10; // 扣除快乐值
         // 启动定时器，3秒后隐藏文字
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
@@ -273,6 +305,7 @@ void Sheep::addKeyboardListener() {
 void Sheep::hideLabel(float dt)
 {
     sheep_feed_label->setVisible(false); // 隐藏文字
+    sheep_touch_label->setVisible(false); // 隐藏文字
 }
 
 //初始化
@@ -334,15 +367,21 @@ bool Sheep::init()
     this->addChild(sheep_feed_label);
     sheep_feed_label->setPosition(cocos2d::Vec2(20, 40));
 
+    sheep_touch_label = cocos2d::Label::createWithSystemFont("The sheep has been touched.Happiess+10", "Arial", 10);
+    sheep_touch_label->setVisible(false); // 初始时隐藏
+    this->addChild(sheep_touch_label);
+    sheep_touch_label->setPosition(cocos2d::Vec2(20, 40));
+
     Sheep::addKeyboardListener();
     this->schedule(CC_SCHEDULE_SELECTOR(Sheep::isMainCharNear), 0.1f);
+    this->schedule(CC_SCHEDULE_SELECTOR(Sheep::decreaseHappiness), 20.0f);
 
     return true;
 }
 
 void Sheep::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);
@@ -366,6 +405,11 @@ void Sheep::move(Sheep* sheep, TMXTiledMap* map) {
     sheep->runAction(RepeatForever::create(move_cow));
     std::vector<Vec2> path_cow = { Vec2(950, 500), Vec2(950, 545), Vec2(1070, 500),Vec2(1070, 545) };
     sheep->setPath(path_cow);
+}
+
+void Sheep::decreaseHappiness(float delta) {
+    if (happiness > 5)
+        happiness -= 5;
 }
 
 int Chicken::Animalsize_x = 16;
@@ -392,10 +436,23 @@ Chicken* Chicken::create(const std::string& filename)
 
 void Chicken::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E)
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
         chicken_feed_label->setVisible(true); // 显示文字
-
+        wheat_number--;
+        if (happiness <= 50 && happiness >= 0)
+            egg_number++;
+        else if (happiness >= 50 && happiness <= 90)
+            egg_number += 2;
+        else
+            egg_number += 4;
+        // 启动定时器，3秒后隐藏文字
+        this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
+    }
+    if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
+    {
+        chicken_touch_label->setVisible(true); // 显示文字
+        happiness += 10; // 扣除快乐值
         // 启动定时器，3秒后隐藏文字
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
@@ -412,6 +469,7 @@ void Chicken::addKeyboardListener() {
 void Chicken::hideLabel(float dt)
 {
     chicken_feed_label->setVisible(false); // 隐藏文字
+    chicken_touch_label->setVisible(false); // 隐藏文字
 }
 
 //初始化
@@ -473,15 +531,21 @@ bool Chicken::init()
     this->addChild(chicken_feed_label);
     chicken_feed_label->setPosition(cocos2d::Vec2(20, 40));
 
+    // 创建文字标签
+    chicken_touch_label = cocos2d::Label::createWithSystemFont("The chicken has been fed.Obtain Egg x1", "Arial", 10);
+    chicken_touch_label->setVisible(false); // 初始时隐藏
+    this->addChild(chicken_touch_label);
+    chicken_touch_label->setPosition(cocos2d::Vec2(20, 40));
+
     Chicken::addKeyboardListener();
     this->schedule(CC_SCHEDULE_SELECTOR(Chicken::isMainCharNear), 0.1f);
-
+    this->schedule(CC_SCHEDULE_SELECTOR(Sheep::decreaseHappiness), 20.0f);
     return true;
 }
 
 void Chicken::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
     Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
 
     float distance = sprite1Position.distance(sprite2Position);
@@ -507,3 +571,7 @@ void Chicken::move(Chicken* chicken, TMXTiledMap* map) {
     chicken->setPath(path_cow);
 }
 
+void Chicken::decreaseHappiness(float delta) {
+    if (happiness > 5)
+        happiness -= 5;
+}

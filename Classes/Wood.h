@@ -1,6 +1,6 @@
 #ifndef __WOOD_H__
 #define __WOOD_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -9,7 +9,7 @@ USING_NS_CC;
 class Wood : public cocos2d::Scene {
 public:
     bool iswood;//是否拿木头
-    int woodnum;//木头数量
+   
     ui::CheckBox* woodcheckbox;//种子复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

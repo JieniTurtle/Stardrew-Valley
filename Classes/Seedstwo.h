@@ -1,6 +1,6 @@
 #ifndef __SEEDSTWO_H__
 #define __SEEDSTWO_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -10,13 +10,13 @@ USING_NS_CC;
 
 #define MaturePlantID 5548//成熟图块id
 #define MatureTime 2.0f //成熟时间
-#define NoWaterDieTime 10.0f //没有浇水最长生存时间
+extern int NoWaterDieTimeTwo; //没有浇水最长生存时间
 #define AbleHoeID 809  //可耕做的图块id
 // 种子类
 class Seedstwo : public cocos2d::Scene {
 public:
     bool isseedstwo;//是否拿种子
-    int seedstwonum;//种子数量
+  
     ui::CheckBox* seedstwocheckbox;//种子复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

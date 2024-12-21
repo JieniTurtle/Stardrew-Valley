@@ -15,7 +15,7 @@ public:
     ui::CheckBox* stonecheckbox;//stone复选框
     ui::CheckBox* gemcheckbox;//gem复选框
 
-    int stonenum;//stone数量
+    int stonenum= stone_number;//stone数量
     int gemnum = mineral_number;//gem数量
 
     Vec2 mapPosition;//地图位置

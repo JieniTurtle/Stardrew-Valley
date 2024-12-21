@@ -115,6 +115,8 @@ bool NPC::init()
     movedown->retain();
     movestatic->retain();
 
+    relation = 0;
+
     return true;
 }
 
@@ -122,8 +124,12 @@ bool NPC::init()
 void NPC::setPath(const std::vector<Vec2>& newPath)
 {
     NPCpath = newPath;
-    for (int i = 0; i < NPCpath.size(); i++) {
-        NPCpath[i] *= 16;   // tile size
+    //for (int i = 0; i < NPCpath.size(); i++) {
+    //    NPCpath[i] *= 16;   // tile size
+    //}
+    
+    for (auto& i : NPCpath) {
+        i *= 16;
     }
     currentPathIndex = 0;  // 重置路径索引
     setPosition(NPCpath[currentPathIndex]);  // 设置 NPC 的起始位置
@@ -143,13 +149,13 @@ void NPC::updatemove(float dt)
     float distance = direction.length();
 
     //如果到达目标，切换到下一个路径点
-    if (distance < 1.0f) { currentPathIndex = (currentPathIndex + 1) % NPCpath.size(); }
+    if (distance < 30.0f) { currentPathIndex = (currentPathIndex + 1) % NPCpath.size(); }
 
     //进行移动
     Vec2 moveDirection = direction.getNormalized();
     Vec2 v = moveDirection * speed;
     this->getPhysicsBody()->setVelocity(v);
-    
+
     //播放动画
     if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // 水平移动
         if (moveDirection.x > 0) {
@@ -201,6 +207,7 @@ void NPC::stopMovement()
 {
     animate_sprite->stopAllActions();
     animate_sprite->runAction(RepeatForever::create(movestatic));
+    getPhysicsBody()->setVelocity(Vec2::ZERO);
     // 停止 NPC 的路径更新
     unschedule("npc_notselected_key");
 
@@ -220,8 +227,9 @@ void NPC::startMovement()
     schedule([=](float dt) { updatemove(dt); }, 1.2f, "npc_notselected_key");
 }
 
+
 //判断鼠标是否点击在NPC上
-bool NPC::JudgeClickNPC(Vec2 clickPos, int mapscale)
+bool NPC::JudgeClickNPC(Vec2 clickPos,int mapscale)
 {
     //获取地图坐标信息
     float TileNum_Width = NPCmap->getMapSize().width;  // 横向瓷砖数量
@@ -240,8 +248,14 @@ bool NPC::JudgeClickNPC(Vec2 clickPos, int mapscale)
     //获取NPC位置
     Vec2 NPCPosition = this->getPosition();
 
-    if (NPCPosition.distance(clickPos) < 64)
-        return true;
-
+    if (NPCPosition.x - NPCsize_x / 2 <= clickPos.x) {
+        if (NPCPosition.x + NPCsize_x / 2 >= clickPos.x) {
+            if (NPCPosition.y - NPCsize_y / 2 <= clickPos.y) {
+                if (NPCPosition.y + NPCsize_y / 2 >= clickPos.y) {
+                    return true;
+                }
+            }
+        }
+    }
     return false;
 }

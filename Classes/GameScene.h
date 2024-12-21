@@ -5,7 +5,7 @@
 #include "animals.h"
 #include"MainCharacter.h"
 #include "ui/CocosGUI.h"
-
+#include "global.h"
 #include "NPC.h"
 
 #include "Seeds.h"
@@ -22,8 +22,15 @@
 #include "Fishing.h"
 #include "Mineral.h"
 #include "Pickaxe.h"
+#include "ingredient.h"
 USING_NS_CC;
-
+# define NewFishingExp 20
+# define NewPickaxeExp 40
+# define NewCookLayerExp 60
+# define ExpTime 1
+#define WeatherChangeTime 20
+extern int experience;
+extern int money;
 enum Mouse {
     notTaken,
     TakenByNPC
@@ -61,7 +68,7 @@ public:
     void addMouseListener();
     void Mouseupdate(float delta);
     void onMouseDown(cocos2d::Event* event);
-    void MouseClickNPC(NPC* npc);
+    void DialogClose(NPC* npc);
  
 
     Tools* tools;//传入锄头
@@ -80,11 +87,25 @@ public:
     //
     Store* store;//商店
     Fishing* fishing;//钓鱼竿
+    CookLayer* cookLayer;
+
     std::string scene_name_;
 
     int clickNPCButtons();
     void CloseOtherCheckbox(ui::CheckBox* selectedCheckbox);
     void showmoneynum();
+    void NewFishingListening();//解锁钓鱼
+    void NewPickaxeListening();//解锁挖矿
+    void NewCookLayerListening();//解锁烹饪
+    void showdark();
+    void createRain();
+    void createSunEffect();
+    void weatherchange();
+
+    //亲密度提示
+    Label* relationTip;
+    Sprite* relationFull;
+    void NPCTaskManger(NPC* npc);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

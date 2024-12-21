@@ -3,7 +3,7 @@
 
 bool Wood::init(TMXTiledMap* map) {
     iswood = 0;
-    woodnum = 0;
+   
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -44,12 +44,12 @@ Wood* Wood::create(TMXTiledMap* map) {
 
 void Wood::showwoodnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(woodnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(wood_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 5.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(woodnum));
+        label->setString(std::to_string(wood_number));
         }, "update_label_key");
 }

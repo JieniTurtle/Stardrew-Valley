@@ -154,6 +154,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Axe.cpp" />
     <ClCompile Include="..\Classes\Carrot.cpp" />
+    <ClCompile Include="..\Classes\Date.cpp" />
     <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\explore.cpp" />
     <ClCompile Include="..\Classes\FarmProduct.cpp" />
@@ -162,9 +163,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\Gloves.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\ingredients.cpp" />
     <ClCompile Include="..\Classes\Kettle.cpp" />
     <ClCompile Include="..\Classes\MainCharacter.cpp" />
     <ClCompile Include="..\Classes\Mineral.cpp" />
+    <ClCompile Include="..\Classes\MiniGame.cpp" />
     <ClCompile Include="..\Classes\NPC.cpp" />
     <ClCompile Include="..\Classes\Pickaxe.cpp" />
     <ClCompile Include="..\Classes\Seeds.cpp" />
@@ -183,6 +186,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Axe.h" />
     <ClInclude Include="..\Classes\Carrot.h" />
+    <ClInclude Include="..\Classes\Date.h" />
     <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\explore.h" />
     <ClInclude Include="..\Classes\FarmProduct.h" />
@@ -192,9 +196,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\global.h" />
     <ClInclude Include="..\Classes\Gloves.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\ingredient.h" />
     <ClInclude Include="..\Classes\Kettle.h" />
     <ClInclude Include="..\Classes\MainCharacter.h" />
     <ClInclude Include="..\Classes\Mineral.h" />
+    <ClInclude Include="..\Classes\MiniGame.h" />
     <ClInclude Include="..\Classes\NPC.h" />
     <ClInclude Include="..\Classes\Pickaxe.h" />
     <ClInclude Include="..\Classes\Seeds.h" />

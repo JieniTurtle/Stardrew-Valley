@@ -2,7 +2,7 @@
 
 #include "SimpleAudioEngine.h"
 
-bool Pickaxe::init(TMXTiledMap* map, int& stonenum, int& gemnum) {
+bool Pickaxe::init(TMXTiledMap* map) {
     ispickaxe = 0;
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
@@ -14,7 +14,7 @@ bool Pickaxe::init(TMXTiledMap* map, int& stonenum, int& gemnum) {
     mapwidth = mapHeight * tileHeight;
     setpickaxecheckbox();//设置复选框
 
-    pickaxeListenerMouse(map, stonenum, gemnum);
+    pickaxeListenerMouse(map);
     return true;
 }
 
@@ -30,10 +30,10 @@ void  Pickaxe::setpickaxecheckbox() {
 
 }
 
-Pickaxe* Pickaxe::create(TMXTiledMap* map, int& stonenum, int& gemnum) {
+Pickaxe* Pickaxe::create(TMXTiledMap* map) {
 
     Pickaxe* ret = new Pickaxe();
-    if (ret && ret->init(map,  stonenum, gemnum)) {
+    if (ret && ret->init(map)) {
         ret->autorelease(); // 自动释放内存
         return ret;
     }
@@ -41,11 +41,11 @@ Pickaxe* Pickaxe::create(TMXTiledMap* map, int& stonenum, int& gemnum) {
     return nullptr;
 }
 
-void Pickaxe::pickaxeListenerMouse(TMXTiledMap* map, int& stonenum, int& gemnum) {
+void Pickaxe::pickaxeListenerMouse(TMXTiledMap* map) {
     // 创建鼠标事件监听器
     auto mouseListener = EventListenerMouse::create();
 
-    mouseListener->onMouseDown = [=,& stonenum, & gemnum](Event* event) {
+    mouseListener->onMouseDown = [=](Event* event) {
         EventMouse* mouseEvent = static_cast<EventMouse*>(event);
         Vec2 mapPosition = map->getPosition();
         if (ispickaxe == 1) {
@@ -66,15 +66,15 @@ void Pickaxe::pickaxeListenerMouse(TMXTiledMap* map, int& stonenum, int& gemnum)
                 if (tileGID == StoneID) {//判断是否可挖
 
                     tileLayer->setTileGID(0, Vec2(tileX, tileY));//删除图块
-
-                    stonenum++;
+                    experience += GemExp;
+                    stone_number++;
                 }
                 //瓦片左下角为锚点
                 if (tileGID == GemID) {//判断是否可挖
 
                     tileLayer->setTileGID(0, Vec2(tileX, tileY));//删除图块
-
-                    gemnum++;
+                    experience += GemExp;
+                    mineral_number++;
                 }
             }
         }

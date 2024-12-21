@@ -1,6 +1,6 @@
 #ifndef __WHEAT_H__
 #define __WHEAT_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -9,7 +9,7 @@ USING_NS_CC;
 class Wheat : public cocos2d::Scene {
 public:
     bool iswheat;//是否拿小麦
-    int wheatnum;//小麦数量
+ 
     ui::CheckBox* wheatcheckbox;//种子复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

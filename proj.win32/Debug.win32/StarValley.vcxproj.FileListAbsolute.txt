@@ -4,3 +4,5 @@ C:\Users\10068\Desktop\new4\proj.win32\Debug.win32\StarValley.exe
 D:\cocos2dx\3\New\new4\proj.win32\Debug.win32\StarValley.exe
 C:\Users\10068\Desktop\New5\proj.win32\Debug.win32\StarValley.exe
 C:\Users\10068\Desktop\New6\Stardrew-Valley\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\New6\Stardrew-Valley\proj.win32\Debug.win32\StarValley.exe
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\proj.win32\Debug.win32\StarValley.exe

@@ -3,7 +3,7 @@
 
 bool Carrot::init(TMXTiledMap* map) {
     iscarrot = 0;
-    carrotnum = 2;
+ 
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -99,12 +99,12 @@ Carrot* Carrot::create(TMXTiledMap* map) {
 
 void Carrot::showcarrotnum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(carrotnum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(carrot_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9.7 / 10, visibleSize.height * 6.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(carrotnum));
+        label->setString(std::to_string(carrot_number));
         }, "update_label_key");
 }

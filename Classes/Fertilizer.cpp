@@ -3,7 +3,7 @@
 
 bool Fertilizer::init(TMXTiledMap* map) {
     isfertilizer = 0;
-    fertilizernum = 5;
+   
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
     mapWidth = map->getMapSize().width;  // 横向瓷砖数量
@@ -63,20 +63,20 @@ void Fertilizer::fertilizerListenerMouse(TMXTiledMap* map) {
             //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
             if (tileLayer) {
 
-                if ((tileGID == RawPlantWaterID) && fertilizernum > 0) {//有浇水的发芽id，判断是否可用肥料
+                if ((tileGID == RawPlantWaterID) && fertilizer_number > 0) {//有浇水的发芽id，判断是否可用肥料
                    
                     tileLayer->setTileGID(MaturePlantID, Vec2(tileX, tileY));
                     // 使用完即刻长大
  
-                    fertilizernum--;//施肥成功，肥料数量减少
+                    fertilizer_number--;//施肥成功，肥料数量减少
                 }
                 //瓦片左下角为锚点
-                if ((tileGID == RawPlantWaterTwoID) && fertilizernum > 0) {//有浇水的发芽id，判断是否可用肥料
+                if ((tileGID == RawPlantWaterTwoID) && fertilizer_number > 0) {//有浇水的发芽id，判断是否可用肥料
 
                     tileLayer->setTileGID(MaturePlantTwoID, Vec2(tileX, tileY));
                     // 使用完即刻长大
                 
-                    fertilizernum--;//施肥成功，肥料数量减少
+                    fertilizer_number--;//施肥成功，肥料数量减少
                 }
             }
         }
@@ -87,13 +87,13 @@ void Fertilizer::fertilizerListenerMouse(TMXTiledMap* map) {
 
 void Fertilizer::showfertilizernum() {
     // 创建标签并添加到场景中
-    auto label = Label::createWithTTF(std::to_string(fertilizernum), "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF(std::to_string(fertilizer_number), "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(visibleSize.width * 9 / 10, visibleSize.height * 4.5 / 10)); // 设置标签显示的位置
     this->addChild(label, 1);
 
     // 创建一个定时器或调度器，以便在每帧更新标签
     this->schedule([this, label](float dt) {
-        label->setString(std::to_string(fertilizernum));
+        label->setString(std::to_string(fertilizer_number));
         }, "update_label_key");
 }
 

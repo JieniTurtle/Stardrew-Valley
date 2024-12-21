@@ -1,6 +1,6 @@
 #ifndef __FERTILIZER_H__
 #define __FERTILIZER_H__
-
+#include "global.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -14,7 +14,7 @@ USING_NS_CC;
 class Fertilizer : public cocos2d::Scene {
 public:
     bool isfertilizer;//是否拿肥料
-    int fertilizernum;//肥料数量
+
     ui::CheckBox* fertilizercheckbox;//肥料复选框
     Vec2 mapPosition;//地图位置
     int maplength;//地图长度

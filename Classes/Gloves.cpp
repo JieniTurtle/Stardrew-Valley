@@ -1,7 +1,7 @@
 #include "Gloves.h"
 #include "SimpleAudioEngine.h"
 
-bool Gloves::init(TMXTiledMap* map, int& wheatnum, int& carrotnum) {
+bool Gloves::init(TMXTiledMap* map) {
     isgloves = 0;
     visibleSize = Director::getInstance()->getVisibleSize();//获取当前游戏视图窗口的尺寸
 
@@ -13,7 +13,7 @@ bool Gloves::init(TMXTiledMap* map, int& wheatnum, int& carrotnum) {
     mapwidth = mapHeight * tileHeight;
     setglovescheckbox();//设置手套复选框
 
-    glovesListenerMouse(map,wheatnum, carrotnum);
+    glovesListenerMouse(map);
     return true;
 }
 
@@ -41,10 +41,10 @@ void  Gloves::setglovescheckbox() {
 
 }
 
-Gloves* Gloves::create(TMXTiledMap* map, int& wheatnum, int& carrotnum) {
+Gloves* Gloves::create(TMXTiledMap* map) {
 
     Gloves* ret = new Gloves();
-    if (ret && ret->init(map,wheatnum,  carrotnum)) {
+    if (ret && ret->init(map)) {
         ret->autorelease(); // 自动释放内存
         return ret;
     }
@@ -52,11 +52,11 @@ Gloves* Gloves::create(TMXTiledMap* map, int& wheatnum, int& carrotnum) {
     return nullptr;
 }
 
-void Gloves::glovesListenerMouse(TMXTiledMap* map, int& wheatnum, int& carrotnum) {
+void Gloves::glovesListenerMouse(TMXTiledMap* map) {
     // 创建鼠标事件监听器
     auto mouseListener = EventListenerMouse::create();
 
-    mouseListener->onMouseDown = [=, & wheatnum, & carrotnum](Event* event) {
+    mouseListener->onMouseDown = [=](Event* event) {
         EventMouse* mouseEvent = static_cast<EventMouse*>(event);
         Vec2 mapPosition = map->getPosition();
         if (isgloves == 1) {
@@ -77,14 +77,16 @@ void Gloves::glovesListenerMouse(TMXTiledMap* map, int& wheatnum, int& carrotnum
                 if (tileGID == MaturePlantID) {//成熟作物瓦片id，判断是否可收取
 
                     tileLayer->setTileGID(AbleHoeID, Vec2(tileX, tileY));//替换成原始图块
-                    wheatnum++;
+                    wheat_number++;
+                    experience += GainExp;
                     //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
                 }
                 //瓦片左下角为锚点
                 if (tileGID == MaturePlantTwoID) {//成熟作物瓦片id，判断是否可收取
 
                     tileLayer->setTileGID(AbleHoeID, Vec2(tileX, tileY));//替换成原始图块
-                    carrotnum++;
+                    carrot_number++;
+                    experience += GainExp;
                     //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
                 }
                 //瓦片左下角为锚点

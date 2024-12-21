@@ -4,11 +4,13 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include "Wheat.h"
+#include "global.h"
 USING_NS_CC;
 #define ScaleFactor 2  //扩大因子，地图乘2
 #define MaturePlantID 5548//成熟图块id
 #define MaturePlantTwoID 5552//成熟图块id
 #define AbleHoeID 809  //可耕做的图块id
+#define GainExp 20
 // 工具类
 class Gloves : public cocos2d::Layer {
 public:
@@ -23,11 +25,11 @@ public:
     int tileWidth; // 单个瓷砖的像素宽度
     int tileHeight; // 单个瓷砖的像素高度
     //
-    virtual bool init(TMXTiledMap* map,int& wheatnum, int& carrotnum);
+    virtual bool init(TMXTiledMap* map);
     void setglovescheckbox();//设置手套复选框
 
-    static Gloves* create(TMXTiledMap* map, int& wheatnum, int& carrotnum);
-    void glovesListenerMouse(TMXTiledMap* map, int& wheatnum, int& carrotnum);//手套监听函数
+    static Gloves* create(TMXTiledMap* map);
+    void glovesListenerMouse(TMXTiledMap* map);//手套监听函数
 
 };
 

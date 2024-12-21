@@ -2,19 +2,18 @@
 #define __STORE_H__
 
 #include "cocos2d.h"
-
+#include "global.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 #define ScaleFactor 2  //扩大因子，地图乘2
-#define WheatSellPrice 10
+
 #define MilkSellPrice 15
 #define WoolSellPrice 12
 #define EggSellPrice 12
-#define CarrotSellPrice 10
-#define SeedsBuyPrice 2
-#define SeedsTwoBuyPrice 3
+
+
 #define FailSellDisplayTime 0.5
-extern int money;
+
 // 工具类
 class Store : public cocos2d::Layer {
 public:
@@ -48,14 +47,15 @@ public:
     Sprite* emptystoragesprite;//空货架
     //
     void setopenitem();//设置打开按钮
-    void setstorescene(int& wheatnum, int& milknum, int& woolnum, int& eggnum, int& seedsnum, int& fertilzernum, int&seedstwonum, int&carrotnum);//设置商店界面
-    void Store::setsell(int& wheatnum,  int& milknum, int& woolnum, int& eggnum, int& seedsnum, int& fertilzernum, int& seedstwonum, int& carrotnum);
-    void Store::setbuy(int& wheatnum, int& milknum, int& woolnum, int& eggnum, int& seedsnum, int& fertilzernum, int& seedstwonum, int& carrotnum);//买入
-    virtual bool init(TMXTiledMap* map,int &wheatnum, int& milknum, int& woolnum, int& eggnum, int& seedsnum, int& fertilzernum, int& seedstwonum, int& carrotnum);
+    void setstorescene();//设置商店界面
+    void Store::setsell();
+    void Store::setbuy();//买入
+    virtual bool init(TMXTiledMap* map);
     void menuOpenCallback();//打开商店界面
-    static Store* create(TMXTiledMap* map, int& wheatnum, int& milknum, int& woolnum, int& eggnum, int& seedsnum, int& fertilzernum, int& seedstwonum, int& carrotnum);
+    static Store* create(TMXTiledMap* map);
     void CloseCallback();//关闭商店界面
     void sellfail();//显示卖出失败
     void buyfail();//显示买入失败
+    void pricechange();
 };
 #endif

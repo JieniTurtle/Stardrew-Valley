@@ -2,7 +2,7 @@
 #define __KETTLE_H__
 
 #include "cocos2d.h"
-
+#include"global.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 #define ScaleFactor 2  //扩大因子，地图乘2
@@ -14,7 +14,7 @@ USING_NS_CC;
 #define RawPlantWaterTwoID 5537//发芽图块id浇水
 #define MaturePlantID 5548//成熟图块id
 #define MaturePlantTwoID 5552//成熟图块id
-#define MatureTime 8.0f //成熟时间只浇水
+//extern int MatureTime; //成熟时间只浇水
 // 工具类
 class Kettle : public cocos2d::Layer {
 public:

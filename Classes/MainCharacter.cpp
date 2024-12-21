@@ -11,7 +11,7 @@
 #define UP_DOWN_CONFLICT 4
 #define LEFT_RIGHT_CONFLICT 5
 
-#define V_LIMIT 800
+#define V_LIMIT 400
 
 #define CHARACTER 1
 
