@@ -1,11 +1,11 @@
 ﻿  precheader.cpp
   AssetsManager.cpp
-  AssetsManagerEx.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\unzip.h(47,1): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/extensions/assets-manager/AssetsManager.cpp”)
   C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
   参见“CC_DLL”的前一个定义
   
+  AssetsManagerEx.cpp
   CCEventAssetsManagerEx.cpp
   CCEventListenerAssetsManagerEx.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\unzip.h(47,1): warning C4005: “CC_DLL”: 宏重定义
@@ -16,10 +16,10 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   Manifest.cpp
   CCControl.cpp
   CCControlButton.cpp
+  CCControlColourPicker.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\extensions\assets-manager\AssetsManagerEx.cpp(1180,46): warning C4305: “+=”: 从“double”到“float”截断
   (编译源文件“/extensions/assets-manager/AssetsManagerEx.cpp”)
   
-  CCControlColourPicker.cpp
   CCControlHuePicker.cpp
   CCControlPotentiometer.cpp
   CCControlSaturationBrightnessPicker.cpp
@@ -67,8 +67,8 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCPUDoExpireEventHandlerTranslator.cpp
   CCPUDoFreezeEventHandler.cpp
   CCPUDoFreezeEventHandlerTranslator.cpp
-  CCPUDoPlacementParticleEventHandlerTranslator.cpp
   CCPUDoPlacementParticleEventHandler.cpp
+  CCPUDoPlacementParticleEventHandlerTranslator.cpp
   CCPUDoScaleEventHandler.cpp
   CCPUDoScaleEventHandlerTranslator.cpp
   CCPUDoStopSystemEventHandler.cpp
@@ -202,39 +202,39 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   sweep_context.cc
   tinyxml2.cpp
   ioapi_mem.cpp
-  ioapi.cpp
-  unzip.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\ioapi.h(25,1): warning C4005: “CC_DLL”: 宏重定义
-  (编译源文件“/external/unzip/ioapi.cpp”)
-  C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
-  参见“CC_DLL”的前一个定义
-  
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\ioapi.h(25,1): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/external/unzip/ioapi_mem.cpp”)
   C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
   参见“CC_DLL”的前一个定义
   
+  ioapi.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\ioapi.h(25,1): warning C4005: “CC_DLL”: 宏重定义
+  (编译源文件“/external/unzip/ioapi.cpp”)
+  C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
+  参见“CC_DLL”的前一个定义
+  
+  unzip.cpp
+  xxhash.c
+  CCAABB.cpp
+  CCAnimate3D.cpp
+  CCAnimation3D.cpp
+  CCAttachNode.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\unzip.h(47,1): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/external/unzip/unzip.cpp”)
   C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
   参见“CC_DLL”的前一个定义
   
-  xxhash.c
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\flatbuffers\idl_parser.cpp(790,3): warning C4858: 正在放弃返回值: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
-  (编译源文件“/external/flatbuffers/idl_parser.cpp”)
-  
-  CCAABB.cpp
+  CCBillBoard.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\xxhash\xxhash.c(312,5): warning C4804: “/”: 在操作中使用类型“bool”不安全
   (编译源文件“/external/xxhash/xxhash.c”)
   
-  CCAnimate3D.cpp
-  CCAnimation3D.cpp
-  CCAttachNode.cpp
-  CCBillBoard.cpp
   CCBundle3D.cpp
   CCBundleReader.cpp
   CCFrustum.cpp
   CCMesh.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\flatbuffers\idl_parser.cpp(790,3): warning C4858: 正在放弃返回值: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
+  (编译源文件“/external/flatbuffers/idl_parser.cpp”)
+  
   CCMeshSkin.cpp
   CCMeshVertexIndexData.cpp
   CCMotionStreak3D.cpp
@@ -272,13 +272,13 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCData.cpp
   CCDataVisitor.cpp
   CCDirector.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\base\CCDirector.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“/base/CCDirector.cpp”)
+  
   CCEvent.cpp
   CCEventAcceleration.cpp
   CCEventController.cpp
   CCEventCustom.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\base\CCDirector.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  (编译源文件“/base/CCDirector.cpp”)
-  
   CCEventDispatcher.cpp
   CCEventFocus.cpp
   CCEventKeyboard.cpp
@@ -363,6 +363,10 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCActionManagerEx.cpp
   CCActionNode.cpp
   CCActionObject.cpp
+  CCArmature.cpp
+  CCArmatureAnimation.cpp
+  CCArmatureDataManager.cpp
+  CCArmatureDefine.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
@@ -377,10 +381,6 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/ActionTimeline/CCActionTimelineCache.cpp”)
   
-  CCArmature.cpp
-  CCArmatureAnimation.cpp
-  CCArmatureDataManager.cpp
-  CCArmatureDefine.cpp
   CCBatchNode.cpp
   CCBone.cpp
   CCColliderDetector.cpp
@@ -393,6 +393,8 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCDecorativeDisplay.cpp
   CCDisplayFactory.cpp
   CCDisplayManager.cpp
+  CCInputDelegate.cpp
+  CCComExtensionData.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
@@ -407,8 +409,6 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/ActionTimeline/CSLoader.cpp”)
   
-  CCInputDelegate.cpp
-  CCComExtensionData.cpp
   CCProcessBase.cpp
   CCSGUIReader.cpp
   CCSkin.cpp
@@ -428,6 +428,20 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   WidgetCallBackHandlerProtocol.cpp
   ArmatureNodeReader.cpp
   ButtonReader.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp”)
+  
   CheckBoxReader.cpp
   ComAudioReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -435,73 +449,31 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
   
   GameMapReader.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
+  
   GameNode3DReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameMapReader/GameMapReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameMapReader/GameMapReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/CheckBoxReader/CheckBoxReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/CheckBoxReader/CheckBoxReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
-  
   ImageViewReader.cpp
   LayoutReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -509,14 +481,14 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameMapReader/GameMapReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameMapReader/GameMapReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -531,6 +503,34 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/FlatBuffersSerialize.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/CheckBoxReader/CheckBoxReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/CheckBoxReader/CheckBoxReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
   
   Light3DReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -538,6 +538,20 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ImageViewReader/ImageViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ImageViewReader/ImageViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
@@ -546,40 +560,26 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
   
   ListViewReader.cpp
   LoadingBarReader.cpp
   NodeReaderDefine.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ImageViewReader/ImageViewReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ImageViewReader/ImageViewReader.cpp”)
-  
   NodeReaderProtocol.cpp
   NodeReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
-  
   PageViewReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -602,6 +602,7 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
   
+  ParticleReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
@@ -609,52 +610,23 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
   
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/LoadingBarReader/LoadingBarReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/LoadingBarReader/LoadingBarReader.cpp”)
-  
-  ParticleReader.cpp
   ProjectNodeReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
-  
   ScrollViewReader.cpp
-  SingleNodeReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/LoadingBarReader/LoadingBarReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/LoadingBarReader/LoadingBarReader.cpp”)
   
+  SingleNodeReader.cpp
   BoneNodeReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -670,67 +642,95 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp”)
   
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
+  
   SkeletonNodeReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
-  
   SliderReader.cpp
   SpriteReader.cpp
-  TabControlReader.cpp
-  TextAtlasReader.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
   
+  TabControlReader.cpp
+  TextAtlasReader.cpp
   TextBMFontReader.cpp
   TextFieldReader.cpp
   TextReader.cpp
@@ -742,13 +742,6 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
   
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
-  
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
@@ -756,6 +749,15 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
   
+  Sprite3DReader.cpp
+  UserCameraReader.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
+  
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
@@ -763,66 +765,36 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
   
-  Sprite3DReader.cpp
-  UserCameraReader.cpp
   Particle3DReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
-  
   WidgetReader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
-  
   CCAffineTransform.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -843,63 +815,105 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
   
   CCGeometry.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
+  
   CCVertex.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
-  
   Mat4.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
+  
   MathUtil.cpp
   Quaternion.cpp
   TransformUtils.cpp
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/WidgetReader.cpp”)
+  
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/WidgetReader.cpp”)
+  
   Vec2.cpp
   Vec3.cpp
   Vec4.cpp
@@ -910,20 +924,6 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCNavMeshUtils.cpp
   CCDownloader-curl.cpp
   CCDownloader.cpp
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/WidgetReader.cpp”)
-  
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/WidgetReader.cpp”)
-  
   HttpClient.cpp
   SocketIO.cpp
   Uri.cpp
@@ -942,12 +942,12 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCPhysicsShape.cpp
   CCPhysicsWorld.cpp
   CCFileUtils.cpp
-  CCGLView.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\external\unzip\unzip.h(47,1): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/platform/CCFileUtils.cpp”)
   C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,1):
   参见“CC_DLL”的前一个定义
   
+  CCGLView.cpp
   CCImage.cpp
   CCSAXParser.cpp
   CCThread.cpp
@@ -971,13 +971,13 @@ C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\Stardr
   CCMeshCommand.cpp
   CCPass.cpp
   CCPrimitive.cpp
-  CCPrimitiveCommand.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\renderer\CCGLProgramState.cpp(920,14): warning C4996: 'cocos2d::UniformValue::setTexture': 被声明为已否决
   (编译源文件“/renderer/CCGLProgramState.cpp”)
   
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\renderer\CCGLProgramState.cpp(924,14): warning C4996: 'cocos2d::UniformValue::setTexture': 被声明为已否决
   (编译源文件“/renderer/CCGLProgramState.cpp”)
   
+  CCPrimitiveCommand.cpp
 C:\Users\10068\Desktop\recent study\sophomore first\Programming Paradigms\StardrewValley\New7\cocos2d\cocos\renderer\CCGLProgramState.cpp(941,14): warning C4996: 'cocos2d::UniformValue::setTexture': 被声明为已否决
   (编译源文件“/renderer/CCGLProgramState.cpp”)
   

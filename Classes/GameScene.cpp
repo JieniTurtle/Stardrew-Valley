@@ -248,9 +248,12 @@ bool GameScene::init(int direction)
     }
     if (scene_name_ == "Woods" && !chest_opened[1]) {
         auto chest = Chest::create(map, 1);
-        map->addChild(chest, 5);
+        map->addChild(chest, 0);
     }
-
+    if (scene_name_ == "Town") {
+        auto gobang_board = GobangBoard::create(map);
+        map->addChild(gobang_board, 5);
+    }
     MouseStatus = notTaken;//设置鼠标状态
 
     //地图为城镇，创建NPC

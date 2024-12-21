@@ -159,8 +159,17 @@ GobangBoard* GobangBoard::create(TMXTiledMap* map)
 bool GobangBoard::init()
 {
     name_ = "Gobang_board";
-    position_ = Vec2(120, 888);
+    position_ = Vec2(240, 928);
     Interaction::init();
+    auto player = Sprite::create("NPC/Willy/static.png");
+    this->addChild(player);
+    player->setPosition(Vec2(8, 40));
+
+    auto physics_body = PhysicsBody::createBox(Size(16, 16));
+    physics_body->setPositionOffset(Vec2(0, -8));
+    physics_body->setDynamic(false);
+    player->addComponent(physics_body);
+
     return true;
 }
 
