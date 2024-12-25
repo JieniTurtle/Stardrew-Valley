@@ -4,7 +4,7 @@
   The play should be rich in seasonal changes, community interactions, and personal development.
 
 # Base Features
- ## Farm Management:
+## Farm Management:
   
   Players can farm, plant, and harvest a variety of crops, with the ripening time of the crops varying according to the species and season.
   
@@ -14,27 +14,27 @@
   
   Manage farm resources such as water, seeds, and fertilizer storage.
 	
-  ##Community Interaction:
+## Community Interaction:
   
   Build relationships with the town's residents, including friendships and romantic relationships.
   Participate in regular community events and festivals.
   Gain prestige and reap rewards by accepting and completing missions from your residents, including collecting specific items, helping to repair buildings, and more.
 	
- ## Explore & Adventure:
+## Explore & Adventure:
 
 Explore the area around the farm, including forests, mountains, and mysterious caves.
 Dig minerals, fish and collect rare items.
 	
-  ##Lengths and Skills:
+## Lengths and Skills:
 
 A variety of skill trees, including farming, mining, fishing, and cooking.
 As you level up your skills, unlock new crop types, tool upgrades, and cooking recipes.
 
 # Additional Features
-  ##Market Economy System:
+## Market Economy System:
   
   Implement a dynamic market price system that affects the selling price of crops and products.
 	
-  ##Weather system:
+## Weather system:
   
   Complex weather patterns affect crop growth and animal behavior, including droughts, heavy rainfall, and seasonal variations.
