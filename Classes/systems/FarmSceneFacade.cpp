@@ -4,6 +4,8 @@
 #include "ToolFactory.h"
 #include "SeedFactory.h"
 #include "AnimalFactory.h"
+#include "ToolUIFacade.h"
+#include "NPCInteractionFacade.h"
 #include "Date.h"
 #include "MiniGame.h"
 
@@ -75,27 +77,7 @@ void FarmSceneFacade::initCommonResources(GameScene* scene, TMXTiledMap* map) {
 }
 
 void FarmSceneFacade::initTownNPCs(GameScene* scene, TMXTiledMap* map) {
-    std::vector<Vec2> path_Willy = { Vec2(28, 51), Vec2(29, 19), Vec2(-10, 19), Vec2(-10, 55), Vec2(26, 55), Vec2(28, 55) };
-    scene->NPC_Willy = scene->initNPC("Willy", path_Willy, map);
-    scene->NPC_Willy->retain();
-
-    std::vector<Vec2> path_Gus = { Vec2(81, 87),Vec2(20, 75), Vec2(20, 55), Vec2(-100, 55), Vec2(-100, 200), Vec2(81, 200) };
-    scene->NPC_Gus = scene->initNPC("Gus", path_Gus, map);
-    scene->NPC_Gus->retain();
-
-    std::vector<Vec2> path_Jodi = { Vec2(-10, 55), Vec2(28, 55), Vec2(28, 51), Vec2(29, 19), Vec2(-10, 19), Vec2(-10, 55), Vec2(26, 55) };
-    scene->NPC_Jodi = scene->initNPC("Jodi", path_Jodi, map);
-    scene->NPC_Jodi->retain();
-
-    std::vector<Vec2> path_Harvey = { Vec2(-100, 200), Vec2(81, 200), Vec2(81, 87),Vec2(20, 75), Vec2(20, 55), Vec2(-100, 55) };
-    scene->NPC_Harvey = scene->initNPC("Harvey", path_Harvey, map);
-    scene->NPC_Harvey->retain();
-
-    scene->relationFull = Sprite::create("NPC/relationFull.png");
-    scene->relationFull->retain();
-
-    scene->addMouseListener();
-    scene->schedule(CC_SCHEDULE_SELECTOR(GameScene::Mouseupdate), 0.1f);
+    NPCInteractionFacade::setup(scene, map);
 }
 
 void FarmSceneFacade::initFarmScene(GameScene* scene, TMXTiledMap* map) {
@@ -138,9 +120,6 @@ void FarmSceneFacade::initFarmScene(GameScene* scene, TMXTiledMap* map) {
     chicken->setMap(map);
     Chicken::move(chicken, map);
 
-    scene->CheckboxOnlyone();
-    scene->NewFishingListening();
-    scene->NewPickaxeListening();
-    scene->NewCookLayerListening();
+    ToolUIFacade::setup(scene);
 }
 

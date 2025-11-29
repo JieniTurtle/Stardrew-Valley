@@ -39,24 +39,23 @@ enum Mouse {
 class GameScene : public cocos2d::Scene
 {
 public:
-    //ÓÃÓÚÖ¸Ê¾Êó±ê±»Ë­Õ¼¾Ý£¬1´ú±í±»NPCÕ¼¾Ý
+    //ï¿½ï¿½ï¿½ï¿½Ö¸Ê¾ï¿½ï¿½ê±»Ë­Õ¼ï¿½Ý£ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½NPCÕ¼ï¿½ï¿½
     enum Mouse MouseStatus;
-    //µØÍ¼±ÈÀý
+    //ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
     static int mapscale;
     Size visibleSize;
     Vec2 origin;
     static Scene* createScene(std::string s, int direction);
     static GameScene* create(std::string s, int direction);
     bool init(int direction);
-    void CheckboxOnlyone();//Ö»ÄÜÑ¡ÔñÒ»¸ö¸´Ñ¡¿ò
 
     void set_physical_map(TMXTiledMap* map);
 
-    MainCharacter* character;//Ö÷½Ç
-    int mapWidth;   // ºáÏò´É×©ÊýÁ¿
-    int mapHeight; // ×ÝÏò´É×©ÊýÁ¿
-    int tileWidth;  // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight;  // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
+    MainCharacter* character;//ï¿½ï¿½ï¿½ï¿½
+    int mapWidth;   // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    int mapHeight; // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    int tileWidth;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½
+    int tileHeight;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ß¶ï¿½
 
     NPC* NPC_Willy;
     NPC* NPC_Gus;
@@ -64,45 +63,36 @@ public:
     NPC* NPC_Harvey;
 
     NPC* initNPC(std::string NPC_Name, std::vector<Vec2>& NPC_Path, TMXTiledMap* NPC_Map);
-
-    void addMouseListener();
-    void Mouseupdate(float delta);
-    void onMouseDown(cocos2d::Event* event);
-    void DialogClose(NPC* npc);
  
 
-    Tools* tools;//´«Èë³úÍ·
-    Pickaxe* pickaxe;//´«Èë¸å×Ó
-    Seeds* seeds;//´«ÈëÖÖ×Ó   
-    Seedstwo* seedstwo;//´«ÈëÖÖ×Ó 2
-    Wheat* wheat;//´«ÈëÐ¡Âó   
-    Carrot* carrot;//´«Èëcarrot
-    Gloves* gloves;//´«ÈëÊÖÌ×
-    Axe* axe;//´«Èë¸«×Ó
-    Wood* wood;//´«Èëwood
-    Kettle* kettle;//Ë®ºø
-    Fertilizer* fertilizer;//·ÊÁÏ
-    FarmProduct* farmproduct;//Å©×÷Îï
-    Mineral* mineral;//¿óÊ¯Àà
+    Tools* tools;//ï¿½ï¿½ï¿½ï¿½ï¿½Í·
+    Pickaxe* pickaxe;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Seeds* seeds;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
+    Seedstwo* seedstwo;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2
+    Wheat* wheat;//ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½   
+    Carrot* carrot;//ï¿½ï¿½ï¿½ï¿½carrot
+    Gloves* gloves;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Axe* axe;//ï¿½ï¿½ï¿½ë¸«ï¿½ï¿½
+    Wood* wood;//ï¿½ï¿½ï¿½ï¿½wood
+    Kettle* kettle;//Ë®ï¿½ï¿½
+    Fertilizer* fertilizer;//ï¿½ï¿½ï¿½ï¿½
+    FarmProduct* farmproduct;//Å©ï¿½ï¿½ï¿½ï¿½
+    Mineral* mineral;//ï¿½ï¿½Ê¯ï¿½ï¿½
     //
-    Store* store;//ÉÌµê
-    Fishing* fishing;//µöÓã¸Í
+    Store* store;//ï¿½Ìµï¿½
+    Fishing* fishing;//ï¿½ï¿½ï¿½ï¿½ï¿½
     CookLayer* cookLayer;
 
     std::string scene_name_;
 
     int clickNPCButtons();
-    void CloseOtherCheckbox(ui::CheckBox* selectedCheckbox);
     void showmoneynum();
-    void NewFishingListening();//½âËøµöÓã
-    void NewPickaxeListening();//½âËøÍÚ¿ó
-    void NewCookLayerListening();//½âËøÅëâ¿
     void showdark();
     void createRain();
     void createSunEffect();
     void weatherchange();
 
-    //Ç×ÃÜ¶ÈÌáÊ¾
+    //ï¿½ï¿½ï¿½Ü¶ï¿½ï¿½ï¿½Ê¾
     Label* relationTip;
     Sprite* relationFull;
     void NPCTaskManger(NPC* npc);
