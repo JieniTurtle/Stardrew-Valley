@@ -10,19 +10,19 @@
 
 #include "Seeds.h"
 #include "Seedstwo.h"
-#include "Gloves.h"
 #include "Wheat.h"
-#include "Axe.h"
 #include "Wood.h"
-#include "Kettle.h"
 #include "Fertilizer.h"
 #include "FarmProduct.h"
 #include "Store.h"
 #include "Carrot.h"
 #include "Fishing.h"
 #include "Mineral.h"
-#include "Pickaxe.h"
 #include "ingredient.h"
+#include "ToolBase.h"
+#include "ToolType.h"
+#include "ToolFactory.h"
+#include <map>
 USING_NS_CC;
 # define NewFishingExp 20
 # define NewPickaxeExp 40
@@ -39,24 +39,23 @@ enum Mouse {
 class GameScene : public cocos2d::Scene
 {
 public:
-    //ÓÃÓÚÖ¸Ê¾Êó±ê±»Ë­Õ¼¾İ£¬1´ú±í±»NPCÕ¼¾İ
+    //é¼ æ ‡æŒ‡ç¤ºå™¨è¢«è°å æ®ï¼Œ1è¡¨ç¤ºè¢«NPCå æ®
     enum Mouse MouseStatus;
-    //µØÍ¼±ÈÀı
+    //åœ°å›¾ç¼©æ”¾
     static int mapscale;
     Size visibleSize;
     Vec2 origin;
     static Scene* createScene(std::string s, int direction);
     static GameScene* create(std::string s, int direction);
     bool init(int direction);
-    void CheckboxOnlyone();//Ö»ÄÜÑ¡ÔñÒ»¸ö¸´Ñ¡¿ò
 
     void set_physical_map(TMXTiledMap* map);
 
-    MainCharacter* character;//Ö÷½Ç
-    int mapWidth;   // ºáÏò´É×©ÊıÁ¿
-    int mapHeight; // ×İÏò´É×©ÊıÁ¿
-    int tileWidth;  // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight;  // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
+    MainCharacter* character;//è§’è‰²
+    int mapWidth;   // åœ°å›¾çš„ç –å—æ•°é‡
+    int mapHeight; // åœ°å›¾çš„ç –å—æ•°é‡
+    int tileWidth;  // æ¯ä¸ªç –å—çš„åƒç´ å®½åº¦
+    int tileHeight;  // æ¯ä¸ªç –å—çš„åƒç´ é«˜åº¦
 
     NPC* NPC_Willy;
     NPC* NPC_Gus;
@@ -64,45 +63,39 @@ public:
     NPC* NPC_Harvey;
 
     NPC* initNPC(std::string NPC_Name, std::vector<Vec2>& NPC_Path, TMXTiledMap* NPC_Map);
-
-    void addMouseListener();
-    void Mouseupdate(float delta);
-    void onMouseDown(cocos2d::Event* event);
-    void DialogClose(NPC* npc);
  
+    // å·¥å…·ç®¡ç† - ä½¿ç”¨å·¥å‚æ¨¡å¼ï¼Œç»Ÿä¸€é€šè¿‡å®¹å™¨ç®¡ç†ï¼ˆå®Œå…¨å¤šæ€åŒ–ï¼‰
+    std::map<ToolType, ToolBase*> toolMap;  // å·¥å…·å®¹å™¨ï¼Œé€šè¿‡å·¥å‚åˆ›å»ºå’Œç®¡ç†
+    
+    // å·¥å…·è®¿é—®å™¨ - é€šè¿‡ç±»å‹è·å–å·¥å…·ï¼ˆä½“ç°å·¥å‚æ¨¡å¼å’Œå¤šæ€ï¼‰
+    ToolBase* getTool(ToolType type) const {
+        auto it = toolMap.find(type);
+        return (it != toolMap.end()) ? it->second : nullptr;
+    }
 
-    Tools* tools;//´«Èë³úÍ·
-    Pickaxe* pickaxe;//´«Èë¸å×Ó
-    Seeds* seeds;//´«ÈëÖÖ×Ó   
-    Seedstwo* seedstwo;//´«ÈëÖÖ×Ó 2
-    Wheat* wheat;//´«ÈëĞ¡Âó   
-    Carrot* carrot;//´«Èëcarrot
-    Gloves* gloves;//´«ÈëÊÖÌ×
-    Axe* axe;//´«Èë¸«×Ó
-    Wood* wood;//´«Èëwood
-    Kettle* kettle;//Ë®ºø
-    Fertilizer* fertilizer;//·ÊÁÏ
-    FarmProduct* farmproduct;//Å©×÷Îï
-    Mineral* mineral;//¿óÊ¯Àà
+    Seeds* seeds;//ç§å­ç±»   
+    Seedstwo* seedstwo;//ç§å­ç±» 2
+    Wheat* wheat;//å°éº¦ç±»   
+    Carrot* carrot;//èƒ¡èåœcarrot
+    Wood* wood;//æœ¨å¤´wood
+    Fertilizer* fertilizer;//è‚¥æ–™
+    FarmProduct* farmproduct;//å†œäº§å“
+    Mineral* mineral;//çŸ¿çŸ³
     //
-    Store* store;//ÉÌµê
-    Fishing* fishing;//µöÓã¸Í
+    Store* store;//å•†åº—
+    Fishing* fishing;//é’“é±¼
     CookLayer* cookLayer;
 
     std::string scene_name_;
 
     int clickNPCButtons();
-    void CloseOtherCheckbox(ui::CheckBox* selectedCheckbox);
     void showmoneynum();
-    void NewFishingListening();//½âËøµöÓã
-    void NewPickaxeListening();//½âËøÍÚ¿ó
-    void NewCookLayerListening();//½âËøÅëâ¿
     void showdark();
     void createRain();
     void createSunEffect();
     void weatherchange();
 
-    //Ç×ÃÜ¶ÈÌáÊ¾
+    //å…³ç³»åº¦æ˜¾ç¤º
     Label* relationTip;
     Sprite* relationFull;
     void NPCTaskManger(NPC* npc);

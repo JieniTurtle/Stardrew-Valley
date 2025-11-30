@@ -4,6 +4,8 @@
 #include "ToolFactory.h"
 #include "SeedFactory.h"
 #include "AnimalFactory.h"
+#include "ToolUIFacade.h"
+#include "NPCInteractionFacade.h"
 #include "Date.h"
 #include "MiniGame.h"
 
@@ -75,50 +77,28 @@ void FarmSceneFacade::initCommonResources(GameScene* scene, TMXTiledMap* map) {
 }
 
 void FarmSceneFacade::initTownNPCs(GameScene* scene, TMXTiledMap* map) {
-    std::vector<Vec2> path_Willy = { Vec2(28, 51), Vec2(29, 19), Vec2(-10, 19), Vec2(-10, 55), Vec2(26, 55), Vec2(28, 55) };
-    scene->NPC_Willy = scene->initNPC("Willy", path_Willy, map);
-    scene->NPC_Willy->retain();
-
-    std::vector<Vec2> path_Gus = { Vec2(81, 87),Vec2(20, 75), Vec2(20, 55), Vec2(-100, 55), Vec2(-100, 200), Vec2(81, 200) };
-    scene->NPC_Gus = scene->initNPC("Gus", path_Gus, map);
-    scene->NPC_Gus->retain();
-
-    std::vector<Vec2> path_Jodi = { Vec2(-10, 55), Vec2(28, 55), Vec2(28, 51), Vec2(29, 19), Vec2(-10, 19), Vec2(-10, 55), Vec2(26, 55) };
-    scene->NPC_Jodi = scene->initNPC("Jodi", path_Jodi, map);
-    scene->NPC_Jodi->retain();
-
-    std::vector<Vec2> path_Harvey = { Vec2(-100, 200), Vec2(81, 200), Vec2(81, 87),Vec2(20, 75), Vec2(20, 55), Vec2(-100, 55) };
-    scene->NPC_Harvey = scene->initNPC("Harvey", path_Harvey, map);
-    scene->NPC_Harvey->retain();
-
-    scene->relationFull = Sprite::create("NPC/relationFull.png");
-    scene->relationFull->retain();
-
-    scene->addMouseListener();
-    scene->schedule(CC_SCHEDULE_SELECTOR(GameScene::Mouseupdate), 0.1f);
+    NPCInteractionFacade::setup(scene, map);
 }
 
 void FarmSceneFacade::initFarmScene(GameScene* scene, TMXTiledMap* map) {
-    auto addToolToScene = [scene](Layer* toolLayer) {
-        if (toolLayer) {
-            scene->addChild(toolLayer, 1);
-        }
+    // 完全使用工厂模式创建工具 - 客户端不需要知道具体实现类
+    // 通过工厂批量创建，统一存入容器管理
+    std::vector<ToolType> toolTypes = {
+        ToolType::TOOLS,    // 锄头
+        ToolType::GLOVES,   // 手套
+        ToolType::AXE,      // 斧头
+        ToolType::KETTLE,   // 水壶
+        ToolType::PICKAXE   // 镐子
     };
-
-    scene->tools = static_cast<Tools*>(ToolFactory::createTool(ToolType::TOOLS, map));
-    addToolToScene(scene->tools);
-
-    scene->gloves = static_cast<Gloves*>(ToolFactory::createTool(ToolType::GLOVES, map));
-    addToolToScene(scene->gloves);
-
-    scene->axe = static_cast<Axe*>(ToolFactory::createTool(ToolType::AXE, map));
-    addToolToScene(scene->axe);
-
-    scene->kettle = static_cast<Kettle*>(ToolFactory::createTool(ToolType::KETTLE, map));
-    addToolToScene(scene->kettle);
-
-    scene->pickaxe = static_cast<Pickaxe*>(ToolFactory::createTool(ToolType::PICKAXE, map));
-    addToolToScene(scene->pickaxe);
+    
+    // 通过工厂统一创建所有工具，完全多态化
+    for (ToolType type : toolTypes) {
+        ToolBase* tool = ToolFactory::createTool(type, map);
+        if (tool) {
+            scene->addChild(tool, 1);
+            scene->toolMap[type] = tool;  // 存入容器，统一管理
+        }
+    }
 
     scene->fishing = Fishing::create(map, scene->character);
     addLayerIfNeeded(scene, scene->fishing, 1);
@@ -138,9 +118,6 @@ void FarmSceneFacade::initFarmScene(GameScene* scene, TMXTiledMap* map) {
     chicken->setMap(map);
     Chicken::move(chicken, map);
 
-    scene->CheckboxOnlyone();
-    scene->NewFishingListening();
-    scene->NewPickaxeListening();
-    scene->NewCookLayerListening();
+    ToolUIFacade::setup(scene);
 }
 

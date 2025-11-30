@@ -1,87 +1,49 @@
 #include "Axe.h"
-
 #include "SimpleAudioEngine.h"
 
 bool Axe::init(TMXTiledMap* map) {
-    isaxe = 0;
-    visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-
-    mapWidth = map->getMapSize().width;  // ºáÏò´É×©ÊıÁ¿
-    mapHeight = map->getMapSize().height; // ×İÏò´É×©ÊıÁ¿
-    tileWidth = map->getTileSize().width * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    tileHeight = map->getTileSize().height * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    maplength = mapWidth * tileWidth;
-    mapwidth = mapHeight * tileHeight;
-    setaxecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
-
-    axeListenerMouse(map);
+    if (!ToolBase::init(map)) {
+        return false;
+    }
+    
+    // åˆå§‹åŒ–å‘åå…¼å®¹çš„æˆå‘˜å˜é‡
+    isaxe = isActive;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®å¤é€‰æ¡†
+    setCheckbox("axe1.png", "axe2.png", 2.0f / 8.0f, 1.0f / 4.0f);
+    
+    // åŒæ­¥å‘åå…¼å®¹çš„æˆå‘˜å˜é‡
+    axecheckbox = checkbox;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®é¼ æ ‡ç›‘å¬
+    setupMouseListener(map);
+    
     return true;
 }
 
-void  Axe::setaxecheckbox() {
-    auto visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    //´´½¨³úÍ·Í¼±ê
-    axecheckbox = ui::CheckBox::create("axe1.png", "axe2.png");
-    axecheckbox->setPosition(Vec2(visibleSize.width*2 / 8, visibleSize.height / 4)); // ÉèÖÃÎ»ÖÃ
-    this->addChild(axecheckbox);
-
-
-}
-
 Axe* Axe::create(TMXTiledMap* map) {
-
     Axe* ret = new Axe();
     if (ret && ret->init(map)) {
-        ret->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+        ret->autorelease();
         return ret;
     }
-    CC_SAFE_DELETE(ret); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ı
+    CC_SAFE_DELETE(ret);
     return nullptr;
 }
 
-void Axe::axeListenerMouse(TMXTiledMap* map) {
-    // ´´½¨Êó±êÊÂ¼ş¼àÌıÆ÷
-    auto mouseListener = EventListenerMouse::create();
+void Axe::handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) {
+    // æ–§å¤´ç‰¹å®šçš„å¤„ç†é€»è¾‘ï¼šç æ ‘
+    for (int i = 1; i <= numberOfTree; ++i) {
+        std::string layerName = "Tree" + std::to_string(i);
+        auto treeLayer = map->getLayer(layerName);
 
-    mouseListener->onMouseDown = [=](Event* event) {
-        EventMouse* mouseEvent = static_cast<EventMouse*>(event);
-        Vec2 mapPosition = map->getPosition();
-        if (isaxe == 1) {
-            // »ñÈ¡Êó±êµã»÷µÄÎ»ÖÃ
-            Vec2 clickPos = mouseEvent->getLocation();//ÒÔ×óÉÏ½ÇÎªÔ­µã
-            clickPos.y = visibleSize.height - clickPos.y;//×ª»¯Îª×óÏÂ½ÇÎªÔ­µã
-            //×ø±ê×ª»¯ÎªÏà¶ÔµØÍ¼×óÏÂ½ÇµÄ
-            clickPos.x = clickPos.x - mapPosition.x + maplength / 2;
-            clickPos.y = clickPos.y - mapPosition.y + mapwidth / 2;
-            // ×ª»»ÎªÏà¶ÔµØÍ¼×óÉÏ½ÇµÄÍ¼¿éµ¥Î»×ø±ê
-            int tileX = static_cast<int>(clickPos.x / (ScaleFactor * 16));
-            int tileY = mapHeight - 1 - static_cast<int>((clickPos.y) / (ScaleFactor * 16));
-          //±éÀúÃ¿Ò»¸öÊ÷Í¼²ã
-            for (int i = 1; i <= numberOfTree; ++i) {
-                // ¹¹ÔìÍ¼²ãÃû³Æ
-                std::string layerName = "Tree" + std::to_string(i); // Éú³É "Tree1", "Tree2", ...
-
-                // »ñÈ¡Ê÷µÄÍ¼²ã
-                auto treeLayer = map->getLayer(layerName);
-
-                // ¼ì²éÍ¼²ãÊÇ·ñÓĞĞ§
-                if (treeLayer) {
-                    
-                    int tileGID = treeLayer->getTileGIDAt(Vec2(tileX, tileY));//µã»÷´¦ÊÇ·ñÓĞÊ÷
-                    if (tileGID != 0) {
-                        map->removeChild(treeLayer, true);//ÒÆ³ı¸ÃÍ¼²ã£¬±íÊ¾¿³µôÁË
-                        wood_number += OneTreeForWood;
-                        experience += WoodExp;
-                    }
-                  
-                }
-
+        if (treeLayer) {
+            int tileGID = treeLayer->getTileGIDAt(Vec2(tileX, tileY));
+            if (tileGID != 0) {
+                map->removeChild(treeLayer, true);
+                wood_number += OneTreeForWood;
+                experience += WoodExp;
             }
-          
-            
-            
         }
-        };
-    // ½«¼àÌıÆ÷Ìí¼Óµ½ÊÂ¼ş·ÖÅäÆ÷
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, this);
+    }
 }

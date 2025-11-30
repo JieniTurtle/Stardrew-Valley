@@ -1,35 +1,29 @@
 #ifndef __PICKAXE_H__
 #define __PICKAXE_H__
 
-#include "cocos2d.h"
+#include "ToolBase.h"
 #include "global.h"
-#include "ui/CocosGUI.h"
 USING_NS_CC;
-#define ScaleFactor 2  //À©´óÒò×Ó£¬µØÍ¼³Ë2
-#define StoneID 5564  //ÆÕÍ¨Ê¯¿é
-#define GemID 5530  //±¦Ê¯¿ì
+
+#define ScaleFactor 2  //åœ°å›¾ç¼©æ”¾ï¼Œåœ°å›¾*2
+#define StoneID 5564  //æ™®é€šçŸ³å¤´
+#define GemID 5530  //å®çŸ³
 #define GemExp 20
-// ¸å×ÓÀà
-class Pickaxe : public cocos2d::Layer {
+
+// é•å­ - ç»§æ‰¿ToolBaseåŸºç±»
+class Pickaxe : public ToolBase {
 public:
-    bool ispickaxe;//ÊÇ·ñÄÃ
-    ui::CheckBox* pickaxecheckbox;//¸´Ñ¡¿ò
-    Vec2 mapPosition;//µØÍ¼Î»ÖÃ
-    int maplength;//µØÍ¼³¤¶È
-    int mapwidth;//µØÍ¼¿í¶È
-    Size visibleSize;//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    int mapWidth;  // ºáÏò´É×©ÊıÁ¿
-    int mapHeight; // ×İÏò´É×©ÊıÁ¿
-    int tileWidth; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    virtual bool init(TMXTiledMap* map);
-    void setpickaxecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
-
     static Pickaxe* create(TMXTiledMap* map);
-    void pickaxeListenerMouse(TMXTiledMap* map);//³úµØ¼àÌıº¯Êı
-
+    
+    // å®ç°åŸºç±»çš„çº¯è™šå‡½æ•° - å¤„ç†é•å­ç‰¹å®šçš„ç‚¹å‡»é€»è¾‘
+    virtual void handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) override;
+    
+    // é‡å†™initæ–¹æ³•ä»¥è®¾ç½®é•å­ç‰¹å®šçš„UI
+    virtual bool init(TMXTiledMap* map) override;
+    
+    // å‘åå…¼å®¹çš„æˆå‘˜å˜é‡ï¼ˆåœ¨initä¸­åŒæ­¥ï¼‰
+    bool ispickaxe;
+    ui::CheckBox* pickaxecheckbox;
 };
 
-
 #endif
-
