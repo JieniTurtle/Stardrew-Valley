@@ -1,0 +1,13 @@
+**.obj
+**.pch
+**.tlog
+**.vsidx
+**.pdb 
+**.exe                                                              
+**.VC.**                                                                                                                                 
+proj.win32/.vs/StarValley/v17/ipch/                                                                                    
+proj.win32/Debug.win32/StarValley.exp                                                                                 
+proj.win32/Debug.win32/StarValley.ilk                                                                               
+proj.win32/Debug.win32/game.res                                                                                       
+proj.win32/Debug.win32/libcocos2d.exp                                                                               
+proj.win32/StarValley.vcxproj.user      

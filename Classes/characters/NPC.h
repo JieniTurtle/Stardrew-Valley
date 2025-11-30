@@ -1,85 +1,33 @@
 #ifndef __NPC_SCENE_H__
 #define __NPC_SCENE_H__
-#include "cocos2d.h"
-#include "Dialog.h"
+#include "BaseNPC.h"
 #include "Task.h"
 
 USING_NS_CC;
 
-class NPC : public cocos2d::Sprite
+// NPCç±» - ç»§æ‰¿BaseNPCï¼Œæ”¯æŒè£…é¥°å™¨æ¨¡å¼
+// ä¿ç•™ä»»åŠ¡åŠŸèƒ½ä»¥ä¿æŒå‘åå…¼å®¹
+class NPC : public BaseNPC
 {
-private:
-    Sprite* animate_sprite;
 public:
-    int relation;
-    //Îö¹¹
-    ~NPC() {
-        moveup->release();
-        moveleft->release();
-        moveright->release();
-        movedown->release();
-        movestatic->release();
-    }
-    //NPCÃû³Æ
-    std::string NPCname;
-
-    TMXTiledMap* NPCmap;//µØÍ¼Ö¸Õë
-    //´«ÈëµØÍ¼Ö¸Õë
-    void setMap(TMXTiledMap* map) { NPCmap = map; }
-
-    //NPC¾«Áé´óĞ¡
-    static int NPCsize_x;
-    static int NPCsize_y;
-
-    //NPCÎÆÀíµÄ¶¯»­Ë³Ğò
-    static int NPCorder_up;
-    static int NPCorder_left;
-    static int NPCorder_right;
-    static int NPCorder_down;
-
-    //NPC¶¯»­ ¶¯»­Â·¾¶Ê¾Àı£ºNPC/filename/moveup1.png
-    Animate* movestatic;
-    Animate* moveup;
-    Animate* moveleft;
-    Animate* moveright;
-    Animate* movedown;
-
-    //NPCÈÎÎñ
+    // NPCä»»åŠ¡ï¼ˆä¿ç•™ä»¥ä¿æŒå‘åå…¼å®¹ï¼Œä¹Ÿå¯ä»¥é€šè¿‡è£…é¥°å™¨æ·»åŠ ï¼‰
     Task NPCtask;
 
-    //NPC¶Ô»°
-    Dialog* Dialog_NPC;
+    // æ„é€ å‡½æ•°å’Œææ„å‡½æ•°
+    NPC() {}
+    ~NPC() {
+        // BaseNPCçš„ææ„å‡½æ•°ä¼šå¤„ç†åŠ¨ç”»é‡Šæ”¾
+    }
 
-    //Â·¾¶Ïà¹Ø
-    int currentPathIndex;//Â·¾¶Ë÷Òı
-    float speed;//ËÙ¶È
-    std::vector<Vec2> NPCpath;//Â·¾¶²ÎÊı
-
-    // ÉèÖÃÒÆ¶¯Â·¾¶
-    void setPath(const std::vector<Vec2>& path);
-
-    //NPC¾²Ö¹Í¼Æ¬Â·¾¶Îª NPC/filename/static.png
+    // é™æ€åˆ›å»ºæ–¹æ³•
     static NPC* create(const std::string& filename);
 
-    //³õÊ¼»¯
-    bool init();
+    // é‡å†™INPCæ¥å£æ–¹æ³•ä»¥æ”¯æŒä»»åŠ¡åŠŸèƒ½
+    virtual Task* getTask() override;
+    virtual bool hasTask() const override;
 
-    //NPCÒÆ¶¯µÄ¸üĞÂ
-    void updatemove(float dt);
-
-    //NPC¾²Ö¹µÄ¸üĞÂ
-    void updatestatic(float dt);
-
-    // ²¥·Å¶¯»­
-    void playAnimation(const std::string& direction);
-
-    // Í£Ö¹NPCµÄ¶¯»­ºÍÒÆ¶¯
-    void stopMovement();
-
-    // »Ö¸´NPCµÄ¶¯»­ºÍÒÆ¶¯
-    void startMovement();
-
-    //ÅĞ¶ÏÊó±êÎ»ÖÃÊÇ·ñÔÚNPCÉÏ
-    bool JudgeClickNPC(Vec2 clickPos, int mapscale);
+    // ä¸ºäº†å‘åå…¼å®¹ï¼Œæä¾›å¯¹NPCnameçš„å…¬å…±è®¿é—®
+    // BaseNPCä¸­NPCnameæ˜¯privateï¼Œè¿™é‡Œé€šè¿‡getName()è®¿é—®
+    // å¦‚æœéœ€è¦ç›´æ¥è®¿é—®ï¼Œå¯ä»¥æ·»åŠ è®¿é—®å™¨æˆ–ä½¿ç”¨getName()
 };
 #endif // __NPC_SCENE_H__;
