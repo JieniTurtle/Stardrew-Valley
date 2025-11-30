@@ -1,42 +1,36 @@
 #ifndef __KETTLE_H__
 #define __KETTLE_H__
 
-#include "cocos2d.h"
-#include"global.h"
-#include "ui/CocosGUI.h"
+#include "ToolBase.h"
+#include "global.h"
 USING_NS_CC;
-#define ScaleFactor 2  //À©´óÒò×Ó£¬µØÍ¼³Ë2
-#define HoeOverID 1753  //¸û×÷ºóµÄÍ¼¿éid
-#define AbleHoeID 809  //¿É¸û×öµÄÍ¼¿éid
-#define RawPlantNoWaterID 5529//·¢Ñ¿Í¼¿éidÃ»½½Ë®
-#define RawPlantNoWaterTwoID 5531//·¢Ñ¿Í¼¿éidÃ»½½Ë®
-#define RawPlantWaterID 5535//·¢Ñ¿Í¼¿éid½½Ë®
-#define RawPlantWaterTwoID 5537//·¢Ñ¿Í¼¿éid½½Ë®
-#define MaturePlantID 5548//³ÉÊìÍ¼¿éid
-#define MaturePlantTwoID 5552//³ÉÊìÍ¼¿éid
-//extern int MatureTime; //³ÉÊìÊ±¼äÖ»½½Ë®
-// ¹¤¾ßÀà
-class Kettle : public cocos2d::Layer {
+
+#define RawPlantNoWaterID 5529//å‘èŠ½å›¾ç‰‡idæ²¡æœ‰æ°´
+#define RawPlantNoWaterTwoID 5531//å‘èŠ½å›¾ç‰‡idæ²¡æœ‰æ°´
+#define RawPlantWaterID 5535//å‘èŠ½å›¾ç‰‡idæœ‰æ°´
+#define RawPlantWaterTwoID 5537//å‘èŠ½å›¾ç‰‡idæœ‰æ°´
+#define MaturePlantID 5548//æˆç†Ÿå›¾ç‰‡id
+#define MaturePlantTwoID 5552//æˆç†Ÿå›¾ç‰‡id
+
+// æ°´å£¶ - ç»§æ‰¿ToolBaseåŸºç±»
+class Kettle : public ToolBase {
 public:
-    bool iskettle;//ÊÇ·ñÄÃ³úÍ·
-    ui::CheckBox* kettlecheckbox;//³úÍ·¸´Ñ¡¿ò
-    Vec2 mapPosition;//µØÍ¼Î»ÖÃ
-    int maplength;//µØÍ¼³¤¶È
-    int mapwidth;//µØÍ¼¿í¶È
-    Size visibleSize;//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    int mapWidth;  // ºáÏò´É×©ÊıÁ¿
-    int mapHeight; // ×İÏò´É×©ÊıÁ¿
-    int tileWidth; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    virtual bool init(TMXTiledMap* map);
-    void setkettlecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
-    int scheduleCounter;//¼ÆÊ±Æ÷
-
+    int scheduleCounter;  // å®šæ—¶å™¨è®¡æ•°å™¨
+    
     static Kettle* create(TMXTiledMap* map);
-    void kettleListenerMouse(TMXTiledMap* map);//³úµØ¼àÌıº¯Êı
-    //ËæÊ±È¡ÏûÍ¼¿é±ä»¯
+    
+    // å®ç°åŸºç±»çš„çº¯è™šå‡½æ•° - å¤„ç†æ°´å£¶ç‰¹å®šçš„ç‚¹å‡»é€»è¾‘
+    virtual void handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) override;
+    
+    // é‡å†™initæ–¹æ³•ä»¥è®¾ç½®æ°´å£¶ç‰¹å®šçš„UI
+    virtual bool init(TMXTiledMap* map) override;
+    
+    // å®šæ—¶å–æ¶ˆå›¾ç‰‡å˜åŒ–
     void myUpdateFunction(Action* rebackaction, TMXLayer* tileLayer, int tileX, int tileY, std::string updateKey);
+    
+    // å‘åå…¼å®¹çš„æˆå‘˜å˜é‡ï¼ˆåœ¨initä¸­åŒæ­¥ï¼‰
+    bool iskettle;
+    ui::CheckBox* kettlecheckbox;
 };
-
 
 #endif

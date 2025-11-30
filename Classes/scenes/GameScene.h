@@ -10,19 +10,19 @@
 
 #include "Seeds.h"
 #include "Seedstwo.h"
-#include "Gloves.h"
 #include "Wheat.h"
-#include "Axe.h"
 #include "Wood.h"
-#include "Kettle.h"
 #include "Fertilizer.h"
 #include "FarmProduct.h"
 #include "Store.h"
 #include "Carrot.h"
 #include "Fishing.h"
 #include "Mineral.h"
-#include "Pickaxe.h"
 #include "ingredient.h"
+#include "ToolBase.h"
+#include "ToolType.h"
+#include "ToolFactory.h"
+#include <map>
 USING_NS_CC;
 # define NewFishingExp 20
 # define NewPickaxeExp 40
@@ -39,9 +39,9 @@ enum Mouse {
 class GameScene : public cocos2d::Scene
 {
 public:
-    //����ָʾ��걻˭ռ�ݣ�1������NPCռ��
+    //鼠标指示器被谁占据，1表示被NPC占据
     enum Mouse MouseStatus;
-    //��ͼ����
+    //地图缩放
     static int mapscale;
     Size visibleSize;
     Vec2 origin;
@@ -51,11 +51,11 @@ public:
 
     void set_physical_map(TMXTiledMap* map);
 
-    MainCharacter* character;//����
-    int mapWidth;   // �����ש����
-    int mapHeight; // �����ש����
-    int tileWidth;  // ������ש�����ؿ���
-    int tileHeight;  // ������ש�����ظ߶�
+    MainCharacter* character;//角色
+    int mapWidth;   // 地图的砖块数量
+    int mapHeight; // 地图的砖块数量
+    int tileWidth;  // 每个砖块的像素宽度
+    int tileHeight;  // 每个砖块的像素高度
 
     NPC* NPC_Willy;
     NPC* NPC_Gus;
@@ -64,23 +64,26 @@ public:
 
     NPC* initNPC(std::string NPC_Name, std::vector<Vec2>& NPC_Path, TMXTiledMap* NPC_Map);
  
+    // 工具管理 - 使用工厂模式，统一通过容器管理（完全多态化）
+    std::map<ToolType, ToolBase*> toolMap;  // 工具容器，通过工厂创建和管理
+    
+    // 工具访问器 - 通过类型获取工具（体现工厂模式和多态）
+    ToolBase* getTool(ToolType type) const {
+        auto it = toolMap.find(type);
+        return (it != toolMap.end()) ? it->second : nullptr;
+    }
 
-    Tools* tools;//�����ͷ
-    Pickaxe* pickaxe;//�������
-    Seeds* seeds;//��������   
-    Seedstwo* seedstwo;//�������� 2
-    Wheat* wheat;//����С��   
-    Carrot* carrot;//����carrot
-    Gloves* gloves;//��������
-    Axe* axe;//���븫��
-    Wood* wood;//����wood
-    Kettle* kettle;//ˮ��
-    Fertilizer* fertilizer;//����
-    FarmProduct* farmproduct;//ũ����
-    Mineral* mineral;//��ʯ��
+    Seeds* seeds;//种子类   
+    Seedstwo* seedstwo;//种子类 2
+    Wheat* wheat;//小麦类   
+    Carrot* carrot;//胡萝卜carrot
+    Wood* wood;//木头wood
+    Fertilizer* fertilizer;//肥料
+    FarmProduct* farmproduct;//农产品
+    Mineral* mineral;//矿石
     //
-    Store* store;//�̵�
-    Fishing* fishing;//�����
+    Store* store;//商店
+    Fishing* fishing;//钓鱼
     CookLayer* cookLayer;
 
     std::string scene_name_;
@@ -92,7 +95,7 @@ public:
     void createSunEffect();
     void weatherchange();
 
-    //���ܶ���ʾ
+    //关系度显示
     Label* relationTip;
     Sprite* relationFull;
     void NPCTaskManger(NPC* npc);

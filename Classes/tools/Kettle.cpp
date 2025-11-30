@@ -1,125 +1,98 @@
 #include "Kettle.h"
-
 #include "SimpleAudioEngine.h"
-int MatureTime=8; //³ÉÊìÊ±¼äÖ»½½Ë®
+
+int MatureTime = 8; //æˆç†Ÿæ—¶é—´åªæµ‡æ°´
+
 bool Kettle::init(TMXTiledMap* map) {
-    iskettle = 0;
-    visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-
-    mapWidth = map->getMapSize().width;  // ºáÏò´É×©ÊýÁ¿
-    mapHeight = map->getMapSize().height; // ×ÝÏò´É×©ÊýÁ¿
-    tileWidth = map->getTileSize().width * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    tileHeight = map->getTileSize().height * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    maplength = mapWidth * tileWidth;
-    mapwidth = mapHeight * tileHeight;
-    setkettlecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
-
-    kettleListenerMouse(map);
+    if (!ToolBase::init(map)) {
+        return false;
+    }
+    
+    // åˆå§‹åŒ–å‘åŽå…¼å®¹çš„æˆå‘˜å˜é‡
+    iskettle = isActive;
+    
+    scheduleCounter = 0;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®å¤é€‰æ¡†
+    setCheckbox("kettle1.png", "kettle2.png", 2.5f / 8.0f, 1.0f / 4.0f);
+    
+    // åŒæ­¥å‘åŽå…¼å®¹çš„æˆå‘˜å˜é‡
+    kettlecheckbox = checkbox;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®é¼ æ ‡ç›‘å¬
+    setupMouseListener(map);
+    
     return true;
 }
 
-void  Kettle::setkettlecheckbox() {
-    auto visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    //´´½¨³úÍ·Í¼±ê
-    kettlecheckbox = ui::CheckBox::create("kettle1.png", "kettle2.png");
-    kettlecheckbox->setPosition(Vec2(visibleSize.width*2.5 / 8, visibleSize.height / 4)); // ÉèÖÃÎ»ÖÃ
-
-    this->addChild(kettlecheckbox);
-
-
-}
-
 Kettle* Kettle::create(TMXTiledMap* map) {
-
     Kettle* ret = new Kettle();
     if (ret && ret->init(map)) {
-        ret->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+        ret->autorelease();
         return ret;
     }
-    CC_SAFE_DELETE(ret); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(ret);
     return nullptr;
 }
 
-void Kettle::kettleListenerMouse(TMXTiledMap* map) {
-    // ´´½¨Êó±êÊÂ¼þ¼àÌýÆ÷
-    auto mouseListener = EventListenerMouse::create();
-
-    mouseListener->onMouseDown = [=](Event* event) {
-        EventMouse* mouseEvent = static_cast<EventMouse*>(event);
-        Vec2 mapPosition = map->getPosition();
-        if (iskettle == 1) {
-            // »ñÈ¡Êó±êµã»÷µÄÎ»ÖÃ
-            Vec2 clickPos = mouseEvent->getLocation();//ÒÔ×óÉÏ½ÇÎªÔ­µã
-            clickPos.y = visibleSize.height - clickPos.y;//×ª»¯Îª×óÏÂ½ÇÎªÔ­µã
-            auto tileLayer = map->getLayer("soil");
-            //×ø±ê×ª»¯ÎªÏà¶ÔµØÍ¼×óÏÂ½ÇµÄ
-            clickPos.x = clickPos.x - mapPosition.x + maplength / 2;
-            clickPos.y = clickPos.y - mapPosition.y + mapwidth / 2;
-            // ×ª»»ÎªÏà¶ÔµØÍ¼×óÉÏ½ÇµÄÍ¼¿éµ¥Î»×ø±ê
-            int tileX = static_cast<int>(clickPos.x / (ScaleFactor * 16));
-            int tileY = mapHeight - 1 - static_cast<int>((clickPos.y) / (ScaleFactor * 16));
-            int tileGID = tileLayer->getTileGIDAt(Vec2(tileX, tileY));
-            //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
-            if (tileLayer) {
-
-                if (tileGID == RawPlantNoWaterID) {//Ã»ÓÐ½½Ë®µÄ·¢Ñ¿id£¬ÅÐ¶ÏÊÇ·ñ¿É½½Ë®
-                    
-                    tileLayer->setTileGID(RawPlantWaterID, Vec2(tileX, tileY));//Ìæ»»³É½½¹ýË®ÍêµÄÍ¼¿é
-                    // Ê¹ÓÃµ÷¶ÈÆ÷ÔÚÁ½Ãëºó¸ü¸ÄÍßÆ¬ID
-                    auto callback = [this, tileX, tileY, tileLayer]() {
-                        tileLayer->setTileGID(MaturePlantID, Vec2(tileX, tileY)); // Ìæ»»³É³ÉÊì×´Ì¬µÄÍ¼¿é
-                        };
-                    if (weather == 2) {
-                        MatureTime = 4;
-                    }
-                    else if (weather == 1) {
-                        MatureTime = 10;
-                    }
-                    else
-                        MatureTime = 8;
-                    Action* rebackaction = Sequence::create(DelayTime::create(MatureTime), CallFunc::create(callback), nullptr);
-                    this->runAction(rebackaction);
-                    // µ÷¶ÈÆ÷ÑÓ³ÙÖ´ÐÐ£¬nÃë³¤³ÉÊì
-                    
-                    if (scheduleCounter > 1000000) {
-                        scheduleCounter = 0;
-                    }//·ÀÖ¹scheduleCounterÒç³ö
-                    std::string updateKey = "update_function_key_" + std::to_string(scheduleCounter++);
-                    this->schedule([=](float dt) {
-                        myUpdateFunction(rebackaction, tileLayer, tileX, tileY, updateKey); // µ÷ÓÃ¸üÐÂº¯Êý
-                        }, 0.1f, updateKey);
-                }
-                //ÍßÆ¬×óÏÂ½ÇÎªÃªµã
-                if (tileGID == RawPlantNoWaterTwoID) {//Ã»ÓÐ½½Ë®µÄ·¢Ñ¿id£¬ÅÐ¶ÏÊÇ·ñ¿É½½Ë®
-
-                    tileLayer->setTileGID(RawPlantWaterTwoID, Vec2(tileX, tileY));//Ìæ»»³É½½¹ýË®ÍêµÄÍ¼¿é
-                    // Ê¹ÓÃµ÷¶ÈÆ÷ÔÚÁ½Ãëºó¸ü¸ÄÍßÆ¬ID
-                    auto callback = [this, tileX, tileY, tileLayer]() {
-                        tileLayer->setTileGID(MaturePlantTwoID, Vec2(tileX, tileY)); // Ìæ»»³É³ÉÊì×´Ì¬µÄÍ¼¿é
-                        };
-                    Action* rebackaction = Sequence::create(DelayTime::create(MatureTime), CallFunc::create(callback), nullptr);
-                    this->runAction(rebackaction);
-                    // µ÷¶ÈÆ÷ÑÓ³ÙÖ´ÐÐ£¬nÃë³¤³ÉÊì
-
-                    if (scheduleCounter > 1000000) {
-                        scheduleCounter = 0;
-                    }//·ÀÖ¹scheduleCounterÒç³ö
-                    std::string updateKey = "update_function_key_" + std::to_string(scheduleCounter++);
-                    this->schedule([=](float dt) {
-                        myUpdateFunction(rebackaction, tileLayer, tileX, tileY, updateKey); // µ÷ÓÃ¸üÐÂº¯Êý
-                        }, 0.1f, updateKey);
-                }
-                //ÍßÆ¬×óÏÂ½ÇÎªÃªµã
-            }
-        }
+void Kettle::handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) {
+    // æ°´å£¶ç‰¹å®šçš„å¤„ç†é€»è¾‘ï¼šæµ‡æ°´
+    auto tileLayer = map->getLayer("soil");
+    if (!tileLayer) {
+        return;
+    }
+    
+    int tileGID = tileLayer->getTileGIDAt(Vec2(tileX, tileY));
+    
+    if (tileGID == RawPlantNoWaterID) {
+        tileLayer->setTileGID(RawPlantWaterID, Vec2(tileX, tileY));
+        auto callback = [this, tileX, tileY, tileLayer]() {
+            tileLayer->setTileGID(MaturePlantID, Vec2(tileX, tileY));
         };
-    // ½«¼àÌýÆ÷Ìí¼Óµ½ÊÂ¼þ·ÖÅäÆ÷
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, this);
+        
+        if (weather == 2) {
+            MatureTime = 4;
+        } else if (weather == 1) {
+            MatureTime = 10;
+        } else {
+            MatureTime = 8;
+        }
+        
+        Action* rebackaction = Sequence::create(DelayTime::create(MatureTime), CallFunc::create(callback), nullptr);
+        this->runAction(rebackaction);
+        
+        if (scheduleCounter > 1000000) {
+            scheduleCounter = 0;
+        }
+        std::string updateKey = "update_function_key_" + std::to_string(scheduleCounter++);
+        this->schedule([=](float dt) {
+            myUpdateFunction(rebackaction, tileLayer, tileX, tileY, updateKey);
+        }, 0.1f, updateKey);
+    }
+    
+    if (tileGID == RawPlantNoWaterTwoID) {
+        tileLayer->setTileGID(RawPlantWaterTwoID, Vec2(tileX, tileY));
+        auto callback = [this, tileX, tileY, tileLayer]() {
+            tileLayer->setTileGID(MaturePlantTwoID, Vec2(tileX, tileY));
+        };
+        
+        Action* rebackaction = Sequence::create(DelayTime::create(MatureTime), CallFunc::create(callback), nullptr);
+        this->runAction(rebackaction);
+        
+        if (scheduleCounter > 1000000) {
+            scheduleCounter = 0;
+        }
+        std::string updateKey = "update_function_key_" + std::to_string(scheduleCounter++);
+        this->schedule([=](float dt) {
+            myUpdateFunction(rebackaction, tileLayer, tileX, tileY, updateKey);
+        }, 0.1f, updateKey);
+    }
 }
 
 void Kettle::myUpdateFunction(Action* rebackaction, TMXLayer* tileLayer, int tileX, int tileY, std::string updateKey) {
     if (rebackaction) {
-        if ((tileLayer->getTileGIDAt(Vec2(tileX, tileY)) != RawPlantWaterID)&& (tileLayer->getTileGIDAt(Vec2(tileX, tileY)) != RawPlantWaterTwoID)) {
+        if ((tileLayer->getTileGIDAt(Vec2(tileX, tileY)) != RawPlantWaterID) && 
+            (tileLayer->getTileGIDAt(Vec2(tileX, tileY)) != RawPlantWaterTwoID)) {
             this->stopAction(rebackaction);
             this->unschedule(updateKey);
         }

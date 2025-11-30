@@ -1,35 +1,27 @@
 #ifndef __TOOLS_H__
 #define __TOOLS_H__
 
-#include "cocos2d.h"
-#include "Seeds.h"
-#include "Gloves.h"
-#include "Wheat.h"
-#include "ui/CocosGUI.h"
+#include "ToolBase.h"
+#include "global.h"
 USING_NS_CC;
-#define ScaleFactor 2  //À©´óÒò×Ó£¬µØÍ¼³Ë2
-#define HoeOverID 1753  //¸û×÷ºóµÄÍ¼¿éid
-#define AbleHoeID 809  //¿É¸û×öµÄÍ¼¿éid
-// ¹¤¾ßÀà
-class Tools: public cocos2d::Layer{
-public:
-    bool ishoe;//ÊÇ·ñÄÃ³úÍ·
-    ui::CheckBox* hoecheckbox;//³úÍ·¸´Ñ¡¿ò
-    Vec2 mapPosition;//µØÍ¼Î»ÖÃ
-    int maplength;//µØÍ¼³¤¶È
-    int mapwidth;//µØÍ¼¿í¶È
-    Size visibleSize;//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    int mapWidth ;  // ºáÏò´É×©ÊıÁ¿
-    int mapHeight ; // ×İÏò´É×©ÊıÁ¿
-    int tileWidth ; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight ; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    virtual bool init(TMXTiledMap* map);
-    void sethoecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
- 
-    static Tools* create(TMXTiledMap* map);
-    void hoeListenerMouse(TMXTiledMap* map);//³úµØ¼àÌıº¯Êı
-   
-};
 
+#define HoeOverID 1753  //å·²è€•åœ°å›¾ç‰‡id
+#define AbleHoeID 809  //å¯è€•åœ°å›¾ç‰‡id
+
+// é”„å¤´ - ç»§æ‰¿ToolBaseåŸºç±»ï¼ˆå‘½åï¼šToolså®é™…æ˜¯Hoeé”„å¤´ï¼‰
+class Tools : public ToolBase {
+public:
+    static Tools* create(TMXTiledMap* map);
+    
+    // å®ç°åŸºç±»çš„çº¯è™šå‡½æ•° - å¤„ç†é”„å¤´ç‰¹å®šçš„ç‚¹å‡»é€»è¾‘
+    virtual void handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) override;
+    
+    // é‡å†™initæ–¹æ³•ä»¥è®¾ç½®é”„å¤´ç‰¹å®šçš„UI
+    virtual bool init(TMXTiledMap* map) override;
+    
+    // å‘åå…¼å®¹çš„æˆå‘˜å˜é‡ï¼ˆåœ¨initä¸­åŒæ­¥ï¼‰
+    bool ishoe;
+    ui::CheckBox* hoecheckbox;
+};
 
 #endif

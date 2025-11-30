@@ -8,6 +8,7 @@
 
 #include "GameScene.h"
 #include "global.h"
+#include "ToolFactory.h"
 
 #include "ui/CocosGUI.h"
 
@@ -42,22 +43,35 @@ std::vector<CheckboxBinding> buildBindings(GameScene* scene) {
         bindings.push_back({ checkbox, std::move(onSelect), std::move(onDeselect) });
     };
 
+    // 使用工厂模式统一接口访问工具
     addBinding(
-        scene->tools ? scene->tools->hoecheckbox : nullptr,
+        scene->getTool(ToolType::TOOLS) ? scene->getTool(ToolType::TOOLS)->checkbox : nullptr,
         [scene]() {
-            if (scene->tools) scene->tools->ishoe = 1;
+            ToolBase* tool = scene->getTool(ToolType::TOOLS);
+            if (tool) {
+                tool->isActive = 1;  // 使用统一的基类接口
+            }
         },
         [scene]() {
-            if (scene->tools) scene->tools->ishoe = 0;
+            ToolBase* tool = scene->getTool(ToolType::TOOLS);
+            if (tool) {
+                tool->isActive = 0;  // 使用统一的基类接口
+            }
         });
 
     addBinding(
-        scene->pickaxe ? scene->pickaxe->pickaxecheckbox : nullptr,
+        scene->getTool(ToolType::PICKAXE) ? scene->getTool(ToolType::PICKAXE)->checkbox : nullptr,
         [scene]() {
-            if (scene->pickaxe) scene->pickaxe->ispickaxe = 1;
+            ToolBase* tool = scene->getTool(ToolType::PICKAXE);
+            if (tool) {
+                tool->isActive = 1;
+            }
         },
         [scene]() {
-            if (scene->pickaxe) scene->pickaxe->ispickaxe = 0;
+            ToolBase* tool = scene->getTool(ToolType::PICKAXE);
+            if (tool) {
+                tool->isActive = 0;
+            }
         });
 
     addBinding(
@@ -91,12 +105,18 @@ std::vector<CheckboxBinding> buildBindings(GameScene* scene) {
         });
 
     addBinding(
-        scene->gloves ? scene->gloves->glovescheckbox : nullptr,
+        scene->getTool(ToolType::GLOVES) ? scene->getTool(ToolType::GLOVES)->checkbox : nullptr,
         [scene]() {
-            if (scene->gloves) scene->gloves->isgloves = 1;
+            ToolBase* tool = scene->getTool(ToolType::GLOVES);
+            if (tool) {
+                tool->isActive = 1;
+            }
         },
         [scene]() {
-            if (scene->gloves) scene->gloves->isgloves = 0;
+            ToolBase* tool = scene->getTool(ToolType::GLOVES);
+            if (tool) {
+                tool->isActive = 0;
+            }
         });
 
     addBinding(
@@ -118,12 +138,18 @@ std::vector<CheckboxBinding> buildBindings(GameScene* scene) {
         });
 
     addBinding(
-        scene->axe ? scene->axe->axecheckbox : nullptr,
+        scene->getTool(ToolType::AXE) ? scene->getTool(ToolType::AXE)->checkbox : nullptr,
         [scene]() {
-            if (scene->axe) scene->axe->isaxe = 1;
+            ToolBase* tool = scene->getTool(ToolType::AXE);
+            if (tool) {
+                tool->isActive = 1;
+            }
         },
         [scene]() {
-            if (scene->axe) scene->axe->isaxe = 0;
+            ToolBase* tool = scene->getTool(ToolType::AXE);
+            if (tool) {
+                tool->isActive = 0;
+            }
         });
 
     addBinding(
@@ -136,12 +162,18 @@ std::vector<CheckboxBinding> buildBindings(GameScene* scene) {
         });
 
     addBinding(
-        scene->kettle ? scene->kettle->kettlecheckbox : nullptr,
+        scene->getTool(ToolType::KETTLE) ? scene->getTool(ToolType::KETTLE)->checkbox : nullptr,
         [scene]() {
-            if (scene->kettle) scene->kettle->iskettle = 1;
+            ToolBase* tool = scene->getTool(ToolType::KETTLE);
+            if (tool) {
+                tool->isActive = 1;
+            }
         },
         [scene]() {
-            if (scene->kettle) scene->kettle->iskettle = 0;
+            ToolBase* tool = scene->getTool(ToolType::KETTLE);
+            if (tool) {
+                tool->isActive = 0;
+            }
         });
 
     addBinding(
@@ -265,8 +297,9 @@ void setupUnlocks(GameScene* scene) {
 
     configureUnlock(scene, UnlockConfig{
         [scene](bool enabled) {
-            if (scene->pickaxe && scene->pickaxe->pickaxecheckbox) {
-                scene->pickaxe->pickaxecheckbox->setEnabled(enabled);
+            ToolBase* pickaxe = scene->getTool(ToolType::PICKAXE);
+            if (pickaxe && pickaxe->checkbox) {
+                pickaxe->checkbox->setEnabled(enabled);
             }
         },
         NewPickaxeExp,

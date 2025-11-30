@@ -1,39 +1,28 @@
 #ifndef __AXE_H__
 #define __AXE_H__
 
-#include "cocos2d.h"
-#include "Seeds.h"
-#include "Gloves.h"
-#include "Wheat.h"
-#include "ui/CocosGUI.h"
+#include "ToolBase.h"
 #include "global.h"
 USING_NS_CC;
-#define ScaleFactor 2  //À©´óÒò×Ó£¬µØÍ¼³Ë2
-#define HoeOverID 1753  //¸û×÷ºóµÄÍ¼¿éid
-#define AbleHoeID 809  //¿É¸û×öµÄÍ¼¿éid
-#define numberOfTree 3  //Ê÷Í¼²ãµÄÊıÁ¿
-#define OneTreeForWood 5  //Ò»¿ÃÊ÷µÈÓÚ¼¸¸öÄ¾Í·
+
+#define numberOfTree 3  //åœ°å›¾æ ‘æ•°é‡
+#define OneTreeForWood 5  //ä¸€æ£µæ ‘èƒ½è·å¾—å‡ å—æœ¨å¤´
 #define WoodExp 20
-// ¹¤¾ßÀà
-class Axe : public cocos2d::Layer {
+
+// æ–§å¤´ - ç»§æ‰¿ToolBaseåŸºç±»
+class Axe : public ToolBase {
 public:
-    bool isaxe;//ÊÇ·ñÄÃ¸«Í·
-    ui::CheckBox* axecheckbox;//³úÍ·¸´Ñ¡¿ò
-    Vec2 mapPosition;//µØÍ¼Î»ÖÃ
-    int maplength;//µØÍ¼³¤¶È
-    int mapwidth;//µØÍ¼¿í¶È
-    Size visibleSize;//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    int mapWidth;  // ºáÏò´É×©ÊıÁ¿
-    int mapHeight; // ×İÏò´É×©ÊıÁ¿
-    int tileWidth; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    int tileHeight; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    virtual bool init(TMXTiledMap* map);
-    void setaxecheckbox();//ÉèÖÃ³úÍ·¸´Ñ¡¿ò
-
     static Axe* create(TMXTiledMap* map);
-    void axeListenerMouse(TMXTiledMap* map);//³úµØ¼àÌıº¯Êı
-
+    
+    // å®ç°åŸºç±»çš„çº¯è™šå‡½æ•° - å¤„ç†æ–§å¤´ç‰¹å®šçš„ç‚¹å‡»é€»è¾‘
+    virtual void handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) override;
+    
+    // é‡å†™initæ–¹æ³•ä»¥è®¾ç½®æ–§å¤´ç‰¹å®šçš„UI
+    virtual bool init(TMXTiledMap* map) override;
+    
+    // å‘åå…¼å®¹çš„æˆå‘˜å˜é‡ï¼ˆåœ¨initä¸­åŒæ­¥ï¼‰
+    bool isaxe;
+    ui::CheckBox* axecheckbox;
 };
-
 
 #endif

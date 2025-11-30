@@ -1,84 +1,54 @@
 #include "Pickaxe.h"
-
 #include "SimpleAudioEngine.h"
 
 bool Pickaxe::init(TMXTiledMap* map) {
-    ispickaxe = 0;
-    visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-
-    mapWidth = map->getMapSize().width;  // ºáÏò´É×©ÊýÁ¿
-    mapHeight = map->getMapSize().height; // ×ÝÏò´É×©ÊýÁ¿
-    tileWidth = map->getTileSize().width * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    tileHeight = map->getTileSize().height * ScaleFactor; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    maplength = mapWidth * tileWidth;
-    mapwidth = mapHeight * tileHeight;
-    setpickaxecheckbox();//ÉèÖÃ¸´Ñ¡¿ò
-
-    pickaxeListenerMouse(map);
+    if (!ToolBase::init(map)) {
+        return false;
+    }
+    
+    // åˆå§‹åŒ–å‘åŽå…¼å®¹çš„æˆå‘˜å˜é‡
+    ispickaxe = isActive;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®å¤é€‰æ¡†
+    setCheckbox("pickaxe1.png", "pickaxe2.png", 1.5f / 8.0f, 1.0f / 4.0f);
+    
+    // åŒæ­¥å‘åŽå…¼å®¹çš„æˆå‘˜å˜é‡
+    pickaxecheckbox = checkbox;
+    
+    // ä½¿ç”¨åŸºç±»çš„ç»Ÿä¸€æ–¹æ³•è®¾ç½®é¼ æ ‡ç›‘å¬
+    setupMouseListener(map);
+    
     return true;
 }
 
-void  Pickaxe::setpickaxecheckbox() {
-    auto visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
-    //´´½¨³úÍ·Í¼±ê
-    pickaxecheckbox = ui::CheckBox::create("pickaxe1.png", "pickaxe2.png");
-    pickaxecheckbox->setPosition(Vec2(visibleSize.width *1.5/ 8, visibleSize.height / 4)); // ÉèÖÃÎ»ÖÃ
-
- 
-    this->addChild(pickaxecheckbox);
-
-
-}
-
 Pickaxe* Pickaxe::create(TMXTiledMap* map) {
-
     Pickaxe* ret = new Pickaxe();
     if (ret && ret->init(map)) {
-        ret->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+        ret->autorelease();
         return ret;
     }
-    CC_SAFE_DELETE(ret); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(ret);
     return nullptr;
 }
 
-void Pickaxe::pickaxeListenerMouse(TMXTiledMap* map) {
-    // ´´½¨Êó±êÊÂ¼þ¼àÌýÆ÷
-    auto mouseListener = EventListenerMouse::create();
-
-    mouseListener->onMouseDown = [=](Event* event) {
-        EventMouse* mouseEvent = static_cast<EventMouse*>(event);
-        Vec2 mapPosition = map->getPosition();
-        if (ispickaxe == 1) {
-            // »ñÈ¡Êó±êµã»÷µÄÎ»ÖÃ
-            Vec2 clickPos = mouseEvent->getLocation();//ÒÔ×óÉÏ½ÇÎªÔ­µã
-            clickPos.y = visibleSize.height - clickPos.y;//×ª»¯Îª×óÏÂ½ÇÎªÔ­µã
-            auto tileLayer = map->getLayer("Mineral");
-            //×ø±ê×ª»¯ÎªÏà¶ÔµØÍ¼×óÏÂ½ÇµÄ
-            clickPos.x = clickPos.x - mapPosition.x + maplength / 2;
-            clickPos.y = clickPos.y - mapPosition.y + mapwidth / 2;
-            // ×ª»»ÎªÏà¶ÔµØÍ¼×óÉÏ½ÇµÄÍ¼¿éµ¥Î»×ø±ê
-            int tileX = static_cast<int>(clickPos.x / (ScaleFactor * 16));
-            int tileY = mapHeight - 1 - static_cast<int>((clickPos.y) / (ScaleFactor * 16));
-            int tileGID = tileLayer->getTileGIDAt(Vec2(tileX, tileY));
-            //CCLOG("Tile GID at (tileX: %d, tileY: %d) is %d", tileX, tileY, tileGID);
-            if (tileLayer) {
-
-                if (tileGID == StoneID) {//ÅÐ¶ÏÊÇ·ñ¿ÉÍÚ
-
-                    tileLayer->setTileGID(0, Vec2(tileX, tileY));//É¾³ýÍ¼¿é
-                    experience += GemExp;
-                    stone_number++;
-                }
-                //ÍßÆ¬×óÏÂ½ÇÎªÃªµã
-                if (tileGID == GemID) {//ÅÐ¶ÏÊÇ·ñ¿ÉÍÚ
-
-                    tileLayer->setTileGID(0, Vec2(tileX, tileY));//É¾³ýÍ¼¿é
-                    experience += GemExp;
-                    mineral_number++;
-                }
-            }
-        }
-        };
-    // ½«¼àÌýÆ÷Ìí¼Óµ½ÊÂ¼þ·ÖÅäÆ÷
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, this);
+void Pickaxe::handleMouseClick(TMXTiledMap* map, Vec2 clickPos, int tileX, int tileY) {
+    // é•å­ç‰¹å®šçš„å¤„ç†é€»è¾‘ï¼šæŒ–çŸ¿
+    auto tileLayer = map->getLayer("Mineral");
+    if (!tileLayer) {
+        return;
+    }
+    
+    int tileGID = tileLayer->getTileGIDAt(Vec2(tileX, tileY));
+    
+    if (tileGID == StoneID) {
+        tileLayer->setTileGID(0, Vec2(tileX, tileY));
+        experience += GemExp;
+        stone_number++;
+    }
+    
+    if (tileGID == GemID) {
+        tileLayer->setTileGID(0, Vec2(tileX, tileY));
+        experience += GemExp;
+        mineral_number++;
+    }
 }
