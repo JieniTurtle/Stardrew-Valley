@@ -23,15 +23,15 @@ NPC* NPC::create(const std::string& filename)
     if (npc) {
         npc->NPCname = filename;
         if (npc->init()) {
-            npc->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+            npc->autorelease(); // ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½Ú´ï¿½
             return npc;
         }
     }
-    CC_SAFE_DELETE(npc); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ı
+    CC_SAFE_DELETE(npc); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½È«É¾ï¿½ï¿½
     return nullptr;
 }
 
-//³õÊ¼»¯
+//ï¿½ï¿½Ê¼ï¿½ï¿½
 bool NPC::init()
 {
     if (!(Sprite::initWithFile("MainCharacter/transparent.png"))) { return false; }
@@ -50,16 +50,16 @@ bool NPC::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    //´´½¨¶Ô»°
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½
     Dialog_NPC = Dialog::create(NPCname);
 
-    //´´½¨ÎÆÀí
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     Texture2D* Move = Director::getInstance()->getTextureCache()->addImage("NPC/" + NPCname + "/texture.png");
 
-    speed = 50.0f;//ÉèÖÃËÙ¶È
-    currentPathIndex = 0;//³õÊ¼Â·¾¶
+    speed = 50.0f;//ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    currentPathIndex = 0;//ï¿½ï¿½Ê¼Â·ï¿½ï¿½
 
-    //ÏòÉÏ¶¯»­
+    //ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
     Vector<SpriteFrame*> NPCup;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(i * NPCsize_x, NPCorder_up * NPCsize_y, NPCsize_x, NPCsize_y));
@@ -69,7 +69,7 @@ bool NPC::init()
     moveup = Animate::create(uup);
     moveup->setTag(1);
 
-    //Ïò×ó¶¯»­
+    //ï¿½ï¿½ï¿½ó¶¯»ï¿½
     Vector<SpriteFrame*>NPCleft;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(i * NPCsize_x, NPCorder_left * NPCsize_y, NPCsize_x, NPCsize_y));
@@ -79,7 +79,7 @@ bool NPC::init()
     moveleft = Animate::create(lleft);
     moveleft->setTag(2);
 
-    //ÏòÓÒ¶¯»­
+    //ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½
     Vector<SpriteFrame*>NPCright;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(i * NPCsize_x, NPCorder_right * NPCsize_y, NPCsize_x, NPCsize_y));
@@ -89,7 +89,7 @@ bool NPC::init()
     moveright = Animate::create(rright);
     moveright->setTag(3);
 
-    //ÏòÏÂ¶¯»­
+    //ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½
     Vector<SpriteFrame*>NPCdown;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(i * NPCsize_x, NPCorder_down * NPCsize_y, NPCsize_x, NPCsize_y));
@@ -99,7 +99,7 @@ bool NPC::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
-    //¾²Ö¹¶¯»­
+    //ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
     Vector<SpriteFrame*>NPCstatic;
     for (int i = 0; i < 4; i++) {
         auto frame = SpriteFrame::createWithTexture(Move, Rect(0, 0, NPCsize_x, NPCsize_y));
@@ -120,7 +120,7 @@ bool NPC::init()
     return true;
 }
 
-//Â·¾¶³õÊ¼»¯
+//Â·ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 void NPC::setPath(const std::vector<Vec2>& newPath)
 {
     NPCpath = newPath;
@@ -131,33 +131,33 @@ void NPC::setPath(const std::vector<Vec2>& newPath)
     for (auto& i : NPCpath) {
         i *= 16;
     }
-    currentPathIndex = 0;  // ÖØÖÃÂ·¾¶Ë÷Òı
-    setPosition(NPCpath[currentPathIndex]);  // ÉèÖÃ NPC µÄÆğÊ¼Î»ÖÃ
+    currentPathIndex = 0;  // ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    setPosition(NPCpath[currentPathIndex]);  // ï¿½ï¿½ï¿½ï¿½ NPC ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 }
 
-//NPCÒÆ¶¯µÄ¸üĞÂ
+//NPCï¿½Æ¶ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
 void NPC::updatemove(float dt)
 {
     if (NPCpath.empty()) return;
 
-    // »ñÈ¡Ä¿±êÎ»ÖÃ
+    // ï¿½ï¿½È¡Ä¿ï¿½ï¿½Î»ï¿½ï¿½
     Vec2 currentPosition = this->getPosition();
     Vec2 targetPosition = NPCpath[currentPathIndex];
 
-    // ¼ÆËãµ±Ç°Î»ÖÃºÍÄ¿±êÎ»ÖÃµÄ¾àÀë
+    // ï¿½ï¿½ï¿½ãµ±Ç°Î»ï¿½Ãºï¿½Ä¿ï¿½ï¿½Î»ï¿½ÃµÄ¾ï¿½ï¿½ï¿½
     Vec2 direction = targetPosition - currentPosition;
     float distance = direction.length();
 
-    //Èç¹ûµ½´ïÄ¿±ê£¬ÇĞ»»µ½ÏÂÒ»¸öÂ·¾¶µã
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ê£¬ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½
     if (distance < 30.0f) { currentPathIndex = (currentPathIndex + 1) % NPCpath.size(); }
 
-    //½øĞĞÒÆ¶¯
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
     Vec2 moveDirection = direction.getNormalized();
     Vec2 v = moveDirection * speed;
     this->getPhysicsBody()->setVelocity(v);
 
-    //²¥·Å¶¯»­
-    if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // Ë®Æ½ÒÆ¶¯
+    //ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
+    if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // Ë®Æ½ï¿½Æ¶ï¿½
         if (moveDirection.x > 0) {
             playAnimation("right");
         }
@@ -165,7 +165,7 @@ void NPC::updatemove(float dt)
             playAnimation("left");
         }
     }
-    else { // ´¹Ö±ÒÆ¶¯
+    else { // ï¿½ï¿½Ö±ï¿½Æ¶ï¿½
         if (moveDirection.y > 0) {
             playAnimation("up");
         }
@@ -175,13 +175,13 @@ void NPC::updatemove(float dt)
     }
 }
 
-//NPC¾²Ö¹µÄ¸üĞÂ
+//NPCï¿½ï¿½Ö¹ï¿½Ä¸ï¿½ï¿½ï¿½
 void NPC::updatestatic(float dt)
 {
     playAnimation("static");
 }
 
-//²¥·Å¶¯»­
+//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
 void NPC::playAnimation(const std::string& direction)
 {
     animate_sprite->stopAllActions();
@@ -202,19 +202,19 @@ void NPC::playAnimation(const std::string& direction)
     }
 }
 
-// Í£Ö¹NPCµÄ¶¯»­ºÍÒÆ¶¯
+// Í£Ö¹NPCï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 void NPC::stopMovement()
 {
     animate_sprite->stopAllActions();
     animate_sprite->runAction(RepeatForever::create(movestatic));
     getPhysicsBody()->setVelocity(Vec2::ZERO);
-    // Í£Ö¹ NPC µÄÂ·¾¶¸üĞÂ
+    // Í£Ö¹ NPC ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     unschedule("npc_notselected_key");
 
     schedule([=](float dt) { updatestatic(dt); }, 1.2f, "npc_isselected_key");
 }
 
-// »Ö¸´NPCµÄ¶¯»­ºÍÒÆ¶¯
+// ï¿½Ö¸ï¿½NPCï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 void NPC::startMovement()
 {
     animate_sprite->stopAllActions();
@@ -223,29 +223,29 @@ void NPC::startMovement()
 
     unschedule("npc_isselected_key");
 
-    // ÉèÖÃ NPC µÄÂ·¾¶¸üĞÂ
+    // ï¿½ï¿½ï¿½ï¿½ NPC ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     schedule([=](float dt) { updatemove(dt); }, 1.2f, "npc_notselected_key");
 }
 
 
-//ÅĞ¶ÏÊó±êÊÇ·ñµã»÷ÔÚNPCÉÏ
+//ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½NPCï¿½ï¿½
 bool NPC::JudgeClickNPC(Vec2 clickPos,int mapscale)
 {
-    //»ñÈ¡µØÍ¼×ø±êĞÅÏ¢
-    float TileNum_Width = NPCmap->getMapSize().width;  // ºáÏò´É×©ÊıÁ¿
-    float TileNum_Height = NPCmap->getMapSize().height; // ×İÏò´É×©ÊıÁ¿
-    float TileWidth = NPCmap->getTileSize().width * 1; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    float TileHeight = NPCmap->getTileSize().height * 1; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    float mapwidth = TileNum_Width * TileWidth;//»ñÈ¡µØÍ¼¿í¶È
-    float mapheight = TileNum_Height * TileHeight;//»ñÈ¡µØÍ¼¸ß¶È
-    //»ñÈ¡µØÍ¼Î»ÖÃ
+    //ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    float TileNum_Width = NPCmap->getMapSize().width;  // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    float TileNum_Height = NPCmap->getMapSize().height; // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    float TileWidth = NPCmap->getTileSize().width * 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½
+    float TileHeight = NPCmap->getTileSize().height * 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ß¶ï¿½
+    float mapwidth = TileNum_Width * TileWidth;//ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+    float mapheight = TileNum_Height * TileHeight;//ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ß¶ï¿½
+    //ï¿½ï¿½È¡ï¿½ï¿½Í¼Î»ï¿½ï¿½
     auto MAPposition = NPCmap->getPosition() / mapscale;
 
-    //½«Êó±êÎ»ÖÃ×ª»¯ÎªÒÔµØÍ¼×óÏÂ½ÇÎªÔ­µã
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½×ªï¿½ï¿½Îªï¿½Ôµï¿½Í¼ï¿½ï¿½ï¿½Â½ï¿½ÎªÔ­ï¿½ï¿½
     clickPos.x = clickPos.x - MAPposition.x + mapwidth / 2;
     clickPos.y = clickPos.y - MAPposition.y + mapheight / 2;
 
-    //»ñÈ¡NPCÎ»ÖÃ
+    //ï¿½ï¿½È¡NPCÎ»ï¿½ï¿½
     Vec2 NPCPosition = this->getPosition();
 
     if (NPCPosition.x - NPCsize_x / 2 <= clickPos.x) {
@@ -258,4 +258,43 @@ bool NPC::JudgeClickNPC(Vec2 clickPos,int mapscale)
         }
     }
     return false;
+}
+
+// IPoolable æ¥å£å®ç°
+void NPC::reset()
+{
+    // åœæ­¢æ‰€æœ‰åŠ¨ä½œ
+    stopAllActions();
+    if (animate_sprite)
+    {
+        animate_sprite->stopAllActions();
+    }
+    
+    // å–æ¶ˆæ‰€æœ‰è°ƒåº¦å™¨
+    unscheduleAllCallbacks();
+    
+    // ä»çˆ¶èŠ‚ç‚¹ç§»é™¤
+    removeFromParent();
+    
+    // é‡ç½®è·¯å¾„ç›¸å…³çŠ¶æ€
+    NPCpath.clear();
+    currentPathIndex = 0;
+    speed = 0.0f;
+    
+    // é‡ç½®ä½ç½®å’Œå˜æ¢
+    setPosition(Vec2::ZERO);
+    setScale(1.0f);
+    setRotation(0.0f);
+    setVisible(true);
+    setOpacity(255);
+    
+    // é‡ç½®å…³ç³»å€¼
+    relation = 0;
+    
+    // æ¸…ç†æŒ‡é’ˆ
+    NPCmap = nullptr;
+    Dialog_NPC = nullptr;
+    
+    // æ¸…ç†ç‰©ç†ä½“
+    removeComponent(getPhysicsBody());
 }

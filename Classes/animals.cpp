@@ -11,37 +11,65 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-//路径初始化
+//·???????
 void Animal::setPath(const std::vector<Vec2>& newPath)
 {
     Animalpath = newPath;
-    currentPathIndex = 0;  // 重置路径索引
-    setPosition(Animalpath[currentPathIndex]);  // 设置 Animal 的起始位置
+    currentPathIndex = 0;  // ????·??????
+    setPosition(Animalpath[currentPathIndex]);  // ???? Animal ?????λ??
+}
+
+// IPoolable 接口实现
+void Animal::reset()
+{
+    // 停止所有动作
+    stopAllActions();
+    
+    // 取消所有调度器
+    unscheduleAllCallbacks();
+    
+    // 从父节点移除
+    removeFromParent();
+    
+    // 重置路径相关状态
+    Animalpath.clear();
+    currentPathIndex = 0;
+    speed = 0.0f;
+    
+    // 重置选择状态
+    ifSelected = false;
+    
+    // 重置位置和变换
+    setPosition(Vec2::ZERO);
+    setScale(1.0f);
+    setRotation(0.0f);
+    setVisible(true);
+    setOpacity(255);
 }
 
 void Animal::updatemove(float dt)
 {
     if (Animalpath.empty()) return;
 
-    // 获取目标位置
+    // ??????λ??
     Vec2 targetPosition = Animalpath[currentPathIndex];
     Vec2 currentPosition = this->getPosition();
 
-    // 计算当前位置和目标位置的距离
+    // ?????λ?ú????λ??????
     Vec2 direction = targetPosition - currentPosition;
     float distance = direction.length();
 
-    // 如果到达目标，切换到下一个路径点
+    // ???????????л????????·????
     if (distance < 1.0f) {
-        currentPathIndex = (currentPathIndex + 1) % Animalpath.size();  // 循环路径
+        currentPathIndex = (currentPathIndex + 1) % Animalpath.size();  // ???·??
     }
 
-    // 移动 Animal
+    // ??? Animal
     Vec2 moveDirection = direction.getNormalized();
     setPosition(currentPosition + moveDirection * speed * dt);
 
-    // 根据方向播放动画
-    if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // 水平移动
+    // ???????????
+    if (fabs(moveDirection.x) > fabs(moveDirection.y)) { // ?????
         if (moveDirection.x > 0) {
             playAnimation("right");
         }
@@ -49,7 +77,7 @@ void Animal::updatemove(float dt)
             playAnimation("left");
         }
     }
-    else { // 垂直移动
+    else { // ??????
         if (moveDirection.y > 0) {
             playAnimation("up");
         }
@@ -62,7 +90,7 @@ void Animal::updatemove(float dt)
 void Animal::playAnimation(const std::string& direction)
 {
     //!getActionByTag(1)
-    // 如果当前动画与目标方向相同，直接返回
+    // ????????????????????????????
     if (direction == "up" && 1) {
 
         runAction(RepeatForever::create(moveup));
@@ -92,11 +120,11 @@ Cow* Cow::create(const std::string& filename)
     if (cow) {
         cow->animalName = filename;
         if (cow->init()) {
-            cow->autorelease(); // 自动释放内存
+            cow->autorelease(); // ?????????
             return cow;
         }
     }
-    CC_SAFE_DELETE(cow); // 如果创建失败，安全删除
+    CC_SAFE_DELETE(cow); // ?????????????????
     return nullptr;
 }
 
@@ -105,12 +133,12 @@ void Cow::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
         if (weather == 1) {
-            happiness = happiness / 2; // 减半快乐值
+            happiness = happiness / 2; // ????????
         }
         else if (weather == 2) {
-            happiness = happiness / 2; // 减半快乐值
+            happiness = happiness / 2; // ????????
         }
-        cow_feed_label->setVisible(true); // 显示文字
+        cow_feed_label->setVisible(true); // ???????
         if (happiness <= 50&&happiness>=0)
             milk_number++;
         else if(happiness >= 50&&happiness<=90)
@@ -118,40 +146,40 @@ void Cow::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
         else
             milk_number+=4;
             wheat_number--;
-        // 启动定时器，3秒后隐藏文字
+        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
     {
-        cow_touch_label->setVisible(true); // 显示文字
-        happiness += 10; // 加快乐值
-        // 启动定时器，3秒后隐藏文字
+        cow_touch_label->setVisible(true); // ???????
+        happiness += 10; // ??????
+        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
 }
 
-// 添加键盘事件监听
+// ??????????????
 void Cow::addKeyboardListener() {
     auto listener = EventListenerKeyboard::create();
     listener->onKeyPressed = CC_CALLBACK_2(Cow::onKeyPressed, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-//标签隐藏
+//???????
 void Cow::hideLabel(float dt)
 {
-    cow_feed_label->setVisible(false); // 隐藏文字
-    cow_touch_label->setVisible(false); // 隐藏文字
+    cow_feed_label->setVisible(false); // ????????
+    cow_touch_label->setVisible(false); // ????????
 }
 
 void Cow::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
-    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // ????????λ??(??????)
+    Vec2 sprite2Position = this->getPosition(); // ????????λ??(??????????)
 
     float distance = sprite1Position.distance(sprite2Position);
 
-    // 如果距离小于某个值，设置标志位
+    // ???????С??????????????λ
     if (distance < 50)
     {
         isNearSprite = true;
@@ -162,21 +190,21 @@ void Cow::isMainCharNear(float delta)
     }
 }
 
-//初始化
+//?????
 bool Cow::init()
 {
-    //创建纹理
+    //????????
     Texture2D* Move = Director::getInstance()->getTextureCache()->addImage("Animal/" + animalName + "/texture.png");
 
     if (!Sprite::initWithFile("Animal/" + animalName + "/static.png")) { return false; }
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    speed = 50.0f;//设置速度
-    currentPathIndex = 0;//初始路径
-    ifSelected = false;//标记Animal未被选中
+    speed = 50.0f;//???????
+    currentPathIndex = 0;//???·??
+    ifSelected = false;//???Animalδ?????
 
-    // 设置位置更新函数
+    // ????λ????????
     schedule([=](float dt) {updatemove(dt); }, 0.0f, "animal_updatemove_key");
 
     Vector<SpriteFrame*> Animalup;
@@ -216,14 +244,14 @@ bool Cow::init()
     movedown->setTag(4);
 
 
-    // 创建文字标签
+    // ??????????
     cow_feed_label = cocos2d::Label::createWithSystemFont("The cow has been fed.Obtain Milk x1", "Arial", 25);
-    cow_feed_label->setVisible(false); // 初始时隐藏
+    cow_feed_label->setVisible(false); // ????????
     this->addChild(cow_feed_label);
     cow_feed_label->setPosition(cocos2d::Vec2(40, 120));
 
     cow_touch_label = cocos2d::Label::createWithSystemFont("The cow has been touched.Happiess+10", "Arial", 25);
-    cow_touch_label->setVisible(false); // 初始时隐藏
+    cow_touch_label->setVisible(false); // ????????
     this->addChild(cow_touch_label);
     cow_touch_label->setPosition(cocos2d::Vec2(40, 120));
 
@@ -249,6 +277,29 @@ void Cow::decreaseHappiness(float delta) {
         happiness -= 5;
 }
 
+// 重写 reset() 方法，重置 Cow 特有状态
+void Cow::reset()
+{
+    // 先调用父类的 reset()
+    Animal::reset();
+    
+    // 重置 Cow 特有的状态
+    happiness = 0;
+    isNearSprite = false;
+    
+    // 隐藏标签
+    if (cow_feed_label) {
+        cow_feed_label->setVisible(false);
+    }
+    if (cow_touch_label) {
+        cow_touch_label->setVisible(false);
+    }
+    
+    // 清理指针（但不删除，因为这些是对象的一部分）
+    mainChar = nullptr;
+    mainmap = nullptr;
+}
+
 int Sheep::Animalsize_x = 32;
 int Sheep::Animalsize_y = 33;
 
@@ -263,11 +314,11 @@ Sheep* Sheep::create(const std::string& filename)
     if (sheep) {
         sheep->animalName = filename;
         if (sheep->init()) {
-            sheep->autorelease(); // 自动释放内存
+            sheep->autorelease(); // ?????????
             return sheep;
         }
     }
-    CC_SAFE_DELETE(sheep); // 如果创建失败，安全删除
+    CC_SAFE_DELETE(sheep); // ?????????????????
     return nullptr;
 }
 
@@ -275,54 +326,54 @@ void Sheep::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
-        sheep_feed_label->setVisible(true); // 显示文字
+        sheep_feed_label->setVisible(true); // ???????
         if (happiness <= 50 && happiness >= 0)
             wool_number++;
         else if (happiness >= 50 && happiness <= 90)
             wool_number += 2;
         else
             wool_number += 4;
-        wheat_number--;        // 启动定时器，3秒后隐藏文字
+        wheat_number--;        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Sheep::hideLabel), 3.0f);
     }
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
     {
-        sheep_touch_label->setVisible(true); // 显示文字
-        happiness += 10; // 扣除快乐值
-        // 启动定时器，3秒后隐藏文字
+        sheep_touch_label->setVisible(true); // ???????
+        happiness += 10; // ????????
+        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
 }
 
-// 添加键盘事件监听
+// ??????????????
 void Sheep::addKeyboardListener() {
     auto listener = EventListenerKeyboard::create();
     listener->onKeyPressed = CC_CALLBACK_2(Sheep::onKeyPressed, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-//标签隐藏
+//???????
 void Sheep::hideLabel(float dt)
 {
-    sheep_feed_label->setVisible(false); // 隐藏文字
-    sheep_touch_label->setVisible(false); // 隐藏文字
+    sheep_feed_label->setVisible(false); // ????????
+    sheep_touch_label->setVisible(false); // ????????
 }
 
-//初始化
+//?????
 bool Sheep::init()
 {
-    //创建纹理
+    //????????
     Texture2D* Move = Director::getInstance()->getTextureCache()->addImage("Animal/" + animalName + "/texture.png");
 
     if (!Sprite::initWithFile("Animal/" + animalName + "/static.png")) { return false; }
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    speed = 50.0f;//设置速度
-    currentPathIndex = 0;//初始路径
-    ifSelected = false;//标记Animal未被选中
+    speed = 50.0f;//???????
+    currentPathIndex = 0;//???·??
+    ifSelected = false;//???Animalδ?????
 
-    // 设置位置更新函数
+    // ????λ????????
     schedule([=](float dt) {updatemove(dt); }, 0.0f, "animal_updatemove_key");
 
     Vector<SpriteFrame*> Animalup;
@@ -361,14 +412,14 @@ bool Sheep::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
-    // 创建文字标签
+    // ??????????
     sheep_feed_label = cocos2d::Label::createWithSystemFont("The sheep has been fed.Obtain Wool x1", "Arial", 10);
-    sheep_feed_label->setVisible(false); // 初始时隐藏
+    sheep_feed_label->setVisible(false); // ????????
     this->addChild(sheep_feed_label);
     sheep_feed_label->setPosition(cocos2d::Vec2(20, 40));
 
     sheep_touch_label = cocos2d::Label::createWithSystemFont("The sheep has been touched.Happiess+10", "Arial", 10);
-    sheep_touch_label->setVisible(false); // 初始时隐藏
+    sheep_touch_label->setVisible(false); // ????????
     this->addChild(sheep_touch_label);
     sheep_touch_label->setPosition(cocos2d::Vec2(20, 40));
 
@@ -381,12 +432,12 @@ bool Sheep::init()
 
 void Sheep::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
-    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // ????????λ??(??????)
+    Vec2 sprite2Position = this->getPosition(); // ????????λ??(??????????)
 
     float distance = sprite1Position.distance(sprite2Position);
 
-    // 如果距离小于某个值，设置标志位
+    // ???????С??????????????λ
     if (distance < 50)
     {
         isNearSprite = true;
@@ -412,6 +463,29 @@ void Sheep::decreaseHappiness(float delta) {
         happiness -= 5;
 }
 
+// 重写 reset() 方法，重置 Sheep 特有状态
+void Sheep::reset()
+{
+    // 先调用父类的 reset()
+    Animal::reset();
+    
+    // 重置 Sheep 特有的状态
+    happiness = 0;
+    isNearSprite = false;
+    
+    // 隐藏标签
+    if (sheep_feed_label) {
+        sheep_feed_label->setVisible(false);
+    }
+    if (sheep_touch_label) {
+        sheep_touch_label->setVisible(false);
+    }
+    
+    // 清理指针
+    mainChar = nullptr;
+    mainmap = nullptr;
+}
+
 int Chicken::Animalsize_x = 16;
 int Chicken::Animalsize_y = 20;
 
@@ -426,11 +500,11 @@ Chicken* Chicken::create(const std::string& filename)
     if (chicken) {
         chicken->animalName = filename;
         if (chicken->init()) {
-            chicken->autorelease(); // 自动释放内存
+            chicken->autorelease(); // ?????????
             return chicken;
         }
     }
-    CC_SAFE_DELETE(chicken); // 如果创建失败，安全删除
+    CC_SAFE_DELETE(chicken); // ?????????????????
     return nullptr;
 }
 
@@ -438,7 +512,7 @@ void Chicken::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_E && wheat_number > 0)
     {
-        chicken_feed_label->setVisible(true); // 显示文字
+        chicken_feed_label->setVisible(true); // ???????
         wheat_number--;
         if (happiness <= 50 && happiness >= 0)
             egg_number++;
@@ -446,47 +520,47 @@ void Chicken::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
             egg_number += 2;
         else
             egg_number += 4;
-        // 启动定时器，3秒后隐藏文字
+        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
     if (isNearSprite && keyCode == cocos2d::EventKeyboard::KeyCode::KEY_Q)
     {
-        chicken_touch_label->setVisible(true); // 显示文字
-        happiness += 10; // 扣除快乐值
-        // 启动定时器，3秒后隐藏文字
+        chicken_touch_label->setVisible(true); // ???????
+        happiness += 10; // ????????
+        // ???????????3???????????
         this->scheduleOnce(CC_SCHEDULE_SELECTOR(Cow::hideLabel), 3.0f);
     }
 }
 
-// 添加键盘事件监听
+// ??????????????
 void Chicken::addKeyboardListener() {
     auto listener = EventListenerKeyboard::create();
     listener->onKeyPressed = CC_CALLBACK_2(Chicken::onKeyPressed, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-//标签隐藏
+//???????
 void Chicken::hideLabel(float dt)
 {
-    chicken_feed_label->setVisible(false); // 隐藏文字
-    chicken_touch_label->setVisible(false); // 隐藏文字
+    chicken_feed_label->setVisible(false); // ????????
+    chicken_touch_label->setVisible(false); // ????????
 }
 
-//初始化
+//?????
 bool Chicken::init()
 {
-    //创建纹理
+    //????????
     Texture2D* Move = Director::getInstance()->getTextureCache()->addImage("Animal/" + animalName + "/texture.png");
 
     if (!Sprite::initWithFile("Animal/" + animalName + "/static.png")) { return false; }
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    speed = 50.0f;//设置速度
-    currentPathIndex = 0;//初始路径
-    ifSelected = false;//标记Animal未被选中
+    speed = 50.0f;//???????
+    currentPathIndex = 0;//???·??
+    ifSelected = false;//???Animalδ?????
 
-    // 设置位置更新函数
+    // ????λ????????
     schedule([=](float dt) {updatemove(dt); }, 0.0f, "animal_updatemove_key");
 
     Vector<SpriteFrame*> Animalup;
@@ -525,15 +599,15 @@ bool Chicken::init()
     movedown = Animate::create(ddown);
     movedown->setTag(4);
 
-    // 创建文字标签
+    // ??????????
     chicken_feed_label = cocos2d::Label::createWithSystemFont("The chicken has been fed.Obtain Egg x1", "Arial", 10);
-    chicken_feed_label->setVisible(false); // 初始时隐藏
+    chicken_feed_label->setVisible(false); // ????????
     this->addChild(chicken_feed_label);
     chicken_feed_label->setPosition(cocos2d::Vec2(20, 40));
 
-    // 创建文字标签
+    // ??????????
     chicken_touch_label = cocos2d::Label::createWithSystemFont("The chicken has been fed.Obtain Egg x1", "Arial", 10);
-    chicken_touch_label->setVisible(false); // 初始时隐藏
+    chicken_touch_label->setVisible(false); // ????????
     this->addChild(chicken_touch_label);
     chicken_touch_label->setPosition(cocos2d::Vec2(20, 40));
 
@@ -545,12 +619,12 @@ bool Chicken::init()
 
 void Chicken::isMainCharNear(float delta)
 {
-    Vec2 sprite1Position = mainChar->getPosition(); // 获取主角的位置(相对屏幕)
-    Vec2 sprite2Position = this->getPosition(); // 获取地图的位置(相对地图左下角)
+    Vec2 sprite1Position = mainChar->getPosition(); // ????????λ??(??????)
+    Vec2 sprite2Position = this->getPosition(); // ????????λ??(??????????)
 
     float distance = sprite1Position.distance(sprite2Position);
 
-    // 如果距离小于某个值，设置标志位
+    // ???????С??????????????λ
     if (distance < 100)
     {
         isNearSprite = true;
@@ -574,4 +648,27 @@ void Chicken::move(Chicken* chicken, TMXTiledMap* map) {
 void Chicken::decreaseHappiness(float delta) {
     if (happiness > 5)
         happiness -= 5;
+}
+
+// 重写 reset() 方法，重置 Chicken 特有状态
+void Chicken::reset()
+{
+    // 先调用父类的 reset()
+    Animal::reset();
+    
+    // 重置 Chicken 特有的状态
+    happiness = 0;
+    isNearSprite = false;
+    
+    // 隐藏标签
+    if (chicken_feed_label) {
+        chicken_feed_label->setVisible(false);
+    }
+    if (chicken_touch_label) {
+        chicken_touch_label->setVisible(false);
+    }
+    
+    // 清理指针
+    mainChar = nullptr;
+    mainmap = nullptr;
 }

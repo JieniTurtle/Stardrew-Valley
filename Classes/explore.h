@@ -2,9 +2,10 @@
 #include <string>
 #include "cocos2d.h"
 #include "global.h"
+#include "ObjectPool.h"
 USING_NS_CC;
 
-class Interaction : public Sprite {
+class Interaction : public Sprite, public IPoolable {
 protected:
 	std::string name_;
 	Vec2 position_ = Vec2::ZERO;
@@ -16,6 +17,14 @@ protected:
 public:
 	static Interaction* create(TMXTiledMap* map);
 	virtual bool init();
+
+	// IPoolable 接口实现
+	virtual void reset() override;
+	virtual bool isInUse() const override { return _inUse; }
+	virtual void setInUse(bool inUse) override { _inUse = inUse; }
+
+protected:
+	bool _inUse;  // 是否正在使用中（对象池状态标记）
 };
 
 class Bridge : public Interaction {

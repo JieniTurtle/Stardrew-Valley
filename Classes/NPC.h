@@ -3,16 +3,17 @@
 #include "cocos2d.h"
 #include "Dialog.h"
 #include "Task.h"
+#include "ObjectPool.h"
 
 USING_NS_CC;
 
-class NPC : public cocos2d::Sprite
+class NPC : public cocos2d::Sprite, public IPoolable
 {
 private:
     Sprite* animate_sprite;
 public:
     int relation;
-    //Îö¹¹
+    //ï¿½ï¿½ï¿½ï¿½
     ~NPC() {
         moveup->release();
         moveleft->release();
@@ -20,66 +21,74 @@ public:
         movedown->release();
         movestatic->release();
     }
-    //NPCÃû³Æ
+    //NPCï¿½ï¿½ï¿½ï¿½
     std::string NPCname;
 
-    TMXTiledMap* NPCmap;//µØÍ¼Ö¸Õë
-    //´«ÈëµØÍ¼Ö¸Õë
+    TMXTiledMap* NPCmap;//ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
     void setMap(TMXTiledMap* map) { NPCmap = map; }
 
-    //NPC¾«Áé´óĞ¡
+    //NPCï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
     static int NPCsize_x;
     static int NPCsize_y;
 
-    //NPCÎÆÀíµÄ¶¯»­Ë³Ğò
+    //NPCï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Ë³ï¿½ï¿½
     static int NPCorder_up;
     static int NPCorder_left;
     static int NPCorder_right;
     static int NPCorder_down;
 
-    //NPC¶¯»­ ¶¯»­Â·¾¶Ê¾Àı£ºNPC/filename/moveup1.png
+    //NPCï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½NPC/filename/moveup1.png
     Animate* movestatic;
     Animate* moveup;
     Animate* moveleft;
     Animate* moveright;
     Animate* movedown;
 
-    //NPCÈÎÎñ
+    //NPCï¿½ï¿½ï¿½ï¿½
     Task NPCtask;
 
-    //NPC¶Ô»°
+    //NPCï¿½Ô»ï¿½
     Dialog* Dialog_NPC;
 
-    //Â·¾¶Ïà¹Ø
-    int currentPathIndex;//Â·¾¶Ë÷Òı
-    float speed;//ËÙ¶È
-    std::vector<Vec2> NPCpath;//Â·¾¶²ÎÊı
+    //Â·ï¿½ï¿½ï¿½ï¿½ï¿½
+    int currentPathIndex;//Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    float speed;//ï¿½Ù¶ï¿½
+    std::vector<Vec2> NPCpath;//Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // ÉèÖÃÒÆ¶¯Â·¾¶
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Â·ï¿½ï¿½
     void setPath(const std::vector<Vec2>& path);
 
-    //NPC¾²Ö¹Í¼Æ¬Â·¾¶Îª NPC/filename/static.png
+    //NPCï¿½ï¿½Ö¹Í¼Æ¬Â·ï¿½ï¿½Îª NPC/filename/static.png
     static NPC* create(const std::string& filename);
 
-    //³õÊ¼»¯
+    //ï¿½ï¿½Ê¼ï¿½ï¿½
     bool init();
 
-    //NPCÒÆ¶¯µÄ¸üĞÂ
+    //NPCï¿½Æ¶ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
     void updatemove(float dt);
 
-    //NPC¾²Ö¹µÄ¸üĞÂ
+    //NPCï¿½ï¿½Ö¹ï¿½Ä¸ï¿½ï¿½ï¿½
     void updatestatic(float dt);
 
-    // ²¥·Å¶¯»­
+    // ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
     void playAnimation(const std::string& direction);
 
-    // Í£Ö¹NPCµÄ¶¯»­ºÍÒÆ¶¯
+    // Í£Ö¹NPCï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
     void stopMovement();
 
-    // »Ö¸´NPCµÄ¶¯»­ºÍÒÆ¶¯
+    // ï¿½Ö¸ï¿½NPCï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
     void startMovement();
 
-    //ÅĞ¶ÏÊó±êÎ»ÖÃÊÇ·ñÔÚNPCÉÏ
-    bool JudgeClickNPC(Vec2 clickPos, int mapscale);
+    //ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½NPCï¿½ï¿½
+	bool JudgeClickNPC(Vec2 clickPos, int mapscale);
+
+	// IPoolable æ¥å£å®ç°
+	virtual void reset() override;
+	virtual bool isInUse() const override { return _inUse; }
+	virtual void setInUse(bool inUse) override { _inUse = inUse; }
+
+protected:
+	bool _inUse;  // æ˜¯å¦æ­£åœ¨ä½¿ç”¨ä¸­ï¼ˆå¯¹è±¡æ± çŠ¶æ€æ ‡è®°ï¼‰
 };
 #endif // __NPC_SCENE_H__;

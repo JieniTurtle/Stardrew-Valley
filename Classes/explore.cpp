@@ -6,15 +6,15 @@ Interaction* Interaction::create(TMXTiledMap* map)
     if (interaction) {
         interaction->map_ = map;
         if (interaction->init()) {
-            interaction->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+            interaction->autorelease(); // ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½Ú´ï¿½
             return interaction;
         }
     }
-    CC_SAFE_DELETE(interaction); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(interaction); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½È«É¾ï¿½ï¿½
     return nullptr;
 }
 
-//³õÊ¼»¯
+//ï¿½ï¿½Ê¼ï¿½ï¿½
 bool Interaction::init()
 {
 	this->initWithFile("maps/" + name_ + ".png");
@@ -34,21 +34,21 @@ bool Interaction::init()
 
 Vec2 Interaction::transfer_vision_to_map(Vec2 visible_position)
 {
-    //»ñÈ¡µØÍ¼×ø±êÐÅÏ¢
-    float TileNum_Width = map_->getMapSize().width;  // ºáÏò´É×©ÊýÁ¿
-    float TileNum_Height = map_->getMapSize().height; // ×ÝÏò´É×©ÊýÁ¿
-    float TileWidth = map_->getTileSize().width * 1; // µ¥¸ö´É×©µÄÏñËØ¿í¶È
-    float TileHeight = map_->getTileSize().height * 1; // µ¥¸ö´É×©µÄÏñËØ¸ß¶È
-    float mapwidth = TileNum_Width * TileWidth;//»ñÈ¡µØÍ¼¿í¶È
-    float mapheight = TileNum_Height * TileHeight;//»ñÈ¡µØÍ¼¸ß¶È
+    //ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    float TileNum_Width = map_->getMapSize().width;  // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    float TileNum_Height = map_->getMapSize().height; // ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½
+    float TileWidth = map_->getTileSize().width * 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½
+    float TileHeight = map_->getTileSize().height * 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ß¶ï¿½
+    float mapwidth = TileNum_Width * TileWidth;//ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+    float mapheight = TileNum_Height * TileHeight;//ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ß¶ï¿½
     auto mapscale = map_->getScale();
-    //»ñÈ¡µØÍ¼Î»ÖÃ
-    auto visibleSize = Director::getInstance()->getVisibleSize();//»ñÈ¡µ±Ç°ÓÎÏ·ÊÓÍ¼´°¿ÚµÄ³ß´ç
+    //ï¿½ï¿½È¡ï¿½ï¿½Í¼Î»ï¿½ï¿½
+    auto visibleSize = Director::getInstance()->getVisibleSize();//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ï·ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ÚµÄ³ß´ï¿½
     auto MAPposition = map_->getPosition();
 
     Vec2 position_on_map;
 
-    //½«Êó±êÎ»ÖÃ×ª»¯ÎªÒÔµØÍ¼×óÏÂ½ÇÎªÔ­µã
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½×ªï¿½ï¿½Îªï¿½Ôµï¿½Í¼ï¿½ï¿½ï¿½Â½ï¿½ÎªÔ­ï¿½ï¿½
     position_on_map.x = (visible_position.x - MAPposition.x) / mapscale + mapwidth / 2;
     position_on_map.y = (visibleSize.height - visible_position.y - MAPposition.y) / mapscale + mapheight / 2;
 
@@ -61,11 +61,11 @@ Bridge* Bridge::create(TMXTiledMap* map)
     if (bridge) {
         bridge->map_ = map;
         if (bridge->init()) {
-            bridge->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+            bridge->autorelease(); // ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½Ú´ï¿½
             return bridge;
         }
     }
-    CC_SAFE_DELETE(bridge); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(bridge); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½È«É¾ï¿½ï¿½
     return nullptr;
 }
 
@@ -98,11 +98,11 @@ Chest* Chest::create(TMXTiledMap* map, int ID)
         chest->map_ = map;
         chest->ID_ = ID;
         if (chest->init()) {
-            chest->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+            chest->autorelease(); // ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½Ú´ï¿½
             return chest;
         }
     }
-    CC_SAFE_DELETE(chest); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(chest); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½È«É¾ï¿½ï¿½
     return nullptr;
 }
 
@@ -148,11 +148,11 @@ GobangBoard* GobangBoard::create(TMXTiledMap* map)
         gobang_board->map_ = map;
         gobang_board->done_flag_ = 0; // always can click
         if (gobang_board->init()) {
-            gobang_board->autorelease(); // ×Ô¶¯ÊÍ·ÅÄÚ´æ
+            gobang_board->autorelease(); // ï¿½Ô¶ï¿½ï¿½Í·ï¿½ï¿½Ú´ï¿½
             return gobang_board;
         }
     }
-    CC_SAFE_DELETE(gobang_board); // Èç¹û´´½¨Ê§°Ü£¬°²È«É¾³ý
+    CC_SAFE_DELETE(gobang_board); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½È«É¾ï¿½ï¿½
     return nullptr;
 }
 
@@ -183,4 +183,34 @@ void GobangBoard::on_mouse_down(Event* event)
         Director::getInstance()->pushScene(gobang_scene);
         is_playing_gobang = 1;
     }
+}
+
+// IPoolable æŽ¥å£å®žçŽ°
+void Interaction::reset()
+{
+    // åœæ­¢æ‰€æœ‰åŠ¨ä½œ
+    stopAllActions();
+    
+    // å–æ¶ˆæ‰€æœ‰è°ƒåº¦å™¨
+    unscheduleAllCallbacks();
+    
+    // ä»Žçˆ¶èŠ‚ç‚¹ç§»é™¤
+    removeFromParent();
+    
+    // é‡ç½®ä½ç½®å’Œå˜æ¢
+    setPosition(Vec2::ZERO);
+    setScale(1.0f);
+    setRotation(0.0f);
+    setVisible(true);
+    setOpacity(255);
+    
+    // æ¸…ç†æŒ‡é’ˆ
+    map_ = nullptr;
+    done_flag_ = nullptr;
+    
+    // æ¸…ç†ç‰©ç†ä½“
+    removeComponent(getPhysicsBody());
+    
+    // æ¸…ç†äº‹ä»¶ç›‘å¬å™¨
+    _eventDispatcher->removeEventListenersForTarget(this);
 }
