@@ -1,3 +1,4 @@
+// Refactored with Observer Pattern
 #ifndef __TASK_OBSERVER_H__
 #define __TASK_OBSERVER_H__
 

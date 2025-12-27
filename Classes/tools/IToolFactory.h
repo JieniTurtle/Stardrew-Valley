@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef __ITOOL_FACTORY_H__
 #define __ITOOL_FACTORY_H__
 
@@ -22,4 +23,5 @@ public:
 };
 
 #endif // __ITOOL_FACTORY_H__
+
 

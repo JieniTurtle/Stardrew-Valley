@@ -1,3 +1,4 @@
+// Refactored with State Pattern & Observer Pattern
 #ifndef __DIALOG_H__
 #define __DIALOG_H__
 
@@ -22,42 +23,42 @@ public:
         content->release();
     }
 
-    // ×´Ì¬Ïà¹Ø±äÁ¿
+    // ×´Ì¬ï¿½ï¿½Ø±ï¿½ï¿½ï¿½
     std::string User;
     int TaskStatus;
 
-    // UI×é¼þ
+    // UIï¿½ï¿½ï¿½
     LayerColor* BackLayer;
     Label* content;
     ui::Button* button_continue;
     ui::Button* button_close;
 
-    // Refactored with State Pattern: ×´Ì¬¹ÜÀí
+    // Refactored with State Pattern: ×´Ì¬ï¿½ï¿½ï¿½ï¿½
 private:
     std::unique_ptr<DialogState> currentState;
     
-    // Refactored with Observer Pattern: ¹Û²ìÕßÁÐ±í
+    // Refactored with Observer Pattern: ï¿½Û²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     std::vector<TaskObserver*> observers;
 
 public:
-    // ×´Ì¬¹ÜÀí·½·¨
+    // ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void setState(std::unique_ptr<DialogState> newState);
     void updateContent();
     void updateButtonVisibility();
 
-    // ¹Û²ìÕß¹ÜÀí·½·¨
+    // ï¿½Û²ï¿½ï¿½ß¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void addObserver(TaskObserver* observer);
     void removeObserver(TaskObserver* observer);
     void notifyTaskAssigned();
     void notifyTaskProgressUpdated();
     void notifyTaskCompleted();
 
-    // ¹¤¾ß·½·¨
+    // ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½
     std::string GetDialogContent(std::string path);
     static Dialog* create(std::string& Username);
     bool init();
 
-    // °´Å¥ÊÂ¼þ´¦Àí·½·¨ (ÒÑ¼ò»¯)
+    // ï¿½ï¿½Å¥ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½Ñ¼ï¿½)
     void onContinueButtonClick(Ref* obj);
     void onEndButtonClick(Ref* obj);
 };

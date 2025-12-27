@@ -1,3 +1,4 @@
+// Refactored with Decorator Pattern
 #ifndef __FRIEND_DECORATOR_H__
 #define __FRIEND_DECORATOR_H__
 

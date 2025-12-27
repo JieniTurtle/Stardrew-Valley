@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef __TOOLS_FACTORY_H__
 #define __TOOLS_FACTORY_H__
 
@@ -5,7 +6,7 @@
 #include "Tools.h"
 #include "ToolType.h"
 
-// 锄头工厂 - 负责创建Tools（锄头）对象
+// 基础工具工厂 - 负责创建Tools对象
 // 这是工厂方法模式的具体工厂实现
 class ToolsFactory : public IToolFactory {
 public:
@@ -19,4 +20,3 @@ public:
 };
 
 #endif // __TOOLS_FACTORY_H__
-

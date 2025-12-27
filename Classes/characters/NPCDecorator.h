@@ -1,3 +1,4 @@
+// Refactored with Decorator Pattern
 #ifndef __NPCDECORATOR_H__
 #define __NPCDECORATOR_H__
 

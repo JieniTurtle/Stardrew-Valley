@@ -1,3 +1,4 @@
+// Refactored with State Pattern
 #ifndef __DIALOG_STATE_H__
 #define __DIALOG_STATE_H__
 

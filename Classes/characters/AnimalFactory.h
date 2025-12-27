@@ -1,3 +1,4 @@
+// Refactored with Factory Pattern
 #ifndef ANIMAL_FACTORY_H
 #define ANIMAL_FACTORY_H
 

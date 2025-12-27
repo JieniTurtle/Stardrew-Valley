@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef __PICKAXE_FACTORY_H__
 #define __PICKAXE_FACTORY_H__
 
@@ -5,7 +6,7 @@
 #include "Pickaxe.h"
 #include "ToolType.h"
 
-// 镐子工厂 - 负责创建Pickaxe对象
+// 镐头工厂 - 负责创建Pickaxe对象
 // 这是工厂方法模式的具体工厂实现
 class PickaxeFactory : public IToolFactory {
 public:
@@ -18,5 +19,4 @@ public:
     }
 };
 
-#endif // __PICKAXE_FACTORY_H__
-
+#endif // __PICKAXE_FACTORY_H__

@@ -1,3 +1,4 @@
+// Refactored with Object Pool Pattern
 #ifndef __OBJECT_POOL_H__
 #define __OBJECT_POOL_H__
 

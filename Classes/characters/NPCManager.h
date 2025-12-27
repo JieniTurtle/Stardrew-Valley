@@ -1,3 +1,4 @@
+// Refactored with Object Pool Pattern
 #ifndef __NPC_MANAGER_H__
 #define __NPC_MANAGER_H__
 

@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef __AXE_FACTORY_H__
 #define __AXE_FACTORY_H__
 
@@ -18,5 +19,4 @@ public:
     }
 };
 
-#endif // __AXE_FACTORY_H__
-
+#endif // __AXE_FACTORY_H__

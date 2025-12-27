@@ -1,3 +1,4 @@
+// Refactored with Factory Pattern
 #ifndef SEED_FACTORY_H
 #define SEED_FACTORY_H
 

@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef TOOL_FACTORY_H
 #define TOOL_FACTORY_H
 
@@ -17,45 +18,25 @@
 USING_NS_CC;
 
 // 工厂注册表 - 管理所有工具工厂（工厂方法模式）
-// 使用工厂方法模式：每个工具都有对应的工厂类
-class ToolFactoryRegistry {
-private:
-    std::map<ToolType, std::unique_ptr<IToolFactory>> factories;
-    
-    // 单例模式
-    ToolFactoryRegistry() {
-        // 注册所有工厂
-        registerFactory<ToolsFactory>(ToolType::TOOLS);
-        registerFactory<AxeFactory>(ToolType::AXE);
-        registerFactory<GlovesFactory>(ToolType::GLOVES);
-        registerFactory<KettleFactory>(ToolType::KETTLE);
-        registerFactory<PickaxeFactory>(ToolType::PICKAXE);
-    }
-    
-    template<typename FactoryType>
-    void registerFactory(ToolType type) {
-        factories[type] = std::make_unique<FactoryType>();
-    }
-    
-public:
-    // 获取单例
-    static ToolFactoryRegistry& getInstance() {
-        static ToolFactoryRegistry instance;
-        return instance;
-    }
-    
-    // 根据类型获取工厂
-    IToolFactory* getFactory(ToolType type) const {
+// 使用静态局部变量替代单例，更简洁高效
+// 注意：如果未来需要运行时动态注册工厂，可以改回单例模式
+namespace {
+    // 根据类型获取工厂（使用静态局部变量，C++11保证线程安全且只初始化一次）
+    IToolFactory* getFactory(ToolType type) {
+        static std::map<ToolType, std::unique_ptr<IToolFactory>> factories = []() {
+            std::map<ToolType, std::unique_ptr<IToolFactory>> map;
+            map[ToolType::TOOLS] = std::make_unique<ToolsFactory>();
+            map[ToolType::AXE] = std::make_unique<AxeFactory>();
+            map[ToolType::GLOVES] = std::make_unique<GlovesFactory>();
+            map[ToolType::KETTLE] = std::make_unique<KettleFactory>();
+            map[ToolType::PICKAXE] = std::make_unique<PickaxeFactory>();
+            return map;
+        }();
+        
         auto it = factories.find(type);
         return (it != factories.end()) ? it->second.get() : nullptr;
     }
-    
-    // 根据类型创建工具（委托给对应的工厂）
-    ToolBase* createTool(ToolType type, TMXTiledMap* map) const {
-        IToolFactory* factory = getFactory(type);
-        return factory ? factory->createTool(map) : nullptr;
-    }
-};
+}
 
 // 工具工厂管理器 - 提供统一的接口（保持向后兼容）
 // 这是工厂方法模式的客户端接口
@@ -64,7 +45,8 @@ public:
     // 工厂方法：根据类型创建工具，返回统一的基类指针
     // 内部使用工厂注册表，委托给对应的具体工厂
     static ToolBase* createTool(ToolType type, TMXTiledMap* map) {
-        return ToolFactoryRegistry::getInstance().createTool(type, map);
+        IToolFactory* factory = getFactory(type);
+        return factory ? factory->createTool(map) : nullptr;
     }
     
     // 可以根据字符串创建工具（从配置文件读取）

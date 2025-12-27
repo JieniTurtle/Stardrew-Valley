@@ -1,3 +1,4 @@
+// Refactored with Facade Pattern
 #ifndef FARM_SCENE_FACADE_H
 #define FARM_SCENE_FACADE_H
 
@@ -13,5 +14,4 @@ public:
 };
 
 #endif // FARM_SCENE_FACADE_H
-
 

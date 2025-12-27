@@ -1,3 +1,4 @@
+// Refactored with Object Pool Pattern
 #ifndef __INTERACTION_MANAGER_H__
 #define __INTERACTION_MANAGER_H__
 

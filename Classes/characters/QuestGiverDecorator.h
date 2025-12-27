@@ -1,3 +1,4 @@
+// Refactored with Decorator Pattern
 #ifndef __QUESTGIVER_DECORATOR_H__
 #define __QUESTGIVER_DECORATOR_H__
 

@@ -1,3 +1,4 @@
+// Refactored with Decorator Pattern
 #ifndef __TRADER_DECORATOR_H__
 #define __TRADER_DECORATOR_H__
 

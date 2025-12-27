@@ -1,3 +1,4 @@
+// Refactored with Facade Pattern
 #ifndef NPC_INTERACTION_FACADE_H
 #define NPC_INTERACTION_FACADE_H
 

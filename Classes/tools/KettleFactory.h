@@ -1,3 +1,4 @@
+// Refactored with Factory Method Pattern
 #ifndef __KETTLE_FACTORY_H__
 #define __KETTLE_FACTORY_H__
 
@@ -18,5 +19,4 @@ public:
     }
 };
 
-#endif // __KETTLE_FACTORY_H__
-
+#endif // __KETTLE_FACTORY_H__

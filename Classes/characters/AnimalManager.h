@@ -1,3 +1,4 @@
+// Refactored with Object Pool Pattern
 #ifndef __ANIMAL_MANAGER_H__
 #define __ANIMAL_MANAGER_H__
 
