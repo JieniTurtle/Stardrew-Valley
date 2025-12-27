@@ -3,230 +3,248 @@
 
 #include"MainCharacter.h"
 #include "cocos2d.h"
+#include "ObjectPool.h"
 USING_NS_CC;
 
-class Animal : public Sprite {
+class Animal : public Sprite, public IPoolable {
 public:
-	//Animal¶¯»­ ¶¯»­Â·¾¶Ê¾Àı£ºAnimal/filename/moveup1.png
+	//Animalï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Animal/filename/moveup1.png
 	Animate* moveup;
 	Animate* moveleft;
 	Animate* moveright;
 	Animate* movedown;
 
-	//±ê¼ÇAnimalÊÇ·ñ±»Ñ¡ÖĞ
+	//ï¿½ï¿½ï¿½Animalï¿½Ç·ï¿½Ñ¡ï¿½ï¿½
 	bool ifSelected;
 
-	//Â·¾¶Ïà¹Ø
-	std::vector<Vec2> Animalpath;//Â·¾¶²ÎÊı
-	int currentPathIndex;//Â·¾¶Ë÷Òı
-	float speed;//ËÙ¶È
+	//Â·ï¿½ï¿½ï¿½ï¿½ï¿½
+	std::vector<Vec2> Animalpath;//Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int currentPathIndex;//Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	float speed;//ï¿½Ù¶ï¿½
 
-	//AnimaÃû³Æ
+	//Animaï¿½ï¿½ï¿½ï¿½
 	std::string animalName;
 
-	//¸üĞÂAnimalµÄÒÆ¶¯ºÍ¶¯»­
+	//ï¿½ï¿½ï¿½ï¿½Animalï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Í¶ï¿½ï¿½ï¿½
 	void updatemove(float dt);
 
-	// ²¥·Å¶¯»­
+	// ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
 	void playAnimation(const std::string& direction);
 
-	// ÉèÖÃÒÆ¶¯Â·¾¶
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Â·ï¿½ï¿½
 	void setPath(const std::vector<Vec2>& path);
+
+	// IPoolable æ¥å£å®ç°
+	virtual void reset() override;
+	virtual bool isInUse() const override { return _inUse; }
+	virtual void setInUse(bool inUse) override { _inUse = inUse; }
+
+protected:
+	bool _inUse;  // æ˜¯å¦æ­£åœ¨ä½¿ç”¨ä¸­ï¼ˆå¯¹è±¡æ± çŠ¶æ€æ ‡è®°ï¼‰
 };
 
 class Cow : public Animal {
 public:
-	//Animal¾²Ö¹Í¼Æ¬Â·¾¶Îª Animal/filename/static.png
+	//Animalï¿½ï¿½Ö¹Í¼Æ¬Â·ï¿½ï¿½Îª Animal/filename/static.png
 	static Cow* create(const std::string& filename);
 
-	//Animal¾«Áé´óĞ¡
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
 	static int Animalsize_x;
 	static int Animalsize_y;
 
-	//AnimalÎÆÀíµÄ¶¯»­Ë³Ğò
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Ë³ï¿½ï¿½
 	static int Animalorder_up;
 	static int Animalorder_left;
 	static int Animalorder_right;
 	static int Animalorder_down;
 
-	//ĞÒ¸£¶È
+	//ï¿½Ò¸ï¿½ï¿½ï¿½
 	double happiness = 0;
 
-	//Ö÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½
 	MainCharacter* mainChar;
-	//µØÍ¼Ö¸Õë
+	//ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	TMXTiledMap* mainmap;
 
-	//cowÒÑ±»Î¹ÑøµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½Î¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* cow_feed_label;
 
-	//cowÒÑ±»¸§ÃşµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* cow_touch_label;
 
-	//¼ì²âÖ÷½ÇÓë¶¯ÎïµÄÎ»ÖÃ¹ØÏµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½Î»ï¿½Ã¹ï¿½Ïµ
 	void isMainCharNear(float delta);
 
-	//¼ì²âÊÇ·ñ±»¸§Ãş
+	//ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¸ï¿½ï¿½ï¿½
 	void isMainCharTouch(float delta);
 
-	//ËæÊ±¼äĞÒ¸£»á½µµÍ
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ò¸ï¿½ï¿½á½µï¿½ï¿½
 	void decreaseHappiness(float delta);
 
-	//ÊÇ·ñÔÚ¸½½ü
+	//ï¿½Ç·ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
 	bool isNearSprite = false;
 
-	//Ìí¼Ó¼üÅÌ¼àÌıÊÂ¼ş
+	//ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void addKeyboardListener();
 
-	//µ±°´¼ü°´ÏÂÊ±²úÉúµÄÊÂ¼ş
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
-	//±êÇ©Òş²Ø
+	//ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½
 	void hideLabel(float dt);
 
-	//³õÊ¼»¯
+	//ï¿½ï¿½Ê¼ï¿½ï¿½
 	bool init();
 
-	//ÉèÖÃÖ÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void setMaincharacter(MainCharacter* mainCharacter) {
 		mainChar = mainCharacter;
 	}
-	//´«ÈëµØÍ¼Ö¸Õë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	void setMap(TMXTiledMap* map) {
 		mainmap = map;
 	}
-	//²¥·Å¶¯»­
+	//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
 	static void move(Cow* cow, TMXTiledMap* map);
+
+	// é‡å†™ reset() æ–¹æ³•ï¼Œé‡ç½® Cow ç‰¹æœ‰çŠ¶æ€
+	virtual void reset() override;
 };
 
 class Sheep : public Animal {
 public:
-	//Animal¾²Ö¹Í¼Æ¬Â·¾¶Îª Animal/filename/static.png
+	//Animalï¿½ï¿½Ö¹Í¼Æ¬Â·ï¿½ï¿½Îª Animal/filename/static.png
 	static Sheep* create(const std::string& filename);
 
-	//Animal¾«Áé´óĞ¡
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
 	static int Animalsize_x;
 	static int Animalsize_y;
 
-	//AnimalÎÆÀíµÄ¶¯»­Ë³Ğò
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Ë³ï¿½ï¿½
 	static int Animalorder_up;
 	static int Animalorder_left;
 	static int Animalorder_right;
 	static int Animalorder_down;
 
-	//ĞÒ¸£¶È
+	//ï¿½Ò¸ï¿½ï¿½ï¿½
 	double happiness = 0;
 
-	//Ö÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½
 	MainCharacter* mainChar;
-	//µØÍ¼Ö¸Õë
+	//ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	TMXTiledMap* mainmap;
 
-	//cowÒÑ±»Î¹ÑøµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½Î¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* sheep_feed_label;
 
-	//cowÒÑ±»¸§ÃşµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* sheep_touch_label;
 
-	//¼ì²âÖ÷½ÇÓë¶¯ÎïµÄÎ»ÖÃ¹ØÏµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½Î»ï¿½Ã¹ï¿½Ïµ
 	void isMainCharNear(float delta);
 
-	//¼ì²âÊÇ·ñ±»¸§Ãş
+	//ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¸ï¿½ï¿½ï¿½
 	void isMainCharTouch(float delta);
 
-	//ËæÊ±¼äĞÒ¸£»á½µµÍ
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ò¸ï¿½ï¿½á½µï¿½ï¿½
 	void decreaseHappiness(float delta);
 
-	//ÊÇ·ñÔÚ¸½½ü
+	//ï¿½Ç·ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
 	bool isNearSprite = false;
 
-	//Ìí¼Ó¼üÅÌ¼àÌıÊÂ¼ş
+	//ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void addKeyboardListener();
 
-	//µ±°´¼ü°´ÏÂÊ±²úÉúµÄÊÂ¼ş
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
-	//±êÇ©Òş²Ø
+	//ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½
 	void hideLabel(float dt);
 
-	//³õÊ¼»¯
+	//ï¿½ï¿½Ê¼ï¿½ï¿½
 	bool init();
 
-	//ÉèÖÃÖ÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void setMaincharacter(MainCharacter* mainCharacter) {
 		mainChar = mainCharacter;
 	}
-	//´«ÈëµØÍ¼Ö¸Õë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	void setMap(TMXTiledMap* map) {
 		mainmap = map;
 	}
 
-	//²¥·Å¶¯»­
+	//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
 	static void move(Sheep* sheep, TMXTiledMap* map);
+
+	// é‡å†™ reset() æ–¹æ³•ï¼Œé‡ç½® Sheep ç‰¹æœ‰çŠ¶æ€
+	virtual void reset() override;
 };
 
 class Chicken : public Animal {
 public:
-	//Animal¾²Ö¹Í¼Æ¬Â·¾¶Îª Animal/filename/static.png
+	//Animalï¿½ï¿½Ö¹Í¼Æ¬Â·ï¿½ï¿½Îª Animal/filename/static.png
 	static Chicken* create(const std::string& filename);
 
-	//Animal¾«Áé´óĞ¡
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡
 	static int Animalsize_x;
 	static int Animalsize_y;
 
-	//AnimalÎÆÀíµÄ¶¯»­Ë³Ğò
+	//Animalï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Ë³ï¿½ï¿½
 	static int Animalorder_up;
 	static int Animalorder_left;
 	static int Animalorder_right;
 	static int Animalorder_down;
 
-	//ĞÒ¸£¶È
+	//ï¿½Ò¸ï¿½ï¿½ï¿½
 	double happiness = 0;
 
-	//Ö÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½
 	MainCharacter* mainChar;
-	//µØÍ¼Ö¸Õë
+	//ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	TMXTiledMap* mainmap;
 
-	//cowÒÑ±»Î¹ÑøµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½Î¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* chicken_feed_label;
-	//cowÒÑ±»Î¹ÑøµÄ·´À¡µ¯´°
+	//cowï¿½Ñ±ï¿½Î¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	cocos2d::Label* chicken_touch_label;
 
-	//¼ì²âÖ÷½ÇÓë¶¯ÎïµÄÎ»ÖÃ¹ØÏµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½Î»ï¿½Ã¹ï¿½Ïµ
 	void isMainCharNear(float delta);
 
-	//¼ì²âÊÇ·ñ±»¸§Ãş
+	//ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¸ï¿½ï¿½ï¿½
 	void isMainCharTouch(float delta);
 
-	//ËæÊ±¼äĞÒ¸£»á½µµÍ
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ò¸ï¿½ï¿½á½µï¿½ï¿½
 	void decreaseHappiness(float delta);
 
-	//ÊÇ·ñÔÚ¸½½ü
+	//ï¿½Ç·ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
 	bool isNearSprite = false;
 
-	//Ìí¼Ó¼üÅÌ¼àÌıÊÂ¼ş
+	//ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void addKeyboardListener();
 
-	//µ±°´¼ü°´ÏÂÊ±²úÉúµÄÊÂ¼ş
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
-	//±êÇ©Òş²Ø
+	//ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½
 	void hideLabel(float dt);
 
-	//ÉèÖÃÖ÷½Ç
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void setMaincharacter(MainCharacter* mainCharacter) {
 		mainChar = mainCharacter;
 	}
-	//´«ÈëµØÍ¼Ö¸Õë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Ö¸ï¿½ï¿½
 	void setMap(TMXTiledMap* map) {
 		mainmap = map;
 	}
 
-	//³õÊ¼»¯
+	//ï¿½ï¿½Ê¼ï¿½ï¿½
 	bool init();
-	//²¥·Å¶¯»­
+	//ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
 	static void move(Chicken* chicken, TMXTiledMap* map);
+
+	// é‡å†™ reset() æ–¹æ³•ï¼Œé‡ç½® Chicken ç‰¹æœ‰çŠ¶æ€
+	virtual void reset() override;
 };
 #endif 
 #pragma once
